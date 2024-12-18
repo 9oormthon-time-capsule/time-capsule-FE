@@ -1,17 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import html2canvas from 'html2canvas'; // For generating image
-import jsPDF from 'jspdf'; // For generating PDF
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
-// Styled components
 const Container = styled.div`
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  margin: 50px auto;
+  margin: 80px auto;
   width: 90%;
 `;
 
@@ -27,55 +25,81 @@ const Title = styled.h1`
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 30px;
+  margin-top: 80px;
 `;
 
 const Letter = styled.div`
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px;
+  background-image: url('capsule_letterbackimg.png');
+  background-size: cover;          
+  background-position: center;    
+  background-repeat: no-repeat;    
+  border-radius: 10px;
+  padding: 180px; margin-top: -100px;
+  width: 800px;
+  height: 1000px;         
+  position: relative;       
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const ToText = styled.p`
   font-weight: bold;
   margin-bottom: 10px;
+  position: absolute;
+  top: 180px;
+  left: 130px;                    
 `;
 
 const BodyText = styled.p`
-  margin: 10px 0;
-  line-height: 1.5;
+  margin: 60px 0;
+  line-height: 1.6;
 `;
 
 const FromText = styled.p`
-  margin-top: 20px;
+  margin-top: 20px; margin-right: -50px;
+  font-weight: bold;
   text-align: right;
   font-style: italic;
 `;
 
 const DownloadButton = styled.button`
-  padding: 10px 20px;
-  background-color: #4caf50;
+  padding: 20px 60px;
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
   color: white;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 60px;
+
+  &:hover {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:focus {
+    outline: 2px solid #66bb6a;
+    outline-offset: 2px;
+  }
 `;
 
-const LetterDetailPage1 = () => {
-  // Retrieve the letter content from location state or fallback
+const LetterDetailPage2 = () => {
   const location = useLocation();
   const { letterContent } = location.state || {
     letterContent: {
-      to: '나',
+      to: '나에게',
       body: '오늘의 나에게 보내는 메시지를 여기에 작성했습니다.',
-      from: '오늘의 나에게',
+      from: '오늘의 내가',
     },
   };
 
-  // Function to handle PDF/ Image download
   const handleDownload = () => {
     const input = document.getElementById('letter');
     html2canvas(input).then((canvas) => {
@@ -92,7 +116,7 @@ const LetterDetailPage1 = () => {
         &larr;
       </BackButton>
 
-      <Title>2026년 1월 1일 나에게 작성한 편지</Title>
+      <Title>💌2026년 1월 1일 나에게 작성한 편지💌</Title>
       
       <Letter id="letter">
         <ToText>To. {letterContent.to}</ToText>
@@ -101,10 +125,10 @@ const LetterDetailPage1 = () => {
       </Letter>
 
       <DownloadButton onClick={handleDownload}>
-        📥 다운로드
+        📥 PDF로 다운로드
       </DownloadButton>
     </Container>
   );
 };
 
-export default LetterDetailPage1;
+export default LetterDetailPage2;
