@@ -4,7 +4,7 @@ import Directory from './pages/timecapsule/Directory';
 
 const router = createBrowserRouter([
   { path: '/', element: <MainPage /> },
-  { path: '/directory/:type/:usedId', element: <Directory /> },
+  { path: '/directory/:type/:userId', element: <Directory /> },
 ]);
 
 export default router;
