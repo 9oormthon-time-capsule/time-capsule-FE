@@ -12,7 +12,7 @@ const LetterCreateButton = () => {
 
 const Wrapper = styled.div`
 	position: fixed;
-	bottom: 20px;
+	bottom: 30px;
 	right: 50px;
 	z-index: 100;
 `;
