@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const CategoryHeader = () => {
+const CategoryHeader = ({ title, button }: { title: string; button: string }) => {
 	return (
 		<Wrapper>
 			<BackSection>{'<'}</BackSection>
-			<TitleSection>카테고리 등록</TitleSection>
-			<ButtonSection>완료</ButtonSection>
+			<TitleSection>{title}</TitleSection>
+			<ButtonSection>{button}</ButtonSection>
 		</Wrapper>
 	);
 };
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 	height: auto;
 	display: flex;
 	justify-content: space-between;
-	padding: 40px 100px;
+	padding: 40px 150px;
 `;
 
 const BackSection = styled.div`
@@ -28,7 +28,7 @@ const TitleSection = styled.div`
 `;
 
 const ButtonSection = styled.div`
-	font-size: 18px;
+	font-size: 20px;
 `;
 
 export default CategoryHeader;

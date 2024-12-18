@@ -23,7 +23,7 @@ const CategoryRegister = () => {
 
 	return (
 		<>
-			<CategoryHeader />
+			<CategoryHeader title="카테고리 등록" button="완료" />
 			<Wrapper>
 				<CategoryInput placeholder="카테고리 입력" />
 				<UnderLine />
@@ -49,7 +49,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding: 10px 100px;
+	padding: 10px 150px;
 `;
 
 const CategoryInput = styled.input`
@@ -71,7 +71,7 @@ const ColorContainer = styled.div`
 
 const UnderLine = styled.div`
 	width: 100%;
-	height: 3px;
+	height: 2px;
 	background-color: gray;
 `;
 
