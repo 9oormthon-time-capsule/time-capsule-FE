@@ -50,12 +50,15 @@ export const EmotionBox = styled.div`
 	border-radius: 5px;
 	width: 60%;
 	margin: 0 auto;
+`;
 
-	label {
-		font-size: 1.3rem;
-		margin: 5px;
-		cursor: pointer;
-	}
+export const EmotionLabel = styled.label`
+	font-size: 1.3rem;
+	margin: 5px;
+	cursor: pointer;
+	background-color: ${({ isSelected }) => (isSelected ? '#666a88' : '')};
+	transition: background-color 0.3s;
+	border-radius: 50%;
 `;
 
 // 반짝이는 애니메이션
