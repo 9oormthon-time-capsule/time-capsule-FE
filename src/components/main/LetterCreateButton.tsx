@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import Plus from '../../assets/icon/Plus.svg';
 
 const LetterCreateButton = () => {
 	return (
 		<Wrapper>
 			<ButtonFrame>
-				<img src={Plus} width={35} height={35} />
+				<img src="/main/Plus.svg" width={35} height={35} />
 			</ButtonFrame>
 		</Wrapper>
 	);

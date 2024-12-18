@@ -1,12 +1,11 @@
 import styled from "styled-components"
-import MenuIcon from "../assets/icon/Menu.svg"
 
 const Header = () => {
   return (
     <Wrapper>
         <LogoContainer />
         <TitleContainer>"지현"님의 타임캡슐</TitleContainer>
-        <MenuContainer><img src={MenuIcon} width={35} height={35} /></MenuContainer>
+        <MenuContainer><img src="/main/Menu.svg" width={35} height={35} /></MenuContainer>
     </Wrapper>
   )
 }

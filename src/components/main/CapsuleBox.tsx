@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import Box1 from '../../assets/images/Box-1.png';
-import Capsule from '../../assets/icon/Capsule.svg';
 
 const CapsuleBox = () => {
 	return (
@@ -8,12 +6,12 @@ const CapsuleBox = () => {
 			<TitleContainer>
 				<TopSection>2026년의 나에게</TopSection>
                 <BottomSection>
-                    <img src={Capsule} width={50} height={35}/>
+                    <img src="/main/Capsule.svg" width={50} height={35}/>
                     <span>0</span>개의 편지가 보관되어있어요!
                 </BottomSection>
 			</TitleContainer>
 			<BoxContainer>
-				<img src={Box1} width={450} height={400} />
+				<img src="/main/Box-1.png" width={450} height={400} />
 			</BoxContainer>
 		</Wrapper>
 	);
