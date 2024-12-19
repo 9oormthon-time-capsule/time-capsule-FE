@@ -2,31 +2,25 @@ import CapsuleBox from '../../components/main/CapsuleBox';
 import Header from '../../layout/Header';
 import LetterCreateButton from '../../components/main/LetterCreateButton';
 import styled from 'styled-components';
+import MainLayout from '../../layout/MainLayout';
 
 const MainPage = () => {
-	return (
-		<Wrapper>
-			<Header />
-			<MainWrapper>
-				<CapsuleBox />
-				<LetterCreateButton />
-			</MainWrapper>
-		</Wrapper>
-	);
+  return (
+    <MainLayout>
+      <Header />
+      <MainWrapper>
+        <CapsuleBox />
+        <LetterCreateButton />
+      </MainWrapper>
+    </MainLayout>
+  );
 };
 
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	padding: 20px 50px;
-	height: 100vh;
-`;
-
 const MainWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
 export default MainPage;

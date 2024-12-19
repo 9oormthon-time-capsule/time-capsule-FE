@@ -41,7 +41,7 @@ function Directory() {
     <MainLayout>
       <S.Header>
         <S.LeftBox>
-          <S.LogoText href="/">Time Capsule</S.LogoText>
+          <S.LogoText href="/main">Time Capsule</S.LogoText>
           <S.TitleText>익명 님의 {directoryType} 보관함</S.TitleText>
           <S.ChangeButton onClick={handleDirectoryButton}>
             {directoryButton}
@@ -57,7 +57,12 @@ function Directory() {
             <S.CapsuleLabelBox>
               <S.CapsuleLabel>{data.day}</S.CapsuleLabel>
             </S.CapsuleLabelBox>
-            <a href="/">
+            <a
+              href={
+                directoryType === '타임캡슐'
+                  ? '/detail/letter/1'
+                  : '/detail/reflect/1'
+              }>
               <S.CapsuleImg
                 src={CAPSULE_IMAGE[index % CAPSULE_IMAGE.length]}
                 alt={data.day}
