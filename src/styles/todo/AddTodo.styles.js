@@ -13,13 +13,14 @@ export const Title = styled.button`
 	padding: 0.5rem 1rem;
 	border-radius: 3rem;
 	font-weight: bold;
+	width: auto;
 `;
 
 export const TodoContainer = styled.div`
-	width: 100%;
 	margin-top: 1rem;
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 `;
 
 export const CheckBox = styled.input`
@@ -37,6 +38,8 @@ export const CheckBox = styled.input`
 `;
 
 export const StyledInput = styled.input`
+	flex: 1;
+	max-width: 100%;
 	padding: 5px;
 	margin-left: 10px;
 	border: none;
