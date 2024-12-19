@@ -41,7 +41,7 @@ function Directory() {
     <MainLayout>
       <S.Header>
         <S.LeftBox>
-          <S.LogoText href="/">Time Capsule</S.LogoText>
+          <S.LogoText href="/main">Time Capsule</S.LogoText>
           <S.TitleText>익명 님의 {directoryType} 보관함</S.TitleText>
           <S.ChangeButton onClick={handleDirectoryButton}>
             {directoryButton}
