@@ -4,98 +4,175 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
-// 달력 스타일링
-const StyledCalendar = styled(Calendar)`
+const Container = styled.div`
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+  color: black;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   max-width: 600px;
-  background: white;
-  border: none;
-  font-family: Arial, sans-serif;
-  line-height: 1.5em;
+  margin-bottom: 30px;
 
-  .react-calendar__tile {
-    max-width: 100%;
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px 0;
-    font-size: 16px;
-    &:hover {
-      background-color: #e0f7fa;
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+
+    span {
+      font-size: 1.4em;
+      font-weight: bold;
     }
   }
 
-  .react-calendar__tile--now {
-    background: #b3e5fc;
-    color: black;
-    border-radius: 6px;
-  }
-
-  .react-calendar__tile--active {
-    background: #0288d1;
-    color: white;
-    border-radius: 6px;
+  .img {
+    width: 80px;
+    cursor: pointer;
   }
 `;
 
-// 이모지 아이템 스타일링
-const ImojiItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 18px;
-  color: #333;
+const StyledCalendar = styled(Calendar)`
+  width: 100%;
+  max-width: 660px;
+  border: none;
+  color: black;
+  font-size: 20px;
   font-weight: bold;
 
-  span {
-    background-color: #e0e0e0;
-    padding: 6px 12px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  .react-calendar__month-view__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+
+    abbr {
+      text-decoration: none;
+    }
+
+    .react-calendar__month-view__weekdays__weekday:nth-child(7) {
+      color: blue;
+    }
+
+    .react-calendar__month-view__weekdays__weekday:nth-child(1) {
+      color: red;
+    }
+  }
+
+  .react-calendar__tile {
+    text-align: center;
+    border-radius: 50px;
+    font-size: 1em;
+    color: black;
+
+    &:nth-child(7n) {
+      color: blue; 
+    }
+
+    &:nth-child(7n - 6) {
+      color: red; 
+    }
+
+    &.react-calendar__tile--active {
+      background-color: black; 
+      color: white;
+    }
   }
 `;
 
-// 이모지들을 묶는 스타일
-const ImojiWrapper = styled.div`
+const StatusBar = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px; /* 달력과 이모지 사이 간격 */
-`;
+  justify-content: space-between;
 
-// 전체 레이아웃 스타일
-const Container = styled.div`
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  margin-top: 100px;
+  width: 100%;
+  max-width: 600px;
+  
+  font-size: 1.2em;
+
+  .emoji-counter {
+    display: flex;
+    gap: 10px;
+
+    div {
+      display: flex;
+      gap: 5px;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
 `;
 
 const CustomCalendar = () => {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
-      <StyledCalendar
-        onChange={setDate} // 날짜 선택 시 업데이트
-        value={date}
-        calendarType="gregory" // 월요일 시작으로 설정
-      />
+    <Container>
+      <Header>
+        <div className="profile">
+          <img 
+            src="https://mblogthumb-phinf.pstatic.net/MjAxODA2MTVfMyAg/MDAxNTI5MDQ2NzQ5ODM4.j5CptgMQTgciYH_A_H1qUwS4i--k1M-Y94yM691jXvwg.ZW9GQH6hMzfLcsPj66R69NXH20ebrvbDm5nSdHJKCfYg.JPEG.lhy7341/FB_IMG_1529024503427.jpg?type=w800"
+            alt="profile" 
+          />
+          
+          <span>me</span>
+        </div>
 
-      <ImojiWrapper>
-        <ImojiItem>
-          ✅<span>0</span>
-        </ImojiItem>
-        <ImojiItem>
-          🙂<span>0</span>
-        </ImojiItem>
-        <ImojiItem>
-          ❤️<span>0</span>
-        </ImojiItem>
-      </ImojiWrapper>
-    </div>
+        <div className="img">
+          <img src="이모지.png" title="기분 상태는?" alt="기분 상태는?" />
+        </div>     
+      </Header>
+
+      <StatusBar>
+        <div className="emoji-counter">
+          <div>
+            <span>✅</span>
+            <span className="count">0</span>
+          </div>
+          <div>
+            <span>🙂</span>
+            <span className="count">0</span>
+          </div>
+          <div>
+            <span>❤️</span>
+            <span className="count">0</span>
+          </div>
+        </div>
+      </StatusBar>
+
+      <StyledCalendar
+        onChange={setDate}
+        value={date}
+        calendarType="gregory"
+
+        formatShortWeekday={(locale, date) =>
+          ["일", "월", "화", "수", "목", "금", "토"][date.getDay()]
+        }
+
+        formatDay={(locale, date) => date.getDate()}
+
+        prev2Label={null} 
+        next2Label={null} 
+        prevLabel="<"  
+        nextLabel=">"
+      />
+    </Container>
   );
 };
 
