@@ -57,7 +57,12 @@ function Directory() {
             <S.CapsuleLabelBox>
               <S.CapsuleLabel>{data.day}</S.CapsuleLabel>
             </S.CapsuleLabelBox>
-            <a href="/">
+            <a
+              href={
+                directoryType === '타임캡슐'
+                  ? '/detail/letter/1'
+                  : '/detail/reflect/1'
+              }>
               <S.CapsuleImg
                 src={CAPSULE_IMAGE[index % CAPSULE_IMAGE.length]}
                 alt={data.day}
