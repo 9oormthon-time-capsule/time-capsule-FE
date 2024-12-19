@@ -49,7 +49,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding: 10px 150px;
+	padding: 10px 180px;
 `;
 
 const CategoryInput = styled.input`
@@ -76,7 +76,6 @@ const UnderLine = styled.div`
 `;
 
 const DropdownButton = styled.button`
-	padding: 10px 20px;
 	cursor: pointer;
 `;
 

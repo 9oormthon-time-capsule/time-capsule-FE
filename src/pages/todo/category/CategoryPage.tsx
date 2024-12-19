@@ -19,7 +19,7 @@ const CategoryList = styled.div`
 	flex-direction: column;
     align-items: flex-start;
 	width: 100%;
-	padding: 10px 150px;
+	padding: 10px 180px;
 	gap: 20px;
 `;
 
