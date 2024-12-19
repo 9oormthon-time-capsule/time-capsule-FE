@@ -7,6 +7,8 @@ import LetterWritePage from './pages/timecapsule/LetterWritePage';
 import ReflectWritePage from './pages/timecapsule/ReflectWritePage';
 import LetterDetail from './pages/timecapsule/LetterDetail';
 import ReflectDetail from './pages/timecapsule/ReflectDetail';
+import CategoryRegisterPage from './pages/todo/category/CategoryRegisterPage';
+import CategoryPage from './pages/todo/category/CategoryPage';
 
 const router = createBrowserRouter([
   { path: '/', element: <Login /> },
@@ -16,6 +18,8 @@ const router = createBrowserRouter([
   { path: '/write/reflect', element: <ReflectWritePage /> },
   { path: '/detail/letter/:letterId', element: <LetterDetail /> },
   { path: '/detail/reflect/:letterId', element: <ReflectDetail /> },
+  { path: '/todo/category', element: <CategoryPage /> },
+  { path: '/todo/category/new', element: <CategoryRegisterPage /> },
 ]);
 
 export default router;
