@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 const CapsuleBox = () => {
+  const handleCapsuleBox = () => {
+    window.location.href = '/directory/time/1';
+  };
+
   return (
     <Wrapper>
       <TitleContainer>
@@ -10,7 +14,7 @@ const CapsuleBox = () => {
           <span>0</span>개의 편지가 보관되어있어요!
         </BottomSection>
       </TitleContainer>
-      <BoxContainer>
+      <BoxContainer onClick={handleCapsuleBox}>
         <img src="/main/Box-1.png" width={450} height={400} />
       </BoxContainer>
     </Wrapper>
