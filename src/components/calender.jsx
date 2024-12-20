@@ -136,14 +136,6 @@ const CustomCalendar = () => {
             <span>✅</span>
             <span className="count">0</span>
           </div>
-          <div>
-            <span>🙂</span>
-            <span className="count">0</span>
-          </div>
-          <div>
-            <span>❤️</span>
-            <span className="count">0</span>
-          </div>
         </div>
       </StatusBar>
 
@@ -168,3 +160,5 @@ const CustomCalendar = () => {
 };
 
 export default CustomCalendar;
+
+
