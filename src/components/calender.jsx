@@ -39,11 +39,6 @@ const Header = styled.div`
       font-weight: bold;
     }
   }
-
-  .img {
-    width: 80px;
-    cursor: pointer;
-  }
 `;
 
 const StyledCalendar = styled(Calendar)`
@@ -132,11 +127,7 @@ const CustomCalendar = () => {
           />
           
           <span>me</span>
-        </div>
-
-        <div className="img">
-          <img src="이모지.png" title="기분 상태는?" alt="기분 상태는?" />
-        </div>     
+        </div>  
       </Header>
 
       <StatusBar>
