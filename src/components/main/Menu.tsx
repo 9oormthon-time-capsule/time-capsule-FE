@@ -22,7 +22,7 @@ const MenuContainer = styled.div`
 const MenuItem = styled.button`
     padding: 15px 20px;
     color: black;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     border: 2px solid lightgray;
     border-radius: 50px;

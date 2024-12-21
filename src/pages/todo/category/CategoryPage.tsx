@@ -3,16 +3,24 @@ import CategoryHeader from '../../../components/todo/category/CategoryHeader';
 
 const CategoryPage = () => {
 	return (
-		<>
+		<Container>
 			<CategoryHeader title="카테고리" button="+" />
 			<CategoryList>
 				<CategoryItem>개인 학습</CategoryItem>
 				<CategoryItem>중요 일정</CategoryItem>
 				<CategoryItem>약속</CategoryItem>
 			</CategoryList>
-		</>
+		</Container>
 	);
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+`;
 
 const CategoryList = styled.div`
 	display: flex;
