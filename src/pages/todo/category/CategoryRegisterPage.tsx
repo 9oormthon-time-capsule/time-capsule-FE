@@ -22,7 +22,7 @@ const CategoryRegister = () => {
 	};
 
 	return (
-		<>
+		<Container>
 			<CategoryHeader title="카테고리 등록" button="완료" />
 			<Wrapper>
 				<CategoryInput placeholder="카테고리 입력" />
@@ -41,9 +41,17 @@ const CategoryRegister = () => {
 					</DropdownButton>
 				</ColorContainer>
 			</Wrapper>
-		</>
+		</Container>
 	);
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+`;
 
 const Wrapper = styled.div`
 	display: flex;

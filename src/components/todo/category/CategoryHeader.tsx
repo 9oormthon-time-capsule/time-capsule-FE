@@ -23,11 +23,15 @@ const CategoryHeader = ({ title, button }: { title: string; button: string }) =>
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: auto;
+	height: 100px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 30px 180px;
+	max-width: 1200px;
+	min-width: 700px;
+
+	margin: 30px auto;
+	padding: 0 65px;
 `;
 
 const BackSection = styled.div`

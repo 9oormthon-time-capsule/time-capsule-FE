@@ -1,10 +1,18 @@
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom";
 
-const Menu = () => {
+const TodoMenu = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <MenuContainer>
-        <MenuItem>나의 Todo</MenuItem>
-        <MenuItem>나의 편지함</MenuItem>
+        <MenuItem onClick={() => handleNavigate("/main")}>타임캡슐</MenuItem>
+        <MenuItem onClick={() => handleNavigate("/todo/category/new")}>카테고리 등록</MenuItem>
+        <MenuItem onClick={() => handleNavigate("/todo/category")}>카테고리 관리</MenuItem>
         <MenuItem>로그아웃</MenuItem>
     </MenuContainer>
   )
@@ -15,7 +23,7 @@ const MenuContainer = styled.div`
     flex-direction: column;
     position: fixed;
     top: 140px;
-	right: 40px;
+	right: 65px;
     gap: 30px;
 `
 
@@ -34,4 +42,4 @@ const MenuItem = styled.button`
     }
 `
 
-export default Menu
+export default TodoMenu
