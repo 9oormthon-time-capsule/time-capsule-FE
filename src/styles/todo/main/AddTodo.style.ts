@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const TodoContainer = styled.div`
 	background-color: white;
 	padding: 1rem;
 	border-radius: 10px;
 	margin: 1rem;
 `;
 
-export const Title = styled.button`
+export const TodoTitle = styled.button`
 	font-size: 1rem;
 	background-color: rgb(220, 220, 220);
 	padding: 0.5rem 1rem;
@@ -16,7 +16,7 @@ export const Title = styled.button`
 	width: auto;
 `;
 
-export const TodoContainer = styled.div`
+export const InputGroup = styled.div`
 	margin-top: 1rem;
 	display: flex;
 	align-items: center;
@@ -37,7 +37,7 @@ export const CheckBox = styled.input`
 	}
 `;
 
-export const StyledInput = styled.input`
+export const TodoInput = styled.input`
 	flex: 1;
 	max-width: 100%;
 	padding: 5px;
@@ -46,7 +46,7 @@ export const StyledInput = styled.input`
 	border-bottom: 1px solid black;
 `;
 
-export const StyledButton = styled.button`
+export const AddButton = styled.button`
 	padding: 0.3rem;
 	margin-left: 0.5rem;
 	background-color: #222222;

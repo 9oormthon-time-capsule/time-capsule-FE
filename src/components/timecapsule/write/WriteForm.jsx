@@ -1,28 +1,28 @@
 import React from 'react';
-import { Form, TextArea } from '../../../styles/timecapsule/write/WriteForm.style';
-import CustomButton from './CustomButton';
+import * as S from '../../../styles/timecapsule/write/WriteForm.style';
+import WriteButton from './WriteButton';
 
-export default function LetterForm({ placeholder }) {
-  const currentPath = window.location.pathname;
+export default function WriteForm({ placeholder }) {
+	const currentPath = window.location.pathname;
 
-  const handleWriteButton = (event) => {
-    event.preventDefault();
+	const handleWriteButton = (event) => {
+		event.preventDefault();
 
-    if (currentPath === '/write/letter') {
-      window.location.href = '/directory/time/1';
-    } else {
-      window.location.href = '/directory/diary/1';
-    }
-  };
+		if (currentPath === '/write/letter') {
+			window.location.href = '/directory/time/1';
+		} else {
+			window.location.href = '/directory/diary/1';
+		}
+	};
 
-  return (
-    <Form>
-      <TextArea placeholder={placeholder} required />
-      <CustomButton
-        onClick={handleWriteButton}
-        type="submit"
-        text={'작성하기'}
-      />
-    </Form>
-  );
+	return (
+		<S.FormContainer>
+			<S.ContentTextArea placeholder={placeholder} required />
+			<WriteButton
+				onClick={handleWriteButton}
+				type="submit"
+				text={'작성하기'}
+			/>
+		</S.FormContainer>
+	);
 }

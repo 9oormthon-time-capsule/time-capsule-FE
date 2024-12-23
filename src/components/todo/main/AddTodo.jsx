@@ -1,22 +1,15 @@
 import React from 'react';
-import {
-	Title,
-	Container,
-	TodoContainer,
-	StyledInput,
-	CheckBox,
-	StyledButton,
-} from '../../../styles/todo/main/AddTodo.styles';
+import * as S from '../../../styles/todo/main/AddTodo.style';
 
 export default function AddTodo() {
 	return (
-		<Container>
-			<Title>카테고리 1</Title>
-			<TodoContainer>
-				<CheckBox type="checkbox" />
-				<StyledInput type="text" placeholder="할 일 입력" />
-				<StyledButton>추가</StyledButton>
-			</TodoContainer>
-		</Container>
+		<S.TodoContainer>
+			<S.TodoTitle>카테고리 1</S.TodoTitle>
+			<S.InputGroup>
+				<S.CheckBox type="checkbox" />
+				<S.TodoInput type="text" placeholder="할 일 입력" />
+				<S.AddButton>추가</S.AddButton>
+			</S.InputGroup>
+		</S.TodoContainer>
 	);
 }

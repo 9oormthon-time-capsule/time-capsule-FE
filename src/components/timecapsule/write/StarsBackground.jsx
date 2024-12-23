@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-	Star,
-	StarsBackground,
-} from '../../../styles/timecapsule/write/WritePage.style';
+import * as S from '../../../styles/timecapsule/write/StarsBackground.style';
 
 const getRandomPosition = () => {
 	const x = Math.random() * 100;
@@ -14,7 +11,7 @@ const getRandomDuration = () => Math.random() * 2 + 1 + 's';
 const getRandomDelay = () => Math.random() * 2 + 's';
 const getRandomOpacity = () => Math.random() * 0.5 + 0.5;
 
-export const StarsBackgroundWrapper = () => {
+export const StarsBackground = () => {
 	const [stars, setStars] = useState([]);
 
 	useEffect(() => {
@@ -46,9 +43,9 @@ export const StarsBackgroundWrapper = () => {
 	}, []);
 
 	return (
-		<StarsBackground>
+		<S.StarsBackgroundContainer>
 			{stars.map((star) => (
-				<Star
+				<S.Star
 					key={star.id}
 					style={{
 						top: `${star.y}vh`,
@@ -59,6 +56,6 @@ export const StarsBackgroundWrapper = () => {
 					}}
 				/>
 			))}
-		</StarsBackground>
+		</S.StarsBackgroundContainer>
 	);
 };

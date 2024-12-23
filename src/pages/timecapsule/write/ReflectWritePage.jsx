@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import {
-	Container,
-	SubTitle,
-	Text,
-	TitleWrapper,
-	EmotionBox,
-	EmotionLabel,
-} from '../../../styles/timecapsule/write/WritePage.style';
+import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
-import { StarsBackgroundWrapper } from '../../../components/timecapsule/write/StarsBackgroundWrapper';
+import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
 
 export default function ReflectWritePage() {
 	const emotions = [
@@ -26,24 +19,24 @@ export default function ReflectWritePage() {
 	};
 
 	return (
-		<Container>
-			<StarsBackgroundWrapper />
-			<TitleWrapper>
-				<Text>오늘의 회고</Text>
-				<SubTitle>오늘은 어떤 하루였나요?</SubTitle>
-			</TitleWrapper>
-			<EmotionBox>
+		<S.WriteContainer>
+			<StarsBackground />
+			<S.TitleContainer>
+				<S.Title>오늘의 회고</S.Title>
+				<S.SubTitle>오늘은 어떤 하루였나요?</S.SubTitle>
+			</S.TitleContainer>
+			<S.EmotionBox>
 				{emotions.map((emotion) => (
-					<EmotionLabel
+					<S.EmotionLabel
 						key={emotion.id}
 						onClick={() => handleEmotionChange(emotion.id)}
 						isSelected={selectedEmotion === emotion.id}
 					>
 						<span>{emotion.emoji}</span>
-					</EmotionLabel>
+					</S.EmotionLabel>
 				))}
-			</EmotionBox>
+			</S.EmotionBox>
 			<WriteForm placeholder={'오늘 나의 하루를 되돌아보세요!'} />
-		</Container>
+		</S.WriteContainer>
 	);
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const FormContainer = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -8,7 +8,7 @@ export const Form = styled.form`
 	height: 80%;
 `;
 
-export const TextArea = styled.textarea`
+export const ContentTextArea = styled.textarea`
 	width: 60%;
 	height: 70vh;
 	padding: 1rem;
@@ -20,4 +20,3 @@ export const TextArea = styled.textarea`
 	margin-bottom: 2rem;
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 50px;
 `;
-

@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+export const CategoryRegisterContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
 `;
 
-export const Wrapper = styled.div`
+export const CategoryFormWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;

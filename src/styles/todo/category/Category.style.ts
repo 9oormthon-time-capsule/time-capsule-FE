@@ -1,17 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+export const CategoryContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
 `;
 
 export const CategoryList = styled.div`
 	display: flex;
 	flex-direction: column;
-    align-items: flex-start;
+	align-items: flex-start;
 	width: 100%;
 	padding: 10px 180px;
 	gap: 20px;

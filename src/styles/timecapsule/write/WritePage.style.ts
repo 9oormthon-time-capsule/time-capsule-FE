@@ -1,12 +1,12 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-export const Container = styled.div`
+export const WriteContainer = styled.div`
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 `;
 
-export const TitleWrapper = styled.div`
+export const TitleContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -15,7 +15,7 @@ export const TitleWrapper = styled.div`
 	padding: 0.5rem;
 `;
 
-export const Text = styled.div`
+export const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -63,40 +63,4 @@ export const EmotionLabel = styled.label<EmotionLabelProps>`
 	background-color: ${({ isSelected }) => (isSelected ? '#666a88' : '')};
 	transition: background-color 0.3s;
 	border-radius: 50%;
-`;
-
-// 반짝이는 애니메이션
-const blinkAnimation = keyframes`
-  0% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.7); }
-  100% { opacity: 0.5; transform: scale(1); }
-`;
-
-export const StarsBackground = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(rgb(134, 138, 169), #e8b9a4);
-	overflow: hidden;
-	z-index: -1;
-`;
-
-interface StarProps {
-	animationDuration?: string;
-	opacity?: number;
-	animationDelay?: string;
-}
-
-export const Star = styled.div<StarProps>`
-	position: absolute;
-	width: 2px;
-	height: 2px;
-	background-color: white;
-	border-radius: 50%;
-	animation: ${blinkAnimation}
-		${({ animationDuration }) => animationDuration || '2s'} infinite ease-in-out;
-	opacity: ${({ opacity }) => opacity || 1};
-	animation-delay: ${({ animationDelay }) => animationDelay || '0s'};
 `;
