@@ -6,7 +6,7 @@ import {
 	TitleWrapper,
 	EmotionBox,
 	EmotionLabel,
-} from '../../../styles/timecapsule/write/WritePageStyles';
+} from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackgroundWrapper } from '../../../components/timecapsule/write/StarsBackgroundWrapper';
 
