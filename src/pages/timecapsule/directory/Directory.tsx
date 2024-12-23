@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import MainLayout from '../../layout/MainLayout';
-import * as S from '../../styles/timecapsule/Directory.style';
-import { CAPSULE, CAPSULE_MAIN, CAPSULE_IMAGE } from '../../mock/capsule';
+import MainLayout from '../../../layout/MainLayout';
+import * as S from '../../../styles/timecapsule/directory/Directory.style';
+import { CAPSULE, CAPSULE_MAIN, CAPSULE_IMAGE } from '../../../mock/capsule';
 
 function Directory() {
   const navigate = useNavigate();

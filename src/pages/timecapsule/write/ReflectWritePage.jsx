@@ -6,9 +6,9 @@ import {
 	TitleWrapper,
 	EmotionBox,
 	EmotionLabel,
-} from '../../styles/WritePageStyles';
-import WriteForm from '../../components/WriteForm';
-import { StarsBackgroundWrapper } from '../../components/StarsBackgroundWrapper';
+} from '../../../styles/timecapsule/write/WritePageStyles';
+import WriteForm from '../../../components/timecapsule/write/WriteForm';
+import { StarsBackgroundWrapper } from '../../../components/timecapsule/write/StarsBackgroundWrapper';
 
 export default function ReflectWritePage() {
 	const emotions = [

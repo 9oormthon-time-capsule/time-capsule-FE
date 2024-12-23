@@ -4,9 +4,9 @@ import {
 	SubTitle,
 	Text,
 	TitleWrapper,
-} from '../../styles/WritePageStyles';
-import LetterForm from '../../components/WriteForm';
-import { StarsBackgroundWrapper } from '../../components/StarsBackgroundWrapper';
+} from '../../../styles/timecapsule/write/WritePageStyles';
+import LetterForm from '../../../components/timecapsule/write/WriteForm';
+import { StarsBackgroundWrapper } from '../../../components/timecapsule/write/StarsBackgroundWrapper';
 
 export default function LetterWritePage() {
 	return (
