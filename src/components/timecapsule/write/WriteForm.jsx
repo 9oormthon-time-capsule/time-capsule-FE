@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, TextArea } from '../../../styles/timecapsule/write/WriteForm';
+import { Form, TextArea } from '../../../styles/timecapsule/write/WriteForm.style';
 import CustomButton from './CustomButton';
 
 export default function LetterForm({ placeholder }) {

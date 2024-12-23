@@ -52,7 +52,11 @@ export const EmotionBox = styled.div`
 	margin: 0 auto;
 `;
 
-export const EmotionLabel = styled.label`
+interface EmotionLabelProps {
+	isSelected: boolean;
+}
+
+export const EmotionLabel = styled.label<EmotionLabelProps>`
 	font-size: 1.3rem;
 	margin: 5px;
 	cursor: pointer;
@@ -79,7 +83,13 @@ export const StarsBackground = styled.div`
 	z-index: -1;
 `;
 
-export const Star = styled.div`
+interface StarProps {
+	animationDuration?: string;
+	opacity?: number;
+	animationDelay?: string;
+}
+
+export const Star = styled.div<StarProps>`
 	position: absolute;
 	width: 2px;
 	height: 2px;

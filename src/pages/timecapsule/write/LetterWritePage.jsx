@@ -4,7 +4,7 @@ import {
 	SubTitle,
 	Text,
 	TitleWrapper,
-} from '../../../styles/timecapsule/write/WritePageStyles';
+} from '../../../styles/timecapsule/write/WritePage.style';
 import LetterForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackgroundWrapper } from '../../../components/timecapsule/write/StarsBackgroundWrapper';
 

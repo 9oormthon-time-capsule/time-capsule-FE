@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Star, StarsBackground } from '../../../styles/timecapsule/write/WritePageStyles';
+import {
+	Star,
+	StarsBackground,
+} from '../../../styles/timecapsule/write/WritePage.style';
 
 const getRandomPosition = () => {
 	const x = Math.random() * 100;
