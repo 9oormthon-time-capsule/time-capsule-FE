@@ -1,6 +1,6 @@
-import CapsuleBox from '../../components/main/CapsuleBox';
+import CapsuleBox from '../../components/timecapsule/main/CapsuleBox';
 import Header from '../../layout/Header';
-import LetterCreateButton from '../../components/main/LetterCreateButton';
+import LetterCreateButton from '../../components/timecapsule/main/LetterCreateButton';
 import styled from 'styled-components';
 import MainLayout from '../../layout/MainLayout';
 

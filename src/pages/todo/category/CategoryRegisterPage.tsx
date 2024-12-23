@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
+import { Container, Wrapper, CategoryInput, UnderLine, ColorContainer, DropdownButton, DropdownMenu, DropdownItem } from '../../../styles/todo/category/CategoryRegister.style';
 import { useState } from 'react';
 
 const CategoryRegister = () => {
@@ -44,69 +44,5 @@ const CategoryRegister = () => {
 		</Container>
 	);
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-`;
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	padding: 10px 180px;
-`;
-
-const CategoryInput = styled.input`
-	width: 100%;
-	padding: 5px;
-	font-size: 20px;
-	border: none;
-`;
-
-const ColorContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	padding: 5px;
-	font-size: 20px;
-	border: none;
-	margin-top: 30px;
-`;
-
-const UnderLine = styled.div`
-	width: 100%;
-	height: 2px;
-	background-color: gray;
-`;
-
-const DropdownButton = styled.button`
-	cursor: pointer;
-`;
-
-const DropdownMenu = styled.ul`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	list-style: none;
-	margin-top: 15px;
-	gap: 20px;
-`;
-
-const DropdownItem = styled.li<{ color: string }>`
-	width: 25px;
-	height: 25px;
-	border-radius: 20px;
-	background-color: ${(props) => props.color};
-	cursor: pointer;
-
-	&:hover {
-		box-shadow: 0px 0px 1px 4px rgba(0, 0, 0, 0.1);
-	}
-`;
 
 export default CategoryRegister;

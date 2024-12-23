@@ -1,7 +1,7 @@
-import CustomCalendar from '../../components/calender'
-import AddTodo from '../../components/todo/AddTodo'
+import CustomCalendar from '../../components/todo/main/Calendar'
+import AddTodo from '../../components/todo/main/AddTodo'
 import styled from 'styled-components'
-import TodoHeader from '../../components/todo/TodoHeader'
+import TodoHeader from '../../components/todo/main/TodoHeader'
 import MainLayout from '../../layout/MainLayout'
 
 const TodoMainPage = () => {

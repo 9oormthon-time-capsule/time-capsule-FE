@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Login from './pages/login/Login';
-import MainPage from './pages/main/MainPage';
-import Directory from './pages/timecapsule/Directory';
-import LetterWritePage from './pages/timecapsule/LetterWritePage';
-import ReflectWritePage from './pages/timecapsule/ReflectWritePage';
-import LetterDetail from './pages/timecapsule/LetterDetail';
-import ReflectDetail from './pages/timecapsule/ReflectDetail';
+import MainPage from './pages/timecapsule/MainPage';
+import Directory from './pages/timecapsule/directory/Directory';
+import LetterWritePage from './pages/timecapsule/write/LetterWritePage';
+import ReflectWritePage from './pages/timecapsule/write/ReflectWritePage';
+import LetterDetail from './pages/timecapsule/detail/LetterDetail';
+import ReflectDetail from './pages/timecapsule/detail/ReflectDetail';
 import TodoMainPage from './pages/todo/TodoMainPage';
 import CategoryRegisterPage from './pages/todo/category/CategoryRegisterPage';
 import CategoryPage from './pages/todo/category/CategoryPage';

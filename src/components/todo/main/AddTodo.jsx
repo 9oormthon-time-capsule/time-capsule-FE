@@ -6,7 +6,7 @@ import {
 	StyledInput,
 	CheckBox,
 	StyledButton,
-} from '../../styles/todo/AddTodo.styles';
+} from '../../../styles/todo/main/AddTodo.styles';
 
 export default function AddTodo() {
 	return (

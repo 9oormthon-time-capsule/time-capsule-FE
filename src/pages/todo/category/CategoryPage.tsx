@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
+import { Container, CategoryList, CategoryItem } from '../../../styles/todo/category/Category.style';
 
 const CategoryPage = () => {
 	return (
@@ -14,31 +14,6 @@ const CategoryPage = () => {
 	);
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-`;
 
-const CategoryList = styled.div`
-	display: flex;
-	flex-direction: column;
-    align-items: flex-start;
-	width: 100%;
-	padding: 10px 180px;
-	gap: 20px;
-`;
-
-const CategoryItem = styled.div`
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	padding: 10px 20px;
-	border-radius: 30px;
-	background-color: #e8e8e8;
-	white-space: nowrap;
-`;
 
 export default CategoryPage;

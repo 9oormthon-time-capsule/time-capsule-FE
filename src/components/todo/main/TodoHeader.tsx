@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useState } from "react";
-import TodoMenu from "./TodoMenu";
+import TodoMenu from "../main/TodoMenu";
 
 const TodoHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
