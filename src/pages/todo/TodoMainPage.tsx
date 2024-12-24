@@ -7,13 +7,11 @@ import Header from '../../components/common/Header';
 const TodoMainPage = () => {
 	return (
 		<MainLayout>
-			<S.Container>
-				<Header />
-				<S.Content>
-					<CustomCalendar />
-					<AddTodo />
-				</S.Content>
-			</S.Container>
+			<Header />
+			<S.Content>
+				<CustomCalendar />
+				<AddTodo />
+			</S.Content>
 		</MainLayout>
 	);
 };

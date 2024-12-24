@@ -4,9 +4,10 @@ export const MenuContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: fixed;
-	top: 110px;
-	right: 80px;
+	top: 120px;
+	right: 150px;
 	gap: 30px;
+	z-index: 100;
 `;
 
 export const MenuItem = styled.button`
@@ -16,6 +17,7 @@ export const MenuItem = styled.button`
 	font-weight: 600;
 	border: 2px solid lightgray;
 	border-radius: 50px;
+	background-color: white;
 	cursor: pointer;
 
 	&:hover {

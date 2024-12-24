@@ -8,9 +8,6 @@ export const HeaderContainer = styled.div`
 	align-items: center;
 	max-width: 1200px;
 	min-width: 700px;
-
-	margin: 30px auto;
-	padding: 0 65px;
 `;
 
 export const BackSection = styled.div`

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const LetterMenuContainer = styled.div`
-	position: fixed;
-	bottom: 30px;
-	right: 50px;
+	position: absolute;
+	bottom: 50px;
+	right: 20px;
 	z-index: 100;
 `;
 

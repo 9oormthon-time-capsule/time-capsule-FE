@@ -5,7 +5,7 @@ export const Header = styled.header`
   justify-content: space-between;
 
   width: 100%;
-  padding: 1.625rem;
+  padding: 30px 0;
 
   background-color: #ffffff;
 `;
@@ -49,9 +49,6 @@ export const RightBox = styled.div`
 `;
 
 export const MenuImg = styled.img`
-  width: 2rem;
-  height: 2rem;
-
   cursor: pointer;
 `;
 
@@ -59,8 +56,8 @@ export const CapsuleContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 
-  gap: 1.25rem;
-  padding-top: 2rem;
+  gap: 1.5rem;
+  padding-top: 4rem;
 `;
 
 export const CapsuleBox = styled.div`
@@ -91,4 +88,14 @@ export const CapsuleImg = styled.img`
 
   border-radius: 50%;
   object-fit: cover;
+`;
+
+export const Overlay = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 99;
 `;

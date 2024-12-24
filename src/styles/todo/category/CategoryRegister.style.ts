@@ -1,18 +1,10 @@
 import styled from 'styled-components';
 
-export const CategoryRegisterContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100vh;
-	overflow: hidden;
-`;
-
 export const CategoryFormWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding: 10px 180px;
+	padding-top: 30px;
 `;
 
 export const CategoryInput = styled.input`
@@ -29,7 +21,7 @@ export const ColorContainer = styled.div`
 	padding: 5px;
 	font-size: 20px;
 	border: none;
-	margin-top: 30px;
+	margin-top: 40px;
 `;
 
 export const UnderLine = styled.div`
