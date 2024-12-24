@@ -10,7 +10,7 @@ const Menu = () => {
 	};
 
 	const menuItems = (() => {
-		if(location.pathname.startsWith('/main')) {
+		if(location.pathname.startsWith('/main') || location.pathname.startsWith('/directory/:type/:userId') ) {
 			return [
 				{ path: '/todo', label: '나의 Todo'},				
 				{ path: '/directory/:type/:userId', label: '나의 편지함'},				
