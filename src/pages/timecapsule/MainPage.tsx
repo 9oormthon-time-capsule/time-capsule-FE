@@ -1,26 +1,19 @@
 import CapsuleBox from '../../components/timecapsule/main/CapsuleBox';
 import Header from '../../layout/Header';
 import LetterCreateButton from '../../components/timecapsule/main/LetterCreateButton';
-import styled from 'styled-components';
 import MainLayout from '../../layout/MainLayout';
+import * as S from '../../styles/timecapsule/MainPage.style';
 
 const MainPage = () => {
-  return (
-    <MainLayout>
-      <Header />
-      <MainWrapper>
-        <CapsuleBox />
-        <LetterCreateButton />
-      </MainWrapper>
-    </MainLayout>
-  );
+	return (
+		<MainLayout>
+			<Header />
+			<S.MainContainer>
+				<CapsuleBox />
+				<LetterCreateButton />
+			</S.MainContainer>
+		</MainLayout>
+	);
 };
-
-const MainWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`;
 
 export default MainPage;

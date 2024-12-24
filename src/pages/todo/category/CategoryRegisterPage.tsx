@@ -1,5 +1,5 @@
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
-import { Container, Wrapper, CategoryInput, UnderLine, ColorContainer, DropdownButton, DropdownMenu, DropdownItem } from '../../../styles/todo/category/CategoryRegister.style';
+import * as S from '../../../styles/todo/category/CategoryRegister.style';
 import { useState } from 'react';
 
 const CategoryRegister = () => {
@@ -22,26 +22,26 @@ const CategoryRegister = () => {
 	};
 
 	return (
-		<Container>
+		<S.CategoryRegisterContainer>
 			<CategoryHeader title="카테고리 등록" button="완료" />
-			<Wrapper>
-				<CategoryInput placeholder="카테고리 입력" />
-				<UnderLine />
-				<ColorContainer>
+			<S.CategoryFormWrapper>
+				<S.CategoryInput placeholder="카테고리 입력" />
+				<S.UnderLine />
+				<S.ColorContainer>
 					<span>색상</span>
-					<DropdownButton onClick={handleOpen}>
+					<S.DropdownButton onClick={handleOpen}>
 						색상 선택 {isOpen ? '▲' : '▼'}
 						{isOpen && (
-							<DropdownMenu>
+							<S.DropdownMenu>
 								{colors.map((color) => (
-									<DropdownItem key={color} color={color} />
+									<S.DropdownItem key={color} color={color} />
 								))}
-							</DropdownMenu>
+							</S.DropdownMenu>
 						)}
-					</DropdownButton>
-				</ColorContainer>
-			</Wrapper>
-		</Container>
+					</S.DropdownButton>
+				</S.ColorContainer>
+			</S.CategoryFormWrapper>
+		</S.CategoryRegisterContainer>
 	);
 };
 
