@@ -4,8 +4,8 @@ export const MenuContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: fixed;
-	top: 140px;
-	right: 40px;
+	top: 110px;
+	right: 80px;
 	gap: 30px;
 `;
 

@@ -19,5 +19,5 @@ export const Content = styled.div`
 	width: 100%;
 	height: calc(100vh - 100px);
 	box-sizing: border-box;
-	margin-top: 50px;
+	margin-top: 70px;
 `;
