@@ -5,7 +5,7 @@ export const Header = styled.header`
   justify-content: space-between;
 
   width: 100%;
-  padding: 1.625rem;
+  padding: 30px 0;
 
   background-color: #ffffff;
 `;
@@ -49,9 +49,6 @@ export const RightBox = styled.div`
 `;
 
 export const MenuImg = styled.img`
-  width: 2rem;
-  height: 2rem;
-
   cursor: pointer;
 `;
 
@@ -59,8 +56,8 @@ export const CapsuleContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 
-  gap: 1.25rem;
-  padding-top: 2rem;
+  gap: 1.5rem;
+  padding-top: 4rem;
 `;
 
 export const CapsuleBox = styled.div`

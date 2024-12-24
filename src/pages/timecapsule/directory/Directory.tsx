@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import MainLayout from '../../../layout/MainLayout';
+import Menu from '../../../components/common/Menu';
 import * as S from '../../../styles/timecapsule/directory/Directory.style';
 import { CAPSULE, CAPSULE_MAIN, CAPSULE_IMAGE } from '../../../mock/capsule';
 
 function Directory() {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const currentPath = window.location.pathname;
   const isTimeCapsule = currentPath.includes('/directory/time');
@@ -37,6 +39,10 @@ function Directory() {
     }
   };
 
+  const toggleMenu = () => {
+		setIsMenuOpen((prev) => !prev);
+	}
+
   return (
     <MainLayout>
       <S.Header>
@@ -48,7 +54,8 @@ function Directory() {
           </S.ChangeButton>
         </S.LeftBox>
         <S.RightBox>
-          <S.MenuImg src="/header/menu.svg" />
+          <S.MenuImg src="/header/menu.svg" width={35} height={35} onClick={toggleMenu}/>
+          {isMenuOpen && <Menu />}
         </S.RightBox>
       </S.Header>
       <S.CapsuleContainer>

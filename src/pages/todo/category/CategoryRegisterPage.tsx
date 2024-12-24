@@ -1,4 +1,5 @@
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
+import MainLayout from '../../../layout/MainLayout';
 import * as S from '../../../styles/todo/category/CategoryRegister.style';
 import { useState } from 'react';
 
@@ -22,7 +23,7 @@ const CategoryRegister = () => {
 	};
 
 	return (
-		<S.CategoryRegisterContainer>
+		<MainLayout>
 			<CategoryHeader title="카테고리 등록" button="완료" />
 			<S.CategoryFormWrapper>
 				<S.CategoryInput placeholder="카테고리 입력" />
@@ -41,7 +42,7 @@ const CategoryRegister = () => {
 					</S.DropdownButton>
 				</S.ColorContainer>
 			</S.CategoryFormWrapper>
-		</S.CategoryRegisterContainer>
+		</MainLayout>
 	);
 };
 

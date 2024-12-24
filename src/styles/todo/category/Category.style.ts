@@ -1,19 +1,11 @@
 import styled from 'styled-components';
 
-export const CategoryContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100vh;
-	overflow: hidden;
-`;
-
 export const CategoryList = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
-	padding: 10px 180px;
+	padding-top: 30px;
 	gap: 20px;
 `;
 
