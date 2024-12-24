@@ -1,5 +1,5 @@
 import CapsuleBox from '../../components/timecapsule/main/CapsuleBox';
-import Header from '../../layout/Header';
+import Header from '../../components/common/Header';
 import LetterCreateButton from '../../components/timecapsule/main/LetterCreateButton';
 import MainLayout from '../../layout/MainLayout';
 import * as S from '../../styles/timecapsule/MainPage.style';
