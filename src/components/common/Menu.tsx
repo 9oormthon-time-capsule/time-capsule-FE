@@ -12,7 +12,7 @@ const Menu = () => {
 	const menuItems = (() => {
 		if (location.pathname.startsWith('/todo')) {
 			return [
-				{ path: '/main', label: '타임캡슐' },
+				{ path: '/main', label: '나의 타임캡슐' },
 				{ path: '/todo/category/new', label: '카테고리 등록' },
 				{ path: '/todo/category', label: '카테고리 관리' },
 			]

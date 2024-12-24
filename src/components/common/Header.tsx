@@ -16,6 +16,10 @@ const Header = () => {
 		setIsMenuOpen((prev) => !prev);
 	}
 
+	const closeMenu = () => {
+		setIsMenuOpen(false);
+	};
+
 	return (
 		<S.HeaderContainer>
 			<S.LogoContainer />
@@ -23,7 +27,12 @@ const Header = () => {
 			<S.MenuContainer onClick={toggleMenu}>
 				<img src="/main/Menu.svg" width={35} height={35} />
 			</S.MenuContainer>
-			{isMenuOpen && <Menu />}
+			{isMenuOpen && (
+				<>
+					<S.Overlay onClick={closeMenu} />
+					<Menu />
+				</>
+			)}
 		</S.HeaderContainer>
 	);
 };
