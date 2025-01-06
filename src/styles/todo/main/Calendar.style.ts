@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 export const CalendarContainer = styled.div`
 	font-family: Arial, sans-serif;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	
 	color: black;
 `;
 
