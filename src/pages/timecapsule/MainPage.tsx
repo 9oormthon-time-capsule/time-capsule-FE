@@ -9,33 +9,33 @@ import { useEffect } from 'react';
 import { fetchUserData } from '../../api/user';
 
 const MainPage = () => {
-	const { userId } = useParams();
-	const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const { userId } = useParams();
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
 
-	useEffect(() => {
-		const loadUserData = async () => {
-			if(userId) {
-				try {
-					const userData = await fetchUserData(userId);
-					setUserInfo(userId, userData.nickname, userData.profileImage);
-				} catch (error) {
-					console.error('Failed to load user data:', error);
-				}
-			}
-		};
+  useEffect(() => {
+    const loadUserData = async () => {
+      if (userId) {
+        try {
+          const userData = await fetchUserData(userId);
+          setUserInfo(userId, userData.name, userData.profileImage);
+        } catch (error) {
+          console.error('Failed to load user data:', error);
+        }
+      }
+    };
 
-		loadUserData();
-	}, [userId, setUserInfo]);
+    loadUserData();
+  }, [userId, setUserInfo]);
 
-	return (
-		<MainLayout>
-			<Header />
-			<S.MainContainer>
-				<CapsuleBox />
-				<LetterCreateButton />
-			</S.MainContainer>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <Header />
+      <S.MainContainer>
+        <CapsuleBox />
+        <LetterCreateButton />
+      </S.MainContainer>
+    </MainLayout>
+  );
 };
 
 export default MainPage;
