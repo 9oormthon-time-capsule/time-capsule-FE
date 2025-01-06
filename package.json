@@ -13,7 +13,6 @@
     "axios": "^1.7.9",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "firebase": "^11.1.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "prettier": "^3.4.2",
