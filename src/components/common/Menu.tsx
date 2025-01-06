@@ -22,7 +22,7 @@ const Menu = () => {
 		else {
 			return [
 				{ path: `/todo/${userId}`, label: '나의 Todo'},				
-				{ path: '/directory/:type/:userId', label: '나의 편지함'},				
+				{ path: `/directory/diary/${userId}`, label: '나의 편지함'},				
 			]
 		} 
 })();
