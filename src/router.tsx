@@ -13,7 +13,7 @@ import CategoryPage from './pages/todo/category/CategoryPage';
 
 const router = createBrowserRouter([
   { path: '/', element: <Login /> },
-  { path: '/main', element: <MainPage /> },
+  { path: '/main/:userId', element: <MainPage /> },
   { path: '/directory/:type/:userId', element: <Directory /> },
   { path: '/write/letter', element: <LetterWritePage /> },
   { path: '/write/reflect', element: <ReflectWritePage /> },

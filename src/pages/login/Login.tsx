@@ -1,10 +1,7 @@
 import * as S from '../../styles/login/Login.style';
+import { KAKAO_AUTH_URL } from './Auth';
 
 function Login() {
-  const handleLoginButton = () => {
-    window.location.href = '/main';
-  };
-
   return (
     <S.LoginContainer>
       <S.TitleContainer>
@@ -12,7 +9,9 @@ function Login() {
         <S.IntroText>타임 캡슐에 기록을 담아 보관해 보세요 🍀</S.IntroText>
       </S.TitleContainer>
       <img src="/login/capsule_box.png" alt="capsule box" />
-      <S.LoginButton onClick={handleLoginButton} />
+      <a href={KAKAO_AUTH_URL}>
+        <S.LoginButton />
+      </a>
     </S.LoginContainer>
   );
 }
