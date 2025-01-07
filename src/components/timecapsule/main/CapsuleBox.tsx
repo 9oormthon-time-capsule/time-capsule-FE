@@ -1,6 +1,6 @@
 import * as S from '../../../styles/timecapsule/main/CapsuleBox.style';
 
-const CapsuleBox = () => {
+const CapsuleBox = ({letterCount}) => {
 	const handleCapsuleBox = () => {
 		window.location.href = '/directory/time/1';
 	};
@@ -11,7 +11,7 @@ const CapsuleBox = () => {
 				<S.TopSection>2026년의 나에게</S.TopSection>
 				<S.BottomSection>
 					<img src="/main/Capsule.svg" width={50} height={35} />
-					<span>0</span>개의 편지가 보관되어있어요!
+					<span>{letterCount}</span>개의 편지가 보관되어있어요!
 				</S.BottomSection>
 			</S.TitleContainer>
 			<S.BoxContainer onClick={handleCapsuleBox}>
