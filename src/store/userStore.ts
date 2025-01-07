@@ -1,16 +1,22 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface UserState {
-    userId: string;
-    nickname: string;
-    profileImage: string;
-    setUserInfo: (userId: string, nickname: string, profileImage: string) => void;
+  nickname: string | null;
+  profileImage: string | null;
+  setUserInfo: (nickname: string, profileImage: string) => void;
 }
 
-export const useUserStore = create<UserState>((set) => ({
-    userId: null,
-    nickname: null,
-    profileImage: null,
-    setUserInfo: (userId, nickname, profileImage) =>
-        set({ userId, nickname, profileImage })
-}))
+export const useUserStore = create<UserState>()(
+  persist(
+    (set) => ({
+      nickname: null,
+      profileImage: null,
+      setUserInfo: (nickname, profileImage) =>
+        set({ nickname, profileImage }),
+    }),
+    {
+      name: "user-info",
+    }
+  )
+);

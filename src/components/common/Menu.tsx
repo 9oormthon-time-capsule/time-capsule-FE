@@ -1,11 +1,10 @@
-import { useUserStore } from '../../store/userStore';
 import * as S from '../../styles/common/Menu.style';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Menu = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const userId = useUserStore((state) => state.userId);
+	const { userId } = useParams();
 
 	const handleNavigate = (path: string) => {
 		navigate(path);
