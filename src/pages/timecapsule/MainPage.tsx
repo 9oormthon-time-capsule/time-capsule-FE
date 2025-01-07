@@ -29,7 +29,7 @@ const MainPage = () => {
     const loadLetterCount = async () => {
       if(userId) {
         try {
-          const count = await fetchLetterCount(userId);
+          const count = await fetchLetterCount();
           setLetterCount(count);
         } catch (error) {
           console.error('Failed to fetch letter count:', error);
