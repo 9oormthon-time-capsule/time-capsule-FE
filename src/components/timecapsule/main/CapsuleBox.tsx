@@ -8,9 +8,9 @@ const IMAGE_MAP = [
   ];
 
 const CapsuleBox = ({ letterCount }) => {
-  const param = useParams();
+  const { userId } = useParams();
   const handleCapsuleBox = () => {
-    window.location.href = `/directory/time/${param.id}`;
+    window.location.href = `/directory/time/${userId}`;
   };
 
   const getImageSrc = () => {
