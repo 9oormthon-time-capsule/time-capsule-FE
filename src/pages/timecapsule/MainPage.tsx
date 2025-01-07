@@ -19,7 +19,7 @@ const MainPage = () => {
       if (userId) {
         try {
           const userData = await fetchUserData(userId);
-          setUserInfo(userData.name, userData.profileImage);
+          setUserInfo(userId, userData.name, userData.profileImage);
         } catch (error) {
           console.error('Failed to load user data:', error);
         }
