@@ -14,6 +14,13 @@ export const CategoryInput = styled.input`
 	border: none;
 `;
 
+export const SelectedColorIndicator = styled.div<{ color: string }>`
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background-color: ${(props) => props.color};
+`;
+
 export const ColorContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
