@@ -14,16 +14,15 @@ const CategoryRegister = () => {
   const { userId } = useUserStore((state) => state);
 
   const colors = [
-    '#000000',
-    '#FF6F6F',
-    '#FFA26F',
-    '#FFFF6F',
-    '#6FFF6F',
-    '#6F9FFF',
-    '#6F6FFF',
-    '#9F6FFF',
-    '#FFFFFF',
+    '#FFB3BA',
+    '#FFDFBA',
+    '#FFFFBA',
+    '#B9FBC0',
+    '#B2EBF2',
+    '#B3E5FC',
+    '#D1C4E9',
   ];
+  
 
   const handleChange = (e) => {
     setValue(e.target.value);
