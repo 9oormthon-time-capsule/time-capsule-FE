@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   { path: '/write/reflect', element: <ReflectWritePage /> },
   { path: '/detail/letter/:letterId', element: <LetterDetail /> },
   { path: '/detail/reflect/:letterId', element: <ReflectDetail /> },
-  { path: '/todo', element: <TodoMainPage /> },
+  { path: '/todo/:userId', element: <TodoMainPage /> },
   { path: '/todo/category', element: <CategoryPage /> },
   { path: '/todo/category/new', element: <CategoryRegisterPage /> },
 ]);
