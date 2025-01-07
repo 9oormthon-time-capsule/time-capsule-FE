@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { registerCategory } from '../../../api/category';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
 import MainLayout from '../../../layout/MainLayout';
@@ -9,6 +10,7 @@ const CategoryRegister = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
   const [selectColor, setSelectColor] = useState('');
+  const nav = useNavigate();
   const { userId } = useUserStore((state) => state);
 
   const colors = [
@@ -49,6 +51,7 @@ const CategoryRegister = () => {
 
     try {
         await registerCategory(userId, categoryData);
+        nav(`/todo/${userId}`);
     } catch (error) {
       console.error('Error registering category:', error);
       alert('카테고리 등록 중 문제가 발생했습니다.');
