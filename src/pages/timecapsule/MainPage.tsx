@@ -19,7 +19,7 @@ const MainPage = () => {
       if (userId) {
         try {
           const userData = await fetchUserData(userId);
-          setUserInfo(userData.name, userData.profileImage);
+          setUserInfo(userId, userData.name, userData.profileImage);
         } catch (error) {
           console.error('Failed to load user data:', error);
         }
@@ -29,7 +29,7 @@ const MainPage = () => {
     const loadLetterCount = async () => {
       if(userId) {
         try {
-          const count = await fetchLetterCount(userId);
+          const count = await fetchLetterCount();
           setLetterCount(count);
         } catch (error) {
           console.error('Failed to fetch letter count:', error);
