@@ -11,6 +11,6 @@ export const MainContainer = styled.div`
 export const MainContent = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   flex: 1;
 `;

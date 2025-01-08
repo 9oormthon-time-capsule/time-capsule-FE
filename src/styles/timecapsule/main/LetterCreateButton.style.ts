@@ -4,7 +4,7 @@ export const LetterMenuContainer = styled.div`
 	position: absolute;
 	bottom: 50px;
 	right: 20px;
-	z-index: 100;
+	z-index: 1000;
 `;
 
 export const ButtonFrame = styled.div`
