@@ -28,11 +28,11 @@ export default function WriteForm({ placeholder, mode, emoji }) {
       if (mode === 'letter') {
         await submitLetter(content);
         alert('편지가 등록되었습니다.');
-        window.location.href = '/directory/time/1';
+        window.location.href = '/directory/time';
       } else if (mode === 'reflect') {
         await submitReflect(content, emoji);
         alert('회고가 등록되었습니다.');
-        window.location.href = '/directory/diary/1';
+        window.location.href = '/directory/diary';
       }
     } catch (error) {
       alert(
