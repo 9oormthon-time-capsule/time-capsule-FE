@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import MainLayout from '../../../layout/MainLayout';
 import Menu from '../../../components/common/Menu';
@@ -9,7 +9,6 @@ import { CAPSULE, CAPSULE_MAIN, CAPSULE_IMAGE } from '../../../mock/capsule';
 function Directory() {
 	const navigate = useNavigate();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const { userId } = useParams();
 
 	const currentPath = window.location.pathname;
 	const isTimeCapsule = currentPath.includes('/directory/time');
@@ -29,14 +28,14 @@ function Directory() {
 			setDirectoryButton('일일회고 보러가기');
 			setDirectoryType('타임캡슐');
 			setCapsuleData(CAPSULE_MAIN);
-			navigate(`/directory/time/${userId}`);
+			navigate(`/directory/time`);
 		}
 
 		if (directoryButton === '일일회고 보러가기') {
 			setDirectoryButton('타임캡슐 보러가기');
 			setDirectoryType('일일회고');
 			setCapsuleData(CAPSULE);
-			navigate(`/directory/diary/${userId}`);
+			navigate(`/directory/diary`);
 		}
 	};
 
@@ -52,7 +51,7 @@ function Directory() {
 		<MainLayout>
 			<S.Header>
 				<S.LeftBox>
-					<S.LogoText href={`/main/${userId}`}>Time Capsule</S.LogoText>
+					<S.LogoText href={`/main`}>Time Capsule</S.LogoText>
 					<S.TitleText>익명 님의 {directoryType} 보관함</S.TitleText>
 					<S.ChangeButton onClick={handleDirectoryButton}>
 						{directoryButton}

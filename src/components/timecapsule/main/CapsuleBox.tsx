@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import * as S from '../../../styles/timecapsule/main/CapsuleBox.style';
 
 const IMAGE_MAP = [
@@ -8,9 +7,8 @@ const IMAGE_MAP = [
   ];
 
 const CapsuleBox = ({ letterCount }) => {
-  const { userId } = useParams();
   const handleCapsuleBox = () => {
-    window.location.href = `/directory/time/${userId}`;
+    window.location.href = `/directory/time`;
   };
 
   const getImageSrc = () => {

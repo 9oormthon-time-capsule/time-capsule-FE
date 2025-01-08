@@ -1,6 +1,8 @@
-export const fetchUserData = async (userId: string) => {
+export const fetchUserData = async () => {
   try {
-    const response = await fetch(`http://localhost:4000/api/user/${userId}`);
+    const response = await fetch(`http://localhost:4000/api/user`, {
+      credentials: 'include',
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch user data: ${response.statusText}`);

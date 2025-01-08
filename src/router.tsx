@@ -13,13 +13,13 @@ import CategoryPage from './pages/todo/category/CategoryPage';
 
 const router = createBrowserRouter([
   { path: '/', element: <Login /> },
-  { path: '/main/:userId', element: <MainPage /> },
-  { path: '/directory/:type/:userId', element: <Directory /> },
+  { path: '/main', element: <MainPage /> },
+  { path: '/directory/:type', element: <Directory /> },
   { path: '/write/letter', element: <LetterWritePage /> },
   { path: '/write/reflect', element: <ReflectWritePage /> },
   { path: '/detail/letter/:letterId', element: <LetterDetail /> },
   { path: '/detail/reflect/:letterId', element: <ReflectDetail /> },
-  { path: '/todo/:userId', element: <TodoMainPage /> },
+  { path: '/todo', element: <TodoMainPage /> },
   { path: '/todo/category', element: <CategoryPage /> },
   { path: '/todo/category/new', element: <CategoryRegisterPage /> },
 ]);
