@@ -1,15 +1,12 @@
+import axios from "axios";
+
 export const fetchUserData = async () => {
   try {
-    const response = await fetch(`http://localhost:4000/api/user`, {
-      credentials: 'include',
+    const response = await axios.get(`http://localhost:4000/api/user`, {
+      withCredentials: true,
     });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch user data: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data;
+    return response.data;
   } catch (error) {
     console.error('Error fetching user data:', error);
     throw error;
