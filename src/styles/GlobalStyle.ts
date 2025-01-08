@@ -69,6 +69,11 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  
+  a {
+    color: #000;
+    text-decoration: none;
+  }
 
   a:not([class]) {
     text-decoration-skip-ink: auto;
