@@ -14,15 +14,14 @@ const CategoryRegister = () => {
   const { userId } = useUserStore((state) => state);
 
   const colors = [
-    '#FFB3BA',
-    '#FFDFBA',
-    '#FFFFBA',
-    '#B9FBC0',
-    '#B2EBF2',
-    '#B3E5FC',
-    '#D1C4E9',
+    '#FF6F6F',
+    '#FF9E6F',
+    '#FFFF6F',
+    '#6FD96F',
+    '#6FCFFF',
+    '#6FA8FF',
+    '#A786E9',
   ];
-  
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -45,11 +44,11 @@ const CategoryRegister = () => {
 
     const categoryData = {
       categoryName: value,
-      color: selectColor,
+      textColor: selectColor,
     };
 
     try {
-        await registerCategory(userId, categoryData);
+        await registerCategory(categoryData);
         nav(`/todo/${userId}`);
     } catch (error) {
       console.error('Error registering category:', error);
