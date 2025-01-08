@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const Header = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   width: 100%;
-  padding: 30px 0;
+  padding: 35px 0;
 
   background-color: #ffffff;
 `;
@@ -13,6 +14,7 @@ export const Header = styled.header`
 export const LeftBox = styled.div`
   display: flex;
   align-items: center;
+  margin-left: 25px;
   gap: 1rem;
 `;
 

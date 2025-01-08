@@ -23,7 +23,7 @@ const CapsuleBox = ({ letterCount }) => {
       <S.TitleContainer>
         <S.TopSection>2026년의 나에게</S.TopSection>
         <S.BottomSection>
-          <img src="/main/Capsule.svg" width={50} height={35} />
+          <img src="/main/Capsule.svg" width={60} height={35} />
           <span>{letterCount}</span>개의 편지가 보관되어있어요!
         </S.BottomSection>
       </S.TitleContainer>

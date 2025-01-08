@@ -11,6 +11,7 @@ export const TitleContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
+	color: beige;
 `;
 
 export const TopSection = styled.div`

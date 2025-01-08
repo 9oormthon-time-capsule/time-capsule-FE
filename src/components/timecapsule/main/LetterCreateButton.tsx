@@ -6,7 +6,7 @@ const LetterCreateButton = () => {
 	const [isClicked, setIsClicked] = useState(false);
 
 	const handleLetterCreatebutton = () => {
-		setIsClicked(true);
+		setIsClicked((prev) => !prev);
 	};
 
 	return (
@@ -14,7 +14,12 @@ const LetterCreateButton = () => {
 			{isClicked && <LetterMenuOverlay />}
 			<S.LetterMenuContainer>
 				<S.ButtonFrame onClick={handleLetterCreatebutton}>
-					<img src="/main/Plus.svg" width={35} height={35} />
+				<img
+						src={isClicked ? '/main/Close.svg' : '/main/Plus.svg'}
+						width={isClicked ? 28 : 35}
+						height={isClicked ? 28 : 35}
+						alt="toggle-button"
+					/>
 				</S.ButtonFrame>
 			</S.LetterMenuContainer>
 		</>

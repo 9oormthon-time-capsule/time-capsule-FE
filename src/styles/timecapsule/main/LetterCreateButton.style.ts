@@ -4,7 +4,7 @@ export const LetterMenuContainer = styled.div`
 	position: absolute;
 	bottom: 50px;
 	right: 20px;
-	z-index: 100;
+	z-index: 1000;
 `;
 
 export const ButtonFrame = styled.div`
@@ -16,7 +16,7 @@ export const ButtonFrame = styled.div`
 	height: 80px;
 
 	border-radius: 100%;
-	background-color: lightgray;
+	background-color: beige;
 
 	cursor: pointer;
 `;

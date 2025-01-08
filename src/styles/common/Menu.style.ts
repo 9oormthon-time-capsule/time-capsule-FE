@@ -8,6 +8,26 @@ export const MenuContainer = styled.div`
 	right: 150px;
 	gap: 30px;
 	z-index: 100;
+
+	@media (max-width: 1400px) {
+		right: 120px;
+	}
+
+	@media (max-width: 1360px) {
+		right: 100px;
+	}
+
+	@media (max-width: 1320px) {
+		right: 80px;
+	}
+
+	@media (max-width: 1280px) {
+		right: 50px;
+	}
+
+	@media (max-width: 1220px) {
+		right: 35px;
+	}
 `;
 
 export const MenuItem = styled.button`
