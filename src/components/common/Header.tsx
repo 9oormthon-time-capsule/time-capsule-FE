@@ -8,6 +8,7 @@ const Header = () => {
 	const location = useLocation();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const nickname = useUserStore((state) => state.nickname);
+	const isTodo = location.pathname.startsWith('/todo');
 
 	const getTitle = () => {
 		if(location.pathname.startsWith('/main')) return `"${nickname}"님의 타임캡슐`;
@@ -24,9 +25,9 @@ const Header = () => {
 
 	return (
 		<S.HeaderContainer>
-			<S.LogoContainer>Time Capsule</S.LogoContainer>
-			<S.HeaderTitle>{getTitle()}</S.HeaderTitle>
-			<S.MenuContainer onClick={toggleMenu}>
+			<S.LogoContainer isTodo={isTodo}>Time Capsule</S.LogoContainer>
+			<S.HeaderTitle isTodo={isTodo}>{getTitle()}</S.HeaderTitle>
+			<S.MenuContainer onClick={toggleMenu} isTodo={isTodo}>
 				<img src="/main/Menu.svg" width={35} height={35} />
 			</S.MenuContainer>
 			{isMenuOpen && (
