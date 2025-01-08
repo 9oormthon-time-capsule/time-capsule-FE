@@ -24,7 +24,7 @@ const Header = () => {
 
 	return (
 		<S.HeaderContainer>
-			<S.LogoContainer />
+			<S.LogoContainer>Time Capsule</S.LogoContainer>
 			<S.HeaderTitle>{getTitle()}</S.HeaderTitle>
 			<S.MenuContainer onClick={toggleMenu}>
 				<img src="/main/Menu.svg" width={35} height={35} />

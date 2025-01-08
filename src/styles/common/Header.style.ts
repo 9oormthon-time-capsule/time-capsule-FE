@@ -8,9 +8,12 @@ export const HeaderContainer = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-	width: 80px;
-	height: 60px;
-	background-color: lightgray;
+	width: auto;
+	height: 25px;
+	margin-left: 25px;
+	font-size: 24px;
+	font-weight: 600;
+	color: beige;
 `;
 
 export const HeaderTitle = styled.div`
@@ -19,7 +22,7 @@ export const HeaderTitle = styled.div`
 	margin-left: 25px;
 	font-size: 24px;
 	font-weight: 600;
-	color: black;
+	color: white;
 `;
 
 export const MenuContainer = styled.div`

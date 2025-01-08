@@ -16,7 +16,7 @@ export const ButtonFrame = styled.div`
 	height: 80px;
 
 	border-radius: 100%;
-	background-color: lightgray;
+	background-color: beige;
 
 	cursor: pointer;
 `;
