@@ -14,6 +14,7 @@ export const LogoContainer = styled.div`
 	font-size: 24px;
 	font-weight: bold;
 	color: ${(props) => (props.isTodo ? 'black' : 'beige')};
+	cursor: pointer;
 `;
 
 export const HeaderTitle = styled.div`
