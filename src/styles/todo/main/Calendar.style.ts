@@ -2,7 +2,6 @@ import Calendar from 'react-calendar';
 import styled from 'styled-components';
 
 export const CalendarContainer = styled.div`
-  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +48,7 @@ export const StyledCalendar = styled(Calendar)`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
-    font-size: 1em;
+    font-size: 17px;
     padding: 10px 0;
     font-weight: bold;
 
@@ -140,7 +139,7 @@ export const StyledCalendar = styled(Calendar)`
       display: flex;
       align-items: center;
       font-size: 1.5em;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     .react-calendar__navigation__arrow {
