@@ -1,12 +1,26 @@
 import { useState } from 'react';
-import 'react-calendar/dist/Calendar.css';
 import * as S from '../../../styles/todo/main/Calendar.style';
 import { useUserStore } from '../../../store/userStore';
+import dayjs from 'dayjs';
 
 const CustomCalendar = () => {
-  const [date, setDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
   const nickname = useUserStore((state) => state.nickname);
   const profileImage = useUserStore((state) => state.profileImage);
+
+  const tileDisabled = ({ date, view }) => {
+    if (view === 'month') {
+      const currentMonth = dayjs(activeStartDate).month();
+      const tileMonth = dayjs(date).month();
+      return currentMonth !== tileMonth;
+    }
+    return false;
+  };
+
+  const handleActiveStartDateChange = ({ activeStartDate }) => {
+    setActiveStartDate(activeStartDate);
+  };
 
   return (
     <S.CalendarContainer>
@@ -16,23 +30,13 @@ const CustomCalendar = () => {
             src={profileImage || 'https://via.placeholder.com/150'}
             alt="profile"
           />
-
           <span>{nickname}</span>
         </div>
       </S.ProfileHeader>
 
-      <S.TodoStatusBar>
-        <div className="emoji-counter">
-          <div>
-            <span>✅</span>
-            <span className="count">0</span>
-          </div>
-        </div>
-      </S.TodoStatusBar>
-
       <S.StyledCalendar
-        onChange={setDate}
-        value={date}
+        onChange={setCurrentDate}
+        value={currentDate}
         calendarType="gregory"
         formatShortWeekday={(locale, date) =>
           ['일', '월', '화', '수', '목', '금', '토'][date.getDay()]
@@ -42,6 +46,14 @@ const CustomCalendar = () => {
         next2Label={null}
         prevLabel="<"
         nextLabel=">"
+        tileDisabled={tileDisabled}
+        onActiveStartDateChange={handleActiveStartDateChange}
+        navigationLabel={() => (
+          <S.TodoStatusBar>
+            {dayjs(activeStartDate).format('YYYY년 M월')}
+            <span>☑️ 0</span>
+          </S.TodoStatusBar>
+        )}
       />
     </S.CalendarContainer>
   );
