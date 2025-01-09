@@ -8,9 +8,13 @@ export const HeaderContainer = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-	width: 80px;
-	height: 60px;
-	background-color: lightgray;
+	width: auto;
+	height: 25px;
+	margin-left: 25px;
+	font-size: 24px;
+	font-weight: bold;
+	color: ${(props) => (props.isTodo ? 'black' : 'beige')};
+	cursor: pointer;
 `;
 
 export const HeaderTitle = styled.div`
@@ -19,13 +23,18 @@ export const HeaderTitle = styled.div`
 	margin-left: 25px;
 	font-size: 24px;
 	font-weight: 600;
-	color: black;
+	color: ${(props) => (props.isTodo ? 'black' : 'white')};
 `;
 
 export const MenuContainer = styled.div`
 	margin-left: auto;
 	cursor: pointer;
 	z-index: 100;
+
+	img {
+		filter: ${(props) =>
+			props.isTodo ? 'invert(1)' : 'invert(0)'};
+	}
 `;
 
 export const Overlay = styled.div`

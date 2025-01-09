@@ -14,35 +14,37 @@ const MainPage = () => {
 
   useEffect(() => {
     const loadUserData = async () => {
-        try {
-          const userData = await fetchUserData();
-          setUserInfo(userData.name, userData.profileImage);
-        } catch (error) {
-          console.error('Failed to load user data:', error);
-        }
+      try {
+        const userData = await fetchUserData();
+        setUserInfo(userData.name, userData.profileImage);
+      } catch (error) {
+        console.error('Failed to load user data:', error);
       }
+    };
 
     const loadLetterCount = async () => {
-        try {
-          const count = await fetchLetterCount();
-          setLetterCount(count);
-        } catch (error) {
-          console.error('Failed to fetch letter count:', error);
-        }
-    }
+      try {
+        const count = await fetchLetterCount();
+        setLetterCount(count);
+      } catch (error) {
+        console.error('Failed to fetch letter count:', error);
+      }
+    };
 
     loadUserData();
     loadLetterCount();
   }, [setUserInfo]);
 
   return (
-    <MainLayout>
-      <Header />
-      <S.MainContainer>
-        <CapsuleBox letterCount={letterCount}/>
-        <LetterCreateButton />
-      </S.MainContainer>
-    </MainLayout>
+    <S.MainContainer>
+      <MainLayout>
+        <Header />
+        <S.MainContent>
+          <CapsuleBox letterCount={letterCount} />
+          <LetterCreateButton />
+        </S.MainContent>
+      </MainLayout>
+    </S.MainContainer>
   );
 };
 

@@ -49,7 +49,7 @@ const CategoryRegister = () => {
 
     try {
         await registerCategory(categoryData);
-        nav(`/todo/${userId}`);
+        nav("/todo");
     } catch (error) {
       console.error('Error registering category:', error);
       alert('카테고리 등록 중 문제가 발생했습니다.');

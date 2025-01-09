@@ -10,7 +10,7 @@ export const MainLayoutContainer = styled.div`
 	height: 100vh;
 
 	margin: 0 auto;
-	padding: 20px 40px;
+	padding: 20px;
 
 	position: relative;
 `;

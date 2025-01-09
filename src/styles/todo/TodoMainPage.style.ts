@@ -4,10 +4,10 @@ export const Content = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: start;
-	gap: 50px;
+	gap: 70px;
 	flex-grow: 1;
 	max-width: 1200px;
 	width: 100%;
 	box-sizing: border-box;
-	margin-top: 80px;
+	margin-top: 60px;
 `;
