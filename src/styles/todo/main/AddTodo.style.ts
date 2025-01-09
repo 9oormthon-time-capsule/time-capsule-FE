@@ -75,3 +75,13 @@ export const AddButton = styled.button<{ textColor: string }>`
   border: none;
   border-radius: 5px;
 `;
+
+export const TodoItem = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+`;
+
+export const TodoText = styled.p`
+  margin-left: 1rem;
+`;
