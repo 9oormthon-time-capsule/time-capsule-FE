@@ -4,6 +4,7 @@ interface ITodo {
   id: number;
   task: string;
   isCompleted: boolean;
+  categoryId: string;
   createdAt: { seconds: number };
 }
 
@@ -38,6 +39,7 @@ export const fetchTodoData = async () => {
         id: item.id,
         task: item.task,
         isCompleted: item.isCompleted,
+        categoryId: item.categoryId,
         createdAt: date.getTime(),
       };
     });

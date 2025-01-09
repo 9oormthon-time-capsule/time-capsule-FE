@@ -125,7 +125,7 @@ export default function AddTodo() {
                   </S.TodoItem>
                 );
               }
-              return null; // 조건에 맞지 않으면 아무것도 출력하지 않음
+              return null;
             })}
 
             {activeCategory === category.id && (
