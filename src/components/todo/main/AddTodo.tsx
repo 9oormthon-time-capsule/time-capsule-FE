@@ -1,7 +1,12 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import * as S from '../../../styles/todo/main/AddTodo.style';
 import { fetchCategories } from '../../../api/category';
-import { addTodo, fetchTodoData, updateTodo } from '../../../api/todo';
+import {
+  addTodo,
+  deleteTodo,
+  fetchTodoData,
+  updateTodo,
+} from '../../../api/todo';
 
 type category = {
   id: string;
@@ -95,6 +100,19 @@ export default function AddTodo() {
     }
   };
 
+  const handleDeleteTodo = async (todoId: string) => {
+    const isConfirmed = confirm('할 일을 삭제하시겠습니까?');
+    if (!isConfirmed) return;
+    try {
+      await deleteTodo(todoId);
+
+      const updatedTodos = await fetchTodoData();
+      setTodos(updatedTodos);
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
   return (
     <S.TodoContainer>
       <S.CategoryListContainer>
@@ -122,6 +140,9 @@ export default function AddTodo() {
                       }
                     />
                     <S.TodoText>{todo.task}</S.TodoText>
+                    <S.DeleteButton onClick={() => handleDeleteTodo(todo.id)}>
+                      •••
+                    </S.DeleteButton>
                   </S.TodoItem>
                 );
               }

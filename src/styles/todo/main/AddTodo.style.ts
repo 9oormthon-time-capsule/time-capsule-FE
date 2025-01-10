@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const TodoContainer = styled.div`
+  flex: 1;
   background-color: white;
   padding: 1rem;
   border-radius: 10px;
@@ -84,4 +85,10 @@ export const TodoItem = styled.div`
 
 export const TodoText = styled.p`
   margin-left: 1rem;
+`;
+
+export const DeleteButton = styled.button`
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: rgb(182, 182, 182);
 `;
