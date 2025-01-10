@@ -48,8 +48,9 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import axios from 'axios';
 import * as S from '../../../styles/timecapsule/detail/ReflectDetail.style';
+
+import { fetchLetterData } from '../../../api/letter'; // API 호출 함수 불러오기
 
 const ReflectDetail = () => {
   const location = useLocation();
@@ -59,30 +60,17 @@ const ReflectDetail = () => {
     from: '',
   });
 
-  const fetchLetterData = async () => {
-    try {
-      const apiUrl = 'http://localhost:4000/api/timecapsule/reflect';
-      const response = await axios.get(apiUrl, {
-        withCredentials: true,
-      });
-
-      const data = response.data;
-
-      if (data && data.length > 0) {
-        const latestLetter = data[0];
-        setLetterContent({
-          to: latestLetter.to || '나에게',
-          body: latestLetter.content || '편지 내용이 없습니다.',
-          from: latestLetter.from || '보낸 사람',
-        });
-      }
-    } catch (error) {
-      console.error('데이터를 가져오는 데 오류가 발생했습니다:', error);
-    }
-  };
-
   useEffect(() => {
-    fetchLetterData();
+    const fetchLetter = async () => {
+      try {
+        const letter = await fetchLetterData(); // API 호출 함수 사용
+        setLetterContent(letter);
+      } catch (error) {
+        console.error('데이터를 가져오는 데 오류가 발생했습니다:', error);
+      }
+    };
+
+    fetchLetter();
   }, []);
 
   const handleDownload = () => {
