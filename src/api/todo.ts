@@ -70,3 +70,18 @@ export const updateTodo = async (id: string, isCompleted: boolean) => {
     console.error('Error updating todo:', error);
   }
 };
+
+export const deleteTodo = async (id: string) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:4000/api/todo/task/${id}`,
+      {
+        withCredentials: true,
+      },
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting todo:', error);
+  }
+};
