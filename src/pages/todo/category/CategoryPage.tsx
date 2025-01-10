@@ -20,7 +20,7 @@ const CategoryPage = () => {
         }
     };
     loadCategories();
-  });
+  }, []);
 
   const handleDeleteClick = (id: string) => {
     setIsModalOpen(true);
