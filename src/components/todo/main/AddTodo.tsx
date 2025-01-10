@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import * as S from '../../../styles/todo/main/AddTodo.style';
 import { fetchCategories } from '../../../api/category';
 import {
@@ -26,6 +26,9 @@ export default function AddTodo() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -48,6 +51,12 @@ export default function AddTodo() {
 
     getCategories();
     getTodos();
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const handleCategoryClick = (id: string) => {
@@ -80,6 +89,10 @@ export default function AddTodo() {
       setTodos(updatedTodos);
       setTask('');
 
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+
       console.log('할 일이 성공적으로 추가되었습니다!');
     } catch (error) {
       console.error('Error adding todo:', error);
@@ -101,8 +114,6 @@ export default function AddTodo() {
   };
 
   const handleDeleteTodo = async (todoId: string) => {
-    const isConfirmed = confirm('할 일을 삭제하시겠습니까?');
-    if (!isConfirmed) return;
     try {
       await deleteTodo(todoId);
 
@@ -110,6 +121,24 @@ export default function AddTodo() {
       setTodos(updatedTodos);
     } catch (error) {
       console.error('Error deleting todo:', error);
+    }
+  };
+
+  const toggleDropdown = (todoId: string) => {
+    setIsMenuOpen((prev) => (prev === todoId ? null : todoId));
+  };
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+      setIsMenuOpen(null);
+    }
+
+    if (
+      inputRef.current &&
+      !inputRef.current.contains(e.target as Node) &&
+      !(e.target && (e.target as Element).closest('button') === e.target)
+    ) {
+      setActiveCategory(null);
     }
   };
 
@@ -140,9 +169,21 @@ export default function AddTodo() {
                       }
                     />
                     <S.TodoText>{todo.task}</S.TodoText>
-                    <S.DeleteButton onClick={() => handleDeleteTodo(todo.id)}>
+
+                    <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
                       •••
-                    </S.DeleteButton>
+                    </S.TodoMenu>
+
+                    {isMenuOpen === todo.id && (
+                      <S.DropdownMenu ref={menuRef}>
+                        <S.DropdownItem>수정</S.DropdownItem>
+                        <S.DropdownItem
+                          onClick={() => handleDeleteTodo(todo.id)}
+                        >
+                          삭제
+                        </S.DropdownItem>
+                      </S.DropdownMenu>
+                    )}
                   </S.TodoItem>
                 );
               }
@@ -163,6 +204,8 @@ export default function AddTodo() {
                   value={task}
                   onChange={handleWriteTodo}
                   onKeyDown={(e) => handleKeyDown(e, category.id)}
+                  ref={inputRef}
+                  autoFocus
                 />
                 <S.AddButton
                   textColor={category.textColor}
