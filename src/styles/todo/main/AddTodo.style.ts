@@ -19,10 +19,10 @@ export const CategoryItem = styled.button<{ textColor: string }>`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  background-color: #f2f2f2;
+  background-color:rgb(243,243,243);
   border-radius: 5rem;
   width: fit-content;
-  font-weight: bold;
+  font-weight: 800;
   color: ${(props) => props.textColor};
 `;
 

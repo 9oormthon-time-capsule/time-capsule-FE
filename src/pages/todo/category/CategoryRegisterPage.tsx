@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { registerCategory } from '../../../api/category';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
 import MainLayout from '../../../layout/MainLayout';
-import { useUserStore } from '../../../store/userStore';
 import * as S from '../../../styles/todo/category/CategoryRegister.style';
 import { useState } from 'react';
 
@@ -11,12 +10,11 @@ const CategoryRegister = () => {
   const [value, setValue] = useState('');
   const [selectColor, setSelectColor] = useState('');
   const nav = useNavigate();
-  const { userId } = useUserStore((state) => state);
 
   const colors = [
     '#FF6F6F',
     '#FF9E6F',
-    '#FFFF6F',
+    '#fee524',
     '#6FD96F',
     '#6FCFFF',
     '#6FA8FF',
