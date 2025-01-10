@@ -5,28 +5,28 @@ export const MenuContainer = styled.div`
 	flex-direction: column;
 	position: fixed;
 	top: 120px;
-	right: 150px;
+	right: 120px;
 	gap: 30px;
 	z-index: 100;
 
 	@media (max-width: 1400px) {
-		right: 120px;
-	}
-
-	@media (max-width: 1360px) {
 		right: 100px;
 	}
 
-	@media (max-width: 1320px) {
+	@media (max-width: 1360px) {
 		right: 80px;
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 1320px) {
 		right: 50px;
 	}
 
+	@media (max-width: 1280px) {
+		right: 40px;
+	}
+
 	@media (max-width: 1220px) {
-		right: 35px;
+		right: 20px;
 	}
 `;
 
