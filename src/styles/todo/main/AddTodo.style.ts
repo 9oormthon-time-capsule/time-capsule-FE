@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const TodoContainer = styled.div`
+  flex: 1;
   background-color: white;
   padding: 1rem;
   border-radius: 10px;
@@ -74,4 +75,40 @@ export const AddButton = styled.button<{ textColor: string }>`
   color: black;
   border: none;
   border-radius: 5px;
+`;
+
+export const TodoItem = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+`;
+
+export const TodoText = styled.p`
+  margin-left: 1rem;
+`;
+
+export const TodoMenu = styled.button`
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: rgb(182, 182, 182);
+`;
+
+export const DropdownMenu = styled.div`
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+`;
+
+export const DropdownItem = styled.div`
+  padding: 8px 12px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
 `;
