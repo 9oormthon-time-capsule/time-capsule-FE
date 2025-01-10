@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as S from '../../../styles/timecapsule/detail/LetterDetail.style';
 
+import { fetchLetterData } from '../../../api/letter'; // API 호출 함수 불러오기
+
 const LetterDetail = () => {
-  const { userId } = useParams(); // URL에서 userId를 가져옵니다.
+  // const { userId } = useParams(); // URL에서 userId를 가져옵니다.
   const navigate = useNavigate();
-  const [letterContent, setLetterContent] = useState(null); // API로 가져올 데이터를 저장할 상태입니다.
+  const [letterContent, setLetterContent] = useState({
+    to: '',
+    body: '',
+    from: '',
+  });
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
 
@@ -16,15 +21,8 @@ const LetterDetail = () => {
   useEffect(() => {
     const fetchLetter = async () => {
       try {
-        // API 호출: 사용자 ID를 기반으로 해당 사용자의 편지 데이터를 가져옵니다.
-        const response = await axios.get(
-          `http://localhost:4000/api/timecapsule/letter/${userId}`,
-          { withCredentials: true }
-        );
-
-        // 서버에서 받은 데이터로 상태를 업데이트합니다.
-        const letter = response.data; // 단일 편지 데이터라고 가정
-        setLetterContent(letter || { to: '', body: '', from: '' });
+        const letter = await fetchLetterData(); // API 호출 함수 사용
+        setLetterContent(letter);
       } catch (err) {
         setError('편지 데이터를 불러오지 못했습니다.');
       } finally {
@@ -33,7 +31,7 @@ const LetterDetail = () => {
     };
 
     fetchLetter();
-  }, [userId]);
+  }, []);
 
   // PDF 다운로드 함수
   const handleDownload = () => {
