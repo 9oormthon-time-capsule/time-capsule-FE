@@ -54,10 +54,10 @@ export const fetchTodoData = async () => {
   }
 };
 
-export const updateTodo = async (id: string, isCompleted: boolean) => {
+export const updateTodo = async (todoId: string, isCompleted: boolean) => {
   try {
     const response = await axios.patch(
-      `http://localhost:4000/api/todo/task/${id}`,
+      `http://localhost:4000/api/todo/task/${todoId}`,
       {
         isCompleted,
       },
@@ -71,10 +71,10 @@ export const updateTodo = async (id: string, isCompleted: boolean) => {
   }
 };
 
-export const deleteTodo = async (id: string) => {
+export const deleteTodo = async (todoId: string) => {
   try {
     const response = await axios.delete(
-      `http://localhost:4000/api/todo/task/${id}`,
+      `http://localhost:4000/api/todo/task/${todoId}`,
       {
         withCredentials: true,
       },
