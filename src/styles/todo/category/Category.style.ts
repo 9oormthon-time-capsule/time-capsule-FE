@@ -15,9 +15,9 @@ export const CategoryItem = styled.div<{ textColor: string }>`
 	align-items: center;
 	padding: 10px 20px;
 	border-radius: 30px;
-	background-color: rgb(235,235,235);
+	background-color: rgb(243,243,243);
 	color: ${(props) => props.textColor};
-	font-weight: bold;
+	font-weight: 800;
 	white-space: nowrap;
 	cursor: pointer;
 `;
