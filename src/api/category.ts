@@ -58,6 +58,7 @@ export const fetchCategories = async () => {
     return sortedCategories;
   } catch (error) {
     console.error('Error fetching category:', error);
+    return [];
   }
 };
 
