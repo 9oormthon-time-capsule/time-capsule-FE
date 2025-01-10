@@ -112,3 +112,15 @@ export const DropdownItem = styled.div`
     background-color: #f0f0f0;
   }
 `;
+
+export const MsgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+
+export const MsgText = styled.p`
+  font-size: 1rem;
+  color: #ccc;
+`;

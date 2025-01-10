@@ -144,80 +144,88 @@ export default function AddTodo() {
 
   return (
     <S.TodoContainer>
-      <S.CategoryListContainer>
-        {categories.map((category) => (
-          <div>
-            <S.CategoryItem
-              key={category.id}
-              textColor={category.textColor}
-              onClick={() => handleCategoryClick(category.id)}
-            >
-              {category.categoryName}
-              <S.PlusButton>＋</S.PlusButton>
-            </S.CategoryItem>
+      {categories.length === 0 ? (
+        <S.MsgContainer>
+          <S.MsgText>할 일이 없습니다.</S.MsgText>
+          <S.MsgText>카테고리를 먼저 추가하세요!</S.MsgText>
+        </S.MsgContainer>
+      ) : (
+        <S.CategoryListContainer>
+          {categories.map((category) => (
+            <div>
+              <S.CategoryItem
+                key={category.id}
+                textColor={category.textColor}
+                onClick={() => handleCategoryClick(category.id)}
+              >
+                {category.categoryName}
+                <S.PlusButton>＋</S.PlusButton>
+              </S.CategoryItem>
 
-            {todos.map((todo) => {
-              if (todo.categoryId === category.id) {
-                return (
-                  <S.TodoItem key={todo.id}>
-                    <S.CheckBox
-                      type="checkbox"
-                      textColor={category.textColor}
-                      checked={todo.isCompleted}
-                      onChange={() =>
-                        handleCheckBoxChange(todo.id, todo.isCompleted)
-                      }
-                    />
-                    <S.TodoText>{todo.task}</S.TodoText>
+              {Array.isArray(todos) &&
+                todos.map((todo) => {
+                  if (todo.categoryId === category.id) {
+                    return (
+                      <S.TodoItem key={todo.id}>
+                        <S.CheckBox
+                          type="checkbox"
+                          textColor={category.textColor}
+                          checked={todo.isCompleted}
+                          onChange={() =>
+                            handleCheckBoxChange(todo.id, todo.isCompleted)
+                          }
+                        />
+                        <S.TodoText>{todo.task}</S.TodoText>
 
-                    <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
-                      •••
-                    </S.TodoMenu>
+                        <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
+                          •••
+                        </S.TodoMenu>
 
-                    {isMenuOpen === todo.id && (
-                      <S.DropdownMenu ref={menuRef}>
-                        <S.DropdownItem>수정</S.DropdownItem>
-                        <S.DropdownItem
-                          onClick={() => handleDeleteTodo(todo.id)}
-                        >
-                          삭제
-                        </S.DropdownItem>
-                      </S.DropdownMenu>
-                    )}
-                  </S.TodoItem>
-                );
-              }
-              return null;
-            })}
+                        {isMenuOpen === todo.id && (
+                          <S.DropdownMenu ref={menuRef}>
+                            <S.DropdownItem>수정</S.DropdownItem>
+                            <S.DropdownItem
+                              onClick={() => handleDeleteTodo(todo.id)}
+                            >
+                              삭제
+                            </S.DropdownItem>
+                          </S.DropdownMenu>
+                        )}
+                      </S.TodoItem>
+                    );
+                  }
+                  return null;
+                })}
 
-            {activeCategory === category.id && (
-              <S.InputGroup>
-                <S.CheckBox
-                  type="checkbox"
-                  textColor={category.textColor}
-                  checked={false}
-                />
-                <S.TodoInput
-                  type="text"
-                  placeholder="할 일 입력"
-                  textColor={category.textColor}
-                  value={task}
-                  onChange={handleWriteTodo}
-                  onKeyDown={(e) => handleKeyDown(e, category.id)}
-                  ref={inputRef}
-                  autoFocus
-                />
-                <S.AddButton
-                  textColor={category.textColor}
-                  onClick={() => handleAddTodo(category.id)}
-                >
-                  추가
-                </S.AddButton>
-              </S.InputGroup>
-            )}
-          </div>
-        ))}
-      </S.CategoryListContainer>
+              {activeCategory === category.id && (
+                <S.InputGroup>
+                  <S.CheckBox
+                    type="checkbox"
+                    textColor={category.textColor}
+                    checked={false}
+                  />
+                  <S.TodoInput
+                    type="text"
+                    placeholder="할 일 입력"
+                    textColor={category.textColor}
+                    value={task}
+                    onChange={handleWriteTodo}
+                    onKeyDown={(e) => handleKeyDown(e, category.id)}
+                    ref={inputRef}
+                    autoFocus
+                  />
+                  <S.AddButton
+                    textColor={category.textColor}
+                    onClick={() => handleAddTodo(category.id)}
+                  >
+                    추가
+                  </S.AddButton>
+                </S.InputGroup>
+              )}
+            </div>
+          ))}
+        </S.CategoryListContainer>
+      )}
     </S.TodoContainer>
   );
 }
