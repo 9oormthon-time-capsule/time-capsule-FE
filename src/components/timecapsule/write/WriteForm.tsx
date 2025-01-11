@@ -46,7 +46,7 @@ export default function WriteForm({
       } else if (mode === 'reflect') {
         await submitReflect(content, emoji!);
         alert('회고가 등록되었습니다.');
-        window.location.href = '/directory/diary';
+        window.location.href = '/directory/reflect';
       }
     } catch {
       alert(
