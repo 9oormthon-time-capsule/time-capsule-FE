@@ -42,7 +42,7 @@ export default function WriteForm({
       if (mode === 'letter') {
         await submitLetter(content);
         alert('편지가 등록되었습니다.');
-        window.location.href = '/directory/time';
+        window.location.href = '/directory/letter';
       } else if (mode === 'reflect') {
         await submitReflect(content, emoji!);
         alert('회고가 등록되었습니다.');
