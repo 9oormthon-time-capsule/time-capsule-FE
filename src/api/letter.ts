@@ -2,6 +2,7 @@ import axios from 'axios';
 
 interface ILetter {
   createdAt: { seconds: number };
+  canReadDate: { seconds: number };
 }
 
 export const fetchLetterCount = async () => {
@@ -67,5 +68,33 @@ export const canWriteLetter = async () => {
   } catch (error) {
     console.error('편지 작성 제한 체크 중 오류가 발생했습니다:', error);
     return false;
+  }
+};
+
+export const canReadLetter = async () => {
+  try {
+    const response = await axios.get(
+      'http://localhost:4000/api/timecapsule/letter',
+      {
+        withCredentials: true,
+      },
+    );
+
+    const letterData = response.data.map((item: ILetter) => ({
+      canReadDate: new Date(item.canReadDate.seconds * 1000),
+    }));
+
+    const now = new Date().getTime();
+
+    for (const item of letterData) {
+      if (now >= item.canReadDate.getTime()) {
+        return true;
+      }
+    }
+
+    return false;
+  } catch (error) {
+    console.error('Error fetching letter data:', error);
+    throw error;
   }
 };
