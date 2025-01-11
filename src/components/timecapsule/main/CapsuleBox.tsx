@@ -8,7 +8,7 @@ const IMAGE_MAP = [
 
 const CapsuleBox = ({ letterCount }) => {
   const handleCapsuleBox = () => {
-    window.location.href = `/directory/time`;
+    window.location.href = `/directory/letter`;
   };
 
   const getImageSrc = () => {
