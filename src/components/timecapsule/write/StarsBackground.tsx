@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from '../../../styles/timecapsule/write/StarsBackground.style';
 
 const getRandomPosition = () => {
@@ -12,7 +12,7 @@ const getRandomDelay = () => Math.random() * 2 + 's';
 const getRandomOpacity = () => Math.random() * 0.5 + 0.5;
 
 export const StarsBackground = () => {
-	const [stars, setStars] = useState([]);
+	const [stars, setStars] = useState<{ id: number; x: number; y: number; animationDuration: string; animationDelay: string; opacity: number; }[]>([]);
 
 	useEffect(() => {
 		const savedStars = localStorage.getItem('starsPosition');
