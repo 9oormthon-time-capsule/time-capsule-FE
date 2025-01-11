@@ -13,11 +13,7 @@ export const StarsBackgroundContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#340b0d, #bf6b4b);
-  /* background: linear-gradient( #4A2C16, #A05A2C, #E1A95F); */
-  /* background: linear-gradient(#2e1a0f, #a45c40, #ffc373); */
   background: linear-gradient(#2a1300, #7f4326, #daa85a);
-
   overflow: hidden;
   z-index: -1;
 `;
