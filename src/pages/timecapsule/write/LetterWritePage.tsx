@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
