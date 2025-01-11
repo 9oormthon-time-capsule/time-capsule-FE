@@ -14,7 +14,8 @@ import CategoryPage from './pages/todo/category/CategoryPage';
 const router = createBrowserRouter([
   { path: '/', element: <Login /> },
   { path: '/main', element: <MainPage /> },
-  { path: '/directory/:type', element: <Directory /> },
+  { path: '/directory/letter', element: <Directory pageType="타임캡슐" /> },
+  { path: '/directory/reflect', element: <Directory pageType="일일회고" /> },
   { path: '/write/letter', element: <LetterWritePage /> },
   { path: '/write/reflect', element: <ReflectWritePage /> },
   { path: '/detail/letter/:letterId', element: <LetterDetail /> },

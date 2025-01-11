@@ -8,15 +8,20 @@ import { useUserStore } from '../../../store/userStore';
 import { fetchLetterData } from '../../../api/directoryLetter';
 import { handleButtonClick } from './directoryButtonUtil';
 
-function Directory() {
+interface IDirectory {
+  pageType: string;
+}
+
+const Directory = ({ pageType }: IDirectory) => {
   const navigate = useNavigate();
   const nickname = useUserStore((state) => state.nickname);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [letterData, setLetterData] = useState([]);
   const [directoryState, setDirectoryState] = useState({
-    pageType: '타임캡슐',
-    buttonLabel: '일일회고 보러가기',
+    pageType,
+    buttonLabel:
+      pageType === '일일회고' ? '타임캡슐 보러가기' : '일일회고 보러가기',
   });
 
   const toggleMenu = () => {
@@ -72,6 +77,6 @@ function Directory() {
       />
     </MainLayout>
   );
-}
+};
 
 export default Directory;
