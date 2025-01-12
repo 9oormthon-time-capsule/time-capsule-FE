@@ -40,6 +40,25 @@ const Menu = () => {
     }
   };
 
+  const handleWithdraw = async () => {
+    try {
+      const response = await axios.delete(
+        'http://localhost:4000/api/withdraw',
+        {
+          withCredentials: true,
+        },
+      );
+
+      if (response.status === 200) {
+        alert(response.data.message);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 실패:', error);
+      alert('회원 탈퇴에 실패했습니다.');
+    }
+  };
+
   return (
     <S.MenuContainer>
       {menuItems.map((item) => (
@@ -48,6 +67,7 @@ const Menu = () => {
         </S.MenuItem>
       ))}
       <S.MenuItem onClick={handleLogout}>로그아웃</S.MenuItem>
+      <S.MenuItem onClick={handleWithdraw}>회원 탈퇴</S.MenuItem>
     </S.MenuContainer>
   );
 };
