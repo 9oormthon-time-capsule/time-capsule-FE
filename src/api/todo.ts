@@ -48,10 +48,19 @@ export const fetchTodoData = async () => {
       (a: { createdAt: number }, b: { createdAt: number }) =>
         a.createdAt - b.createdAt,
     );
-    return sortedTodos;
+    const currentMonth = new Date().getMonth();
+    const completedCount = sortedTodos.filter((todo) => {
+      const todoDate = new Date(todo.createdAt);
+      return todo.isCompleted && todoDate.getMonth() === currentMonth;
+    }).length;
+
+    return {
+      todos: sortedTodos,
+      completedCount,
+    };
   } catch (error) {
     console.error('데이터를 가져오는 데 오류가 발생했습니다:', error);
-    return [];
+    return { todos: [], completedCount: 0 };
   }
 };
 

@@ -84,6 +84,23 @@ export const StyledCalendar = styled(Calendar)`
     }
   }
 
+  .calendar-tile::before {
+    content: var(--todo-count, '');
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: lightgray;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: black;
+  }
+
   .react-calendar__tile {
     text-align: center;
     font-size: 1em;

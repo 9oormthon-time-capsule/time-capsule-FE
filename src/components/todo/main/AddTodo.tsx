@@ -7,6 +7,7 @@ import {
   fetchTodoData,
   updateTodo,
 } from '../../../api/todo';
+import dayjs from 'dayjs';
 
 type category = {
   id: string;
@@ -19,9 +20,14 @@ type Todo = {
   task: string;
   isCompleted: boolean;
   categoryId: string;
+  createdAt: number;
 };
 
-export default function AddTodo() {
+type AddTodoProps = {
+  selectedDate: string;
+};
+
+export default function AddTodo({ selectedDate }: AddTodoProps) {
   const [categories, setCategories] = useState<category[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
@@ -43,7 +49,7 @@ export default function AddTodo() {
     const getTodos = async () => {
       try {
         const data = await fetchTodoData();
-        setTodos(data);
+        setTodos(data.todos);
       } catch (error) {
         console.error('Error fetching todos:', error);
       }
@@ -86,12 +92,15 @@ export default function AddTodo() {
     try {
       await addTodo(task, categoryId);
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos);
+      setTodos(updatedTodos.todos);
       setTask('');
 
       if (inputRef.current) {
         inputRef.current.focus();
       }
+
+      const event = new CustomEvent('todoUpdated');
+      window.dispatchEvent(event);
 
       console.log('할 일이 성공적으로 추가되었습니다!');
     } catch (error) {
@@ -107,7 +116,10 @@ export default function AddTodo() {
       await updateTodo(todoId, !currentChecked);
 
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos);
+      setTodos(updatedTodos.todos);
+
+      const event = new CustomEvent('todoUpdated');
+      window.dispatchEvent(event);
     } catch (error) {
       console.error('Error updating todo:', error);
     }
@@ -118,7 +130,8 @@ export default function AddTodo() {
       await deleteTodo(todoId);
 
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos);
+      setTodos(updatedTodos.todos);
+      
     } catch (error) {
       console.error('Error deleting todo:', error);
     }
@@ -164,7 +177,11 @@ export default function AddTodo() {
 
               {Array.isArray(todos) &&
                 todos.map((todo) => {
-                  if (todo.categoryId === category.id) {
+                  if (
+                    selectedDate ===
+                      dayjs(todo.createdAt).format('YYYY-MM-DD') &&
+                    todo.categoryId === category.id
+                  ) {
                     return (
                       <S.TodoItem key={todo.id}>
                         <S.CheckBox
