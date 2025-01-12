@@ -49,7 +49,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
     const getTodos = async () => {
       try {
         const data = await fetchTodoData();
-        setTodos(data);
+        setTodos(data.todos);
       } catch (error) {
         console.error('Error fetching todos:', error);
       }
@@ -92,12 +92,15 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
     try {
       await addTodo(task, categoryId);
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos);
+      setTodos(updatedTodos.todos);
       setTask('');
 
       if (inputRef.current) {
         inputRef.current.focus();
       }
+
+      const event = new CustomEvent('todoUpdated');
+      window.dispatchEvent(event);
 
       console.log('할 일이 성공적으로 추가되었습니다!');
     } catch (error) {
@@ -113,7 +116,10 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
       await updateTodo(todoId, !currentChecked);
 
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos);
+      setTodos(updatedTodos.todos);
+
+      const event = new CustomEvent('todoUpdated');
+      window.dispatchEvent(event);
     } catch (error) {
       console.error('Error updating todo:', error);
     }
@@ -124,7 +130,8 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
       await deleteTodo(todoId);
 
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos);
+      setTodos(updatedTodos.todos);
+      
     } catch (error) {
       console.error('Error deleting todo:', error);
     }
