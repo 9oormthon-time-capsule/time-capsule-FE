@@ -170,12 +170,6 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
 
               {Array.isArray(todos) &&
                 todos.map((todo) => {
-                  console.log('Selected Date:', selectedDate);
-                  console.log(
-                    'Todo Date:',
-                    dayjs(todo.createdAt).format('YYYY-MM-DD'),
-                  );
-                  // console.log(dayjs(todo.createdAt).format('YYYY-MM-DD'));
                   if (
                     selectedDate ===
                       dayjs(todo.createdAt).format('YYYY-MM-DD') &&
