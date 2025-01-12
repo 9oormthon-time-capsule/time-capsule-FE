@@ -1,9 +1,9 @@
-import axios from 'axios';
+import API from '.';
 
 export const submitReflect = async (reflect: string, emoji: string) => {
   try {
-    const response = await axios.post(
-      'http://localhost:4000/api/timecapsule/reflect',
+    const response = await API.post(
+      '/timecapsule/reflect',
       { content: reflect, emoji },
       { withCredentials: true },
     );
