@@ -7,6 +7,7 @@ import {
   fetchTodoData,
   updateTodo,
 } from '../../../api/todo';
+import dayjs from 'dayjs';
 
 type category = {
   id: string;
@@ -19,9 +20,14 @@ type Todo = {
   task: string;
   isCompleted: boolean;
   categoryId: string;
+  createdAt: number;
 };
 
-export default function AddTodo() {
+type AddTodoProps = {
+  selectedDate: string;
+};
+
+export default function AddTodo({ selectedDate }: AddTodoProps) {
   const [categories, setCategories] = useState<category[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
@@ -164,7 +170,17 @@ export default function AddTodo() {
 
               {Array.isArray(todos) &&
                 todos.map((todo) => {
-                  if (todo.categoryId === category.id) {
+                  console.log('Selected Date:', selectedDate);
+                  console.log(
+                    'Todo Date:',
+                    dayjs(todo.createdAt).format('YYYY-MM-DD'),
+                  );
+                  // console.log(dayjs(todo.createdAt).format('YYYY-MM-DD'));
+                  if (
+                    selectedDate ===
+                      dayjs(todo.createdAt).format('YYYY-MM-DD') &&
+                    todo.categoryId === category.id
+                  ) {
                     return (
                       <S.TodoItem key={todo.id}>
                         <S.CheckBox

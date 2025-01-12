@@ -3,7 +3,7 @@ import * as S from '../../../styles/todo/main/Calendar.style';
 import { useUserStore } from '../../../store/userStore';
 import dayjs from 'dayjs';
 
-const CustomCalendar = () => {
+const CustomCalendar = ({ onDateChange }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(new Date());
   const nickname = useUserStore((state) => state.nickname);
@@ -22,6 +22,11 @@ const CustomCalendar = () => {
     setActiveStartDate(activeStartDate);
   };
 
+  const handleDateChange = (date) => {
+    setCurrentDate(date);
+    onDateChange(date); // 부모 컴포넌트로 전달달
+  };
+
   return (
     <S.CalendarContainer>
       <S.ProfileHeader>
@@ -35,7 +40,7 @@ const CustomCalendar = () => {
       </S.ProfileHeader>
 
       <S.StyledCalendar
-        onChange={setCurrentDate}
+        onChange={handleDateChange}
         value={currentDate}
         calendarType="gregory"
         formatShortWeekday={(locale, date) =>
