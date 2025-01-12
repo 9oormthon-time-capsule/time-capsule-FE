@@ -1,4 +1,4 @@
-import axios from 'axios';
+import API from '.';
 
 type CategoryData = {
   categoryName: string;
@@ -14,16 +14,12 @@ type Category = {
 
 export const registerCategory = async (categoryData: CategoryData) => {
   try {
-    const response = await axios.post(
-      `http://localhost:4000/api/todo/category`,
-      categoryData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
+    const response = await API.post(`/todo/category`, categoryData, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      withCredentials: true,
+    });
     console.log(response.data);
   } catch (error) {
     console.error('Error registering category:', error);
@@ -32,12 +28,9 @@ export const registerCategory = async (categoryData: CategoryData) => {
 
 export const fetchCategories = async () => {
   try {
-    const response = await axios.get(
-      `http://localhost:4000/api/todo/category`,
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await API.get(`/todo/category`, {
+      withCredentials: true,
+    });
 
     const categories = response.data.map((item: Category) => {
       const date = new Date(item.createdAt.seconds * 1000);
@@ -64,12 +57,9 @@ export const fetchCategories = async () => {
 
 export const deleteCategory = async (categoryId: string) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:4000/api/todo/category/${categoryId}`,
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await API.delete(`/todo/category/${categoryId}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.error('Error deleting category:', error);

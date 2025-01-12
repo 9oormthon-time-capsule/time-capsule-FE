@@ -1,4 +1,4 @@
-import axios from 'axios';
+import API from '.';
 
 interface ILetterData {
   id: number;
@@ -9,11 +9,9 @@ interface ILetterData {
 export const fetchLetterData = async (pageType: string) => {
   try {
     const apiUrl =
-      pageType === '일일회고'
-        ? 'http://localhost:4000/api/timecapsule/reflect'
-        : 'http://localhost:4000/api/timecapsule/letter';
+      pageType === '일일회고' ? '/timecapsule/reflect' : '/timecapsule/letter';
 
-    const response = await axios.get(apiUrl, {
+    const response = await API.get(apiUrl, {
       withCredentials: true,
     });
 

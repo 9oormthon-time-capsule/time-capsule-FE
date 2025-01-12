@@ -1,6 +1,6 @@
 import * as S from '../../styles/common/Menu.style';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 
 const Menu = () => {
   const location = useLocation();
@@ -27,8 +27,8 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:4000/api/logout',
+      const response = await API.post(
+        '/logout',
         {},
         {
           withCredentials: true,
@@ -42,12 +42,9 @@ const Menu = () => {
 
   const handleWithdraw = async () => {
     try {
-      const response = await axios.delete(
-        'http://localhost:4000/api/withdraw',
-        {
-          withCredentials: true,
-        },
-      );
+      const response = await API.delete('/withdraw', {
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         alert(response.data.message);
