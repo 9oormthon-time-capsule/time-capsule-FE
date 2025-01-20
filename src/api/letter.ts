@@ -5,6 +5,20 @@ interface ILetter {
   canReadDate: { seconds: number };
 }
 
+// Reflect 데이터 받아오기
+export const fetchReflectData = async () => {
+  try {
+    const response = await axios.get('http://localhost:4000/api/timecapsule/reflect', {
+      withCredentials: true, // 쿠키와 세션을 함께 보냄
+    });
+    console.log('Reflect Data:', response.data);  // 데이터 확인용
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching reflect data:', error);
+    throw error;
+  }
+};
+
 export const fetchLetterCount = async () => {
   try {
     const response = await axios.get(
@@ -84,7 +98,8 @@ export const canReadLetter = async () => {
       canReadDate: new Date(item.canReadDate.seconds * 1000),
     }));
 
-    const now = new Date().getTime();
+    // const now = new Date().getTime();
+    const now = new Date('2026-01-01').getTime();
 
     for (const item of letterData) {
       if (now >= item.canReadDate.getTime()) {
@@ -92,6 +107,7 @@ export const canReadLetter = async () => {
       }
     }
 
+    console.log('Cannot read any letters yet.');
     return false;
   } catch (error) {
     console.error('Error fetching letter data:', error);
