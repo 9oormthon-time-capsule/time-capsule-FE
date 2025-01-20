@@ -1,4 +1,4 @@
-import axios from 'axios';
+import API from '.';
 
 interface ITodo {
   id: number;
@@ -10,8 +10,8 @@ interface ITodo {
 
 export const addTodo = async (task: string, categoryId: string) => {
   try {
-    const response = await axios.post(
-      `http://localhost:4000/api/todo/task`,
+    const response = await API.post(
+      `/todo/task`,
       {
         task,
         categoryId,
@@ -28,7 +28,7 @@ export const addTodo = async (task: string, categoryId: string) => {
 
 export const fetchTodoData = async () => {
   try {
-    const response = await axios.get(`http://localhost:4000/api/todo/task`, {
+    const response = await API.get(`/todo/task`, {
       withCredentials: true,
     });
 
@@ -48,17 +48,26 @@ export const fetchTodoData = async () => {
       (a: { createdAt: number }, b: { createdAt: number }) =>
         a.createdAt - b.createdAt,
     );
-    return sortedTodos;
+    const currentMonth = new Date().getMonth();
+    const completedCount = sortedTodos.filter((todo) => {
+      const todoDate = new Date(todo.createdAt);
+      return todo.isCompleted && todoDate.getMonth() === currentMonth;
+    }).length;
+
+    return {
+      todos: sortedTodos,
+      completedCount,
+    };
   } catch (error) {
     console.error('데이터를 가져오는 데 오류가 발생했습니다:', error);
-    return [];
+    return { todos: [], completedCount: 0 };
   }
 };
 
 export const updateTodo = async (todoId: string, isCompleted: boolean) => {
   try {
-    const response = await axios.patch(
-      `http://localhost:4000/api/todo/task/${todoId}`,
+    const response = await API.patch(
+      `/todo/task/${todoId}`,
       {
         isCompleted,
       },
@@ -74,12 +83,9 @@ export const updateTodo = async (todoId: string, isCompleted: boolean) => {
 
 export const deleteTodo = async (todoId: string) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:4000/api/todo/task/${todoId}`,
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await API.delete(`/todo/task/${todoId}`, {
+      withCredentials: true,
+    });
     console.log(response.data);
     return response.data;
   } catch (error) {

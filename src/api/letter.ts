@@ -1,4 +1,4 @@
-import axios from 'axios';
+import API from '.';
 
 interface ILetter {
   createdAt: { seconds: number };
@@ -21,12 +21,9 @@ export const fetchReflectData = async () => {
 
 export const fetchLetterCount = async () => {
   try {
-    const response = await axios.get(
-      'http://localhost:4000/api/timecapsule/letter',
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await API.get('/timecapsule/letter', {
+      withCredentials: true,
+    });
 
     return response.data.length;
   } catch (error) {
@@ -37,8 +34,8 @@ export const fetchLetterCount = async () => {
 
 export const submitLetter = async (letter: string) => {
   try {
-    const response = await axios.post(
-      'http://localhost:4000/api/timecapsule/letter',
+    const response = await API.post(
+      '/timecapsule/letter',
       { content: letter },
       { withCredentials: true },
     );
@@ -51,12 +48,9 @@ export const submitLetter = async (letter: string) => {
 
 export const canWriteLetter = async () => {
   try {
-    const response = await axios.get(
-      'http://localhost:4000/api/timecapsule/letter',
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await API.get('/timecapsule/letter', {
+      withCredentials: true,
+    });
 
     if (response.data.length === 0) {
       return true;
@@ -87,12 +81,9 @@ export const canWriteLetter = async () => {
 
 export const canReadLetter = async () => {
   try {
-    const response = await axios.get(
-      'http://localhost:4000/api/timecapsule/letter',
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await API.get('/timecapsule/letter', {
+      withCredentials: true,
+    });
 
     const letterData = response.data.map((item: ILetter) => ({
       canReadDate: new Date(item.canReadDate.seconds * 1000),

@@ -1,6 +1,6 @@
 import * as S from '../../styles/common/Menu.style';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 
 const Menu = () => {
   const location = useLocation();
@@ -27,8 +27,8 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:4000/api/logout',
+      const response = await API.post(
+        '/logout',
         {},
         {
           withCredentials: true,
@@ -40,6 +40,22 @@ const Menu = () => {
     }
   };
 
+  const handleWithdraw = async () => {
+    try {
+      const response = await API.delete('/withdraw', {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        alert(response.data.message);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 실패:', error);
+      alert('회원 탈퇴에 실패했습니다.');
+    }
+  };
+
   return (
     <S.MenuContainer>
       {menuItems.map((item) => (
@@ -48,6 +64,7 @@ const Menu = () => {
         </S.MenuItem>
       ))}
       <S.MenuItem onClick={handleLogout}>로그아웃</S.MenuItem>
+      <S.MenuItem onClick={handleWithdraw}>회원 탈퇴</S.MenuItem>
     </S.MenuContainer>
   );
 };
