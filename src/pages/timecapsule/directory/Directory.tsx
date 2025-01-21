@@ -66,7 +66,7 @@ const Directory = ({ pageType }: IDirectory) => {
           {isMenuOpen && (
             <>
               <S.Overlay onClick={closeMenu} />
-              <Menu />
+              <Menu type="directory" />
             </>
           )}
         </S.RightBox>
