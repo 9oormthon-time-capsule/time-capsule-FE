@@ -1,7 +1,11 @@
 import { canWriteLetter } from '../../../api/letter';
 import * as S from '../../../styles/timecapsule/main/LetterMenuOverlay.style';
 
-const LetterMenuOverlay = () => {
+interface LetterMenuOverlayProps {
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LetterMenuOverlay: React.FC<LetterMenuOverlayProps> = ({ setIsClicked }) => {
   const handleNavigation = async (path: string) => {
     if (path === '/write/letter') {
       const canWrite = await canWriteLetter();
@@ -13,8 +17,12 @@ const LetterMenuOverlay = () => {
     window.location.href = path;
   };
 
+  const handleMenuClose = () => {
+    setIsClicked(false);
+  }
+
   return (
-    <S.OverlayContainer>
+    <S.OverlayContainer onClick={handleMenuClose}>
       <S.OverlayContent onClick={() => handleNavigation('/write/letter')}>
         2026년의 나에게 편지 작성하기
       </S.OverlayContent>
