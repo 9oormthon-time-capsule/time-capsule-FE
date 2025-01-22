@@ -1,3 +1,4 @@
+import { BottomSection } from './../main/CapsuleBox.style';
 import styled from 'styled-components';
 
 export const Header = styled.header`
@@ -51,6 +52,8 @@ export const RightBox = styled.div`
 `;
 
 export const MenuImg = styled.img`
+  margin-bottom: 15px;
+  margin-right: 30px;
   cursor: pointer;
 `;
 
@@ -93,11 +96,11 @@ export const CapsuleImg = styled.img`
 `;
 
 export const Overlay = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
 `;

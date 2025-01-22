@@ -28,6 +28,8 @@ export const HeaderTitle = styled.div`
 
 export const MenuContainer = styled.div`
 	margin-left: auto;
+	position: absolute;
+	right: 50px;
 	cursor: pointer;
 	z-index: 100;
 
