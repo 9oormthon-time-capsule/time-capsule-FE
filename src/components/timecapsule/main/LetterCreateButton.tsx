@@ -11,7 +11,7 @@ const LetterCreateButton = () => {
 
 	return (
 		<>
-			{isClicked && <LetterMenuOverlay />}
+			{isClicked && <LetterMenuOverlay setIsClicked={setIsClicked}/>}
 			<S.LetterMenuContainer>
 				<S.ButtonFrame onClick={handleLetterCreatebutton}>
 				<img
