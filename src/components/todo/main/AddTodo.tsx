@@ -1,26 +1,13 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import * as S from '../../../styles/todo/main/AddTodo.style';
 import { fetchCategories } from '../../../api/category';
-import {
-  addTodo,
-  deleteTodo,
-  fetchTodoData,
-  updateTodo,
-} from '../../../api/todo';
 import dayjs from 'dayjs';
+import useTodo from '../../../hooks/useTodo';
 
 type category = {
   id: string;
   categoryName: string;
   textColor: string;
-};
-
-type Todo = {
-  id: string;
-  task: string;
-  isCompleted: boolean;
-  categoryId: string;
-  createdAt: number;
 };
 
 type AddTodoProps = {
@@ -31,10 +18,18 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   const [categories, setCategories] = useState<category[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
-  const [todos, setTodos] = useState<Todo[]>([]);
+  // const [todos, setTodos] = useState<Todo[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const {
+    todoQuery,
+    addTodoMutation,
+    updateTodoMutation,
+    deletedTodoMutation,
+  } = useTodo();
+  const todos = todoQuery.data?.todos ?? [];
 
   useEffect(() => {
     const getCategories = async () => {
@@ -46,17 +41,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
       }
     };
 
-    const getTodos = async () => {
-      try {
-        const data = await fetchTodoData();
-        setTodos(data.todos);
-      } catch (error) {
-        console.error('Error fetching todos:', error);
-      }
-    };
-
     getCategories();
-    getTodos();
 
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -83,58 +68,28 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
     }
   };
 
-  const handleAddTodo = async (categoryId: string) => {
+  const handleAddTodo = (categoryId: string) => {
     if (!task.trim()) {
       alert('할 일을 입력해주세요.');
       return;
     }
 
-    try {
-      await addTodo(task, categoryId);
-      const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos.todos);
-      setTask('');
+    if (addTodoMutation.isPending) return;
 
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
+    addTodoMutation.mutate({ task, categoryId });
 
-      const event = new CustomEvent('todoUpdated');
-      window.dispatchEvent(event);
-
-      console.log('할 일이 성공적으로 추가되었습니다!');
-    } catch (error) {
-      console.error('Error adding todo:', error);
+    setTask('');
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
-  const handleCheckBoxChange = async (
-    todoId: string,
-    currentChecked: boolean,
-  ) => {
-    try {
-      await updateTodo(todoId, !currentChecked);
-
-      const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos.todos);
-
-      const event = new CustomEvent('todoUpdated');
-      window.dispatchEvent(event);
-    } catch (error) {
-      console.error('Error updating todo:', error);
-    }
+  const handleCheckBoxChange = (todoId: string, currentChecked: boolean) => {
+    updateTodoMutation.mutate({ todoId, isCompleted: !currentChecked });
   };
 
-  const handleDeleteTodo = async (todoId: string) => {
-    try {
-      await deleteTodo(todoId);
-
-      const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos.todos);
-      
-    } catch (error) {
-      console.error('Error deleting todo:', error);
-    }
+  const handleDeleteTodo = (todoId: string) => {
+    deletedTodoMutation.mutate({ todoId });
   };
 
   const toggleDropdown = (todoId: string) => {

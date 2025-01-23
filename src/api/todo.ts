@@ -8,7 +8,10 @@ interface ITodo {
   createdAt: { seconds: number };
 }
 
-export const addTodo = async (task: string, categoryId: string) => {
+export const addTodo = async (
+  task: string,
+  categoryId: string,
+): Promise<void> => {
   try {
     const response = await API.post(
       `/todo/task`,
@@ -21,8 +24,10 @@ export const addTodo = async (task: string, categoryId: string) => {
       },
     );
     console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error('Error adding todo:', error);
+    throw error;
   }
 };
 
@@ -49,7 +54,7 @@ export const fetchTodoData = async () => {
         a.createdAt - b.createdAt,
     );
     const currentMonth = new Date().getMonth();
-    const completedCount = sortedTodos.filter((todo) => {
+    const completedCount = sortedTodos.filter((todo: { createdAt: number; isCompleted: boolean }) => {
       const todoDate = new Date(todo.createdAt);
       return todo.isCompleted && todoDate.getMonth() === currentMonth;
     }).length;
