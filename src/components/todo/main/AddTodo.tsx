@@ -18,7 +18,6 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   const [categories, setCategories] = useState<category[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
-  // const [todos, setTodos] = useState<Todo[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
