@@ -140,23 +140,10 @@ const CustomCalendar = ({ onDateChange, onCompletedCountChange, categories }) =>
     if (view === "month") {
       const formattedDate = dayjs(date).format("YYYY-MM-DD"); // 타일 날짜를 형식화
       const count = checkedCountByDate[formattedDate] || 0; // 해당 날짜의 완료된 투두 수
+      
       // 완료된 투두가 있으면 표시
       if (count > 0) { 
-        return (
-          <div
-            style={{
-              position: "absolute",
-              top: "9px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              fontSize: "12px",
-              fontWeight: "bold",
-              color: "black",
-            }}
-          >
-            {count}
-          </div>
-        );
+        return <S.TileContent>{count}</S.TileContent>
       }
     }
     return null; // 완료된 투두가 없으면 표시하지 않음

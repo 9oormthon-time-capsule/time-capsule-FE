@@ -8,6 +8,16 @@ export const CalendarContainer = styled.div`
   justify-content: center;
 `;
 
+export const TileContent = styled.div`
+  position: "absolute";
+  top: "9px";
+  left: "50%";
+  transform: "translateX(-50%)";
+  fontSize: "12px";
+  fontWeight: "bold";
+  color: "black;
+`;
+
 export const ProfileHeader = styled.div`
   display: flex;
   justify-content: space-between;
