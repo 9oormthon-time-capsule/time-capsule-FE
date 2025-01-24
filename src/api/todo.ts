@@ -11,6 +11,7 @@ interface ITodo {
 export const addTodo = async (
   task: string,
   categoryId: string,
+  selectedDate: string,
 ): Promise<void> => {
   try {
     const response = await API.post(
@@ -18,6 +19,7 @@ export const addTodo = async (
       {
         task,
         categoryId,
+        selectedDate,
       },
       {
         withCredentials: true,
@@ -54,10 +56,12 @@ export const fetchTodoData = async () => {
         a.createdAt - b.createdAt,
     );
     const currentMonth = new Date().getMonth();
-    const completedCount = sortedTodos.filter((todo: { createdAt: number; isCompleted: boolean }) => {
-      const todoDate = new Date(todo.createdAt);
-      return todo.isCompleted && todoDate.getMonth() === currentMonth;
-    }).length;
+    const completedCount = sortedTodos.filter(
+      (todo: { createdAt: number; isCompleted: boolean }) => {
+        const todoDate = new Date(todo.createdAt);
+        return todo.isCompleted && todoDate.getMonth() === currentMonth;
+      },
+    ).length;
 
     return {
       todos: sortedTodos,
