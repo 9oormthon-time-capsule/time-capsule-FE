@@ -10,10 +10,16 @@ export default function useTodo() {
   });
 
   const addTodoMutation = useMutation({
-    mutationFn: ({ task, categoryId }: { task: string; categoryId: string }) =>
-      addTodo(task, categoryId),
+    mutationFn: ({
+      task,
+      categoryId,
+      selectedDate,
+    }: {
+      task: string;
+      categoryId: string;
+      selectedDate: string;
+    }) => addTodo(task, categoryId, selectedDate),
     onSuccess: () => {
-      console.log('invalidateQueries 호출됨!');
       queryClient.invalidateQueries({ queryKey: ['todos'] });
     },
   });

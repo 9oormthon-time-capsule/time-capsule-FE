@@ -75,7 +75,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
 
     if (addTodoMutation.isPending) return;
 
-    addTodoMutation.mutateAsync({ task, categoryId });
+    addTodoMutation.mutate({ task, categoryId, selectedDate });
 
     setTask('');
     if (inputRef.current) {
@@ -88,7 +88,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   };
 
   const handleDeleteTodo = (todoId: string) => {
-    deletedTodoMutation.mutateAsync({ todoId });
+    deletedTodoMutation.mutate({ todoId });
   };
 
   const toggleDropdown = (todoId: string) => {
