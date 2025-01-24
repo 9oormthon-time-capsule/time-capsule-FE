@@ -1,148 +1,493 @@
+// import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+// import * as S from '../../../styles/todo/main/AddTodo.style';
+// import { fetchCategories } from '../../../api/category';
+// import {
+//   addTodo,
+//   deleteTodo,
+//   fetchTodoData,
+//   updateTodo,
+// } from '../../../api/todo';
+// import dayjs from 'dayjs';
+
+// type category = {
+//   id: string;
+//   categoryName: string;
+//   textColor: string;
+// };
+
+// type Todo = {
+//   id: string;
+//   task: string;
+//   isCompleted: boolean;
+//   categoryId: string;
+//   createdAt: number;
+// };
+
+// type AddTodoProps = {
+//   selectedDate: string;
+// };
+
+// export default function AddTodo({ selectedDate }: AddTodoProps) {
+//   const [categories, setCategories] = useState<category[]>([]);
+//   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+//   const [task, setTask] = useState<string>('');
+//   const [todos, setTodos] = useState<Todo[]>([]);
+//   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
+//   const menuRef = useRef<HTMLDivElement>(null);
+//   const inputRef = useRef<HTMLInputElement>(null);
+
+//   useEffect(() => {
+//     const getCategories = async () => {
+//       try {
+//         const data = await fetchCategories();
+//         setCategories(data);
+//       } catch (error) {
+//         console.error('Error fetching categories:', error);
+//       }
+//     };
+
+//     const getTodos = async () => {
+//       try {
+//         const data = await fetchTodoData();
+//         setTodos(data.todos);
+//       } catch (error) {
+//         console.error('Error fetching todos:', error);
+//       }
+//     };
+
+//     getCategories();
+//     getTodos();
+
+//     document.addEventListener('mousedown', handleClickOutside);
+
+//     return () => {
+//       document.removeEventListener('mousedown', handleClickOutside);
+//     };
+//   }, []);
+
+//   const handleCategoryClick = (id: string) => {
+//     console.log(id);
+//     setActiveCategory((prev) => (prev === id ? null : id));
+//   };
+
+//   const handleWriteTodo = (e: ChangeEvent<HTMLInputElement>) => {
+//     setTask(e.target.value);
+//   };
+
+//   const handleKeyDown = (
+//     e: KeyboardEvent<HTMLInputElement>,
+//     categoryId: string,
+//   ) => {
+//     if (e.key === 'Enter') {
+//       handleAddTodo(categoryId);
+//     }
+//   };
+
+//   const handleAddTodo = async (categoryId: string) => {
+//     if (!task.trim()) {
+//       alert('할 일을 입력해주세요.');
+//       return;
+//     }
+
+//     try {
+//       await addTodo(task, categoryId);
+//       const updatedTodos = await fetchTodoData();
+//       setTodos(updatedTodos.todos);
+//       setTask('');
+
+//       if (inputRef.current) {
+//         inputRef.current.focus();
+//       }
+
+//       const event = new CustomEvent('todoUpdated');
+//       window.dispatchEvent(event);
+
+//       console.log('할 일이 성공적으로 추가되었습니다!');
+//     } catch (error) {
+//       console.error('Error adding todo:', error);
+//     }
+//   };
+
+//   const handleCheckBoxChange = async (
+//     todoId: string,
+//     currentChecked: boolean,
+//   ) => {
+//     try {
+//       await updateTodo(todoId, !currentChecked);
+
+//       const updatedTodos = await fetchTodoData();
+//       setTodos(updatedTodos.todos);
+
+//       const event = new CustomEvent('todoUpdated');
+//       window.dispatchEvent(event);
+//     } catch (error) {
+//       console.error('Error updating todo:', error);
+//     }
+//   };
+
+//   const handleDeleteTodo = async (todoId: string) => {
+//     try {
+//       await deleteTodo(todoId);
+
+//       const updatedTodos = await fetchTodoData();
+//       setTodos(updatedTodos.todos);
+      
+//     } catch (error) {
+//       console.error('Error deleting todo:', error);
+//     }
+//   };
+
+//   const toggleDropdown = (todoId: string) => {
+//     setIsMenuOpen((prev) => (prev === todoId ? null : todoId));
+//   };
+
+//   const handleClickOutside = (e: MouseEvent) => {
+//     if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+//       setIsMenuOpen(null);
+//     }
+
+//     if (
+//       inputRef.current &&
+//       !inputRef.current.contains(e.target as Node) &&
+//       !(e.target && (e.target as Element).closest('button') === e.target)
+//     ) {
+//       setActiveCategory(null);
+//     }
+//   };
+
+//   return (
+//     <S.TodoContainer>
+//       {categories.length === 0 ? (
+//         <S.MsgContainer>
+//           <S.MsgText>할 일이 없습니다.</S.MsgText>
+//           <S.MsgText>카테고리를 먼저 추가하세요!</S.MsgText>
+//         </S.MsgContainer>
+//       ) : (
+//         <S.CategoryListContainer>
+//           {categories.map((category) => (
+//             <div>
+//               <S.CategoryItem
+//                 key={category.id}
+//                 textColor={category.textColor}
+//                 onClick={() => handleCategoryClick(category.id)}
+//               >
+//                 {category.categoryName}
+//                 <S.PlusButton>＋</S.PlusButton>
+//               </S.CategoryItem>
+
+//               {Array.isArray(todos) &&
+//                 todos.map((todo) => {
+//                   if (
+//                     selectedDate ===
+//                       dayjs(todo.createdAt).format('YYYY-MM-DD') &&
+//                     todo.categoryId === category.id
+//                   ) {
+//                     return (
+//                       <S.TodoItem key={todo.id}>
+//                         <S.CheckBox
+//                           type="checkbox"
+//                           textColor={category.textColor}
+//                           checked={todo.isCompleted}
+//                           onChange={() =>
+//                             handleCheckBoxChange(todo.id, todo.isCompleted)
+//                           }
+//                         />
+//                         <S.TodoText>{todo.task}</S.TodoText>
+
+//                         <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
+//                           •••
+//                         </S.TodoMenu>
+
+//                         {isMenuOpen === todo.id && (
+//                           <S.DropdownMenu ref={menuRef}>
+//                             <S.DropdownItem>수정</S.DropdownItem>
+//                             <S.DropdownItem
+//                               onClick={() => handleDeleteTodo(todo.id)}
+//                             >
+//                               삭제
+//                             </S.DropdownItem>
+//                           </S.DropdownMenu>
+//                         )}
+//                       </S.TodoItem>
+//                     );
+//                   }
+//                   return null;
+//                 })}
+
+//               {activeCategory === category.id && (
+//                 <S.InputGroup>
+//                   <S.CheckBox
+//                     type="checkbox"
+//                     textColor={category.textColor}
+//                     checked={false}
+//                   />
+//                   <S.TodoInput
+//                     type="text"
+//                     placeholder="할 일 입력"
+//                     textColor={category.textColor}
+//                     value={task}
+//                     onChange={handleWriteTodo}
+//                     onKeyDown={(e) => handleKeyDown(e, category.id)}
+//                     ref={inputRef}
+//                     autoFocus
+//                   />
+//                   <S.AddButton
+//                     textColor={category.textColor}
+//                     onClick={() => handleAddTodo(category.id)}
+//                   >
+//                     추가
+//                   </S.AddButton>
+//                 </S.InputGroup>
+//               )}
+//             </div>
+//           ))}
+//         </S.CategoryListContainer>
+//       )}
+//     </S.TodoContainer>
+//   );
+// }
+
+// React의 필요한 훅과 이벤트 타입 가져오기
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+// 스타일 컴포넌트를 정의한 모듈 가져오기
 import * as S from '../../../styles/todo/main/AddTodo.style';
+// 카테고리 데이터를 가져오는 API 함수 가져오기
 import { fetchCategories } from '../../../api/category';
-import {
-  addTodo,
-  deleteTodo,
-  fetchTodoData,
-  updateTodo,
-} from '../../../api/todo';
-import dayjs from 'dayjs';
+// 할 일 관련 API 함수 가져오기
+import { addTodo, deleteTodo, fetchTodoData, updateTodo } from '../../../api/todo';
+import dayjs from 'dayjs';  // 날짜를 다루기 위한 라이브러리
 
+// 카테고리 데이터의 타입 정의
 type category = {
-  id: string;
-  categoryName: string;
-  textColor: string;
+  id: string;  // 카테고리 고유 ID
+  categoryName: string;  // 카테고리 이름
+  textColor: string;  // 카테고리 색상
 };
 
+// 할 일 데이터의 타입 정의
 type Todo = {
-  id: string;
-  task: string;
-  isCompleted: boolean;
-  categoryId: string;
-  createdAt: number;
+  id: string;  // 할 일 고유 ID
+  task: string;  // 할 일 내용
+  isCompleted: boolean;  // 할 일 완료 여부
+  createdAt: number;  // 할 일 생성 시간(타임스탬프)
+  categoryId: string; // 카테고리 ID
 };
 
+// AddTodo 컴포넌트의 props 타입 정의
 type AddTodoProps = {
-  selectedDate: string;
+  selectedDate: string;  // 선택된 날짜
+  // 부모에게 완료된 할 일 수 전달
+  onCompletedCountChange: (count: number) => void;
+  // handleCategoryClick: (id: string) => void;
+  // activeCategory: string | null;
 };
 
-export default function AddTodo({ selectedDate }: AddTodoProps) {
+export default function AddTodo({ selectedDate, onCompletedCountChange }: AddTodoProps) {
+  // 카테고리 상태 관리
   const [categories, setCategories] = useState<category[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  // 입력된 할 일 상태 관리
   const [task, setTask] = useState<string>('');
+  // 할 일 리스트 상태 관리
   const [todos, setTodos] = useState<Todo[]>([]);
+  // 드롭다운 메뉴의 열림 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
+  // 드롭다운 메뉴 DOM 참조
   const menuRef = useRef<HTMLDivElement>(null);
+  // 입력 필드 DOM 참조
   const inputRef = useRef<HTMLInputElement>(null);
+  const [checkboxState, setCheckboxState] = useState<Record<string, boolean>>({});
+  // 활성화된 카테고리 상태 관리
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+
+  console.log(categories);
+
+  // 컴포넌트가 처음 렌더링될 때 실행되는 useEffect
   useEffect(() => {
+    // 카테고리 데이터를 가져오는 비동기 함수
     const getCategories = async () => {
       try {
+        // 카테고리 데이터 요청
         const data = await fetchCategories();
+        // 가져온 데이터를 상태로 설정
         setCategories(data);
       } catch (error) {
+        // 에러 로그 출력
         console.error('Error fetching categories:', error);
       }
     };
 
+    // 할 일 데이터를 가져오는 비동기 함수
     const getTodos = async () => {
       try {
+        // 할 일 데이터 요청
         const data = await fetchTodoData();
+        // 가져온 데이터를 상태로 설정
         setTodos(data.todos);
       } catch (error) {
+        // 에러 로그 출력
         console.error('Error fetching todos:', error);
       }
     };
 
+    // 카테고리 데이터 가져오기 실행
     getCategories();
+    // 할 일 데이터 가져오기 실행
     getTodos();
 
+    // 문서의 클릭 이벤트를 감지
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
+      // 컴포넌트 언마운트 시 이벤트 제거
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
 
+  // 선택된 날짜 기준으로 완료된 할 일 수를 부모 컴포넌트로 전달하는 useEffect
+  useEffect(() => {
+    // 선택된 날짜의 완료된 할 일 수 계산
+    const completedCount = todos.filter(
+      (todo) =>
+        todo.isCompleted &&
+        dayjs(todo.createdAt).format('YYYY-MM-DD') === selectedDate
+    ).length;
+
+    // 완료된 할 일 수를 부모 컴포넌트로 전달
+    onCompletedCountChange(completedCount);
+  }, [todos, selectedDate, onCompletedCountChange]);
+
+  // 카테고리를 클릭했을 때 실행되는 함수
   const handleCategoryClick = (id: string) => {
-    console.log(id);
+    // 활성화된 카테고리 토글
     setActiveCategory((prev) => (prev === id ? null : id));
   };
 
+  // 입력 필드에서 입력값이 변경될 때 실행되는 함수
   const handleWriteTodo = (e: ChangeEvent<HTMLInputElement>) => {
-    setTask(e.target.value);
+    setTask(e.target.value);  // 입력값을 상태로 저장
   };
 
-  const handleKeyDown = (
-    e: KeyboardEvent<HTMLInputElement>,
-    categoryId: string,
-  ) => {
+  // 입력 필드에서 엔터 키를 눌렀을 때 실행되는 함수
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, categoryId: string) => {
     if (e.key === 'Enter') {
-      handleAddTodo(categoryId);
+      handleAddTodo(categoryId);  // 할 일 추가 함수 호출
     }
   };
 
+  // 새 할 일 추가
   const handleAddTodo = async (categoryId: string) => {
-    if (!task.trim()) {
-      alert('할 일을 입력해주세요.');
-      return;
-    }
+    if (!task.trim()) return; // 빈 입력값 무시
 
     try {
-      await addTodo(task, categoryId);
-      const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos.todos);
-      setTask('');
+      // 새 할 일 서버에 추가
+      const newTodo = await addTodo({
+        task,
+        categoryId,
+        createdAt: Date.now(),
+        isCompleted: false,
+      });
 
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-
-      const event = new CustomEvent('todoUpdated');
-      window.dispatchEvent(event);
-
-      console.log('할 일이 성공적으로 추가되었습니다!');
+      setTodos((prevTodos) => [...prevTodos, newTodo]); // 상태 업데이트
+      setTask(""); // 입력값 초기화
     } catch (error) {
-      console.error('Error adding todo:', error);
+      console.error("Error adding todo:", error);
     }
   };
+  // 할 일을 추가하는 함수
+  // const handleAddTodo = async (categoryId: string) => {
+  //   if (!task.trim()) {
+  //     alert('할 일을 입력해주세요.');  // 빈 값 경고
+  //     return;
+  //   }
 
+  //   try {
+  //     // 새로운 할 일 추가 API 호출
+  //     await addTodo(task, categoryId, selectedDate);
+  //     // 업데이트된 할 일 리스트 가져오기
+  //     const updatedTodos = await fetchTodoData();
+  //     // 상태 업데이트
+  //     setTodos(updatedTodos.todos);
+  //     // 입력 필드 초기화
+  //     setTask('');
+
+  //     inputRef.current?.focus();
+  //   } catch (error) {
+  //     console.error('Error adding todo:', error);
+  //   }
+  // };
+
+  // 체크박스 상태 변경 시 실행되는 함수
   const handleCheckBoxChange = async (
     todoId: string,
-    currentChecked: boolean,
+    currentChecked: boolean
   ) => {
     try {
+      // 할 일 상태 업데이트 API 호출
       await updateTodo(todoId, !currentChecked);
-
+      // 업데이트된 할 일 리스트 가져오기
       const updatedTodos = await fetchTodoData();
+      // 상태 업데이트
       setTodos(updatedTodos.todos);
+      // 체크박스 상태 업데이트
+      setCheckboxState((prevState) => ({
+        ...prevState,
+        [todoId]: !currentChecked,
+      }));
 
-      const event = new CustomEvent('todoUpdated');
-      window.dispatchEvent(event);
+      // 선택된 날짜의 완료된 할 일 수를 부모 컴포넌트로 전달
+      const completedCount = updatedTodos.todos.filter(
+        (todo) =>
+          todo.isCompleted &&
+          dayjs(todo.createdAt).format('YYYY-MM-DD') === selectedDate
+      ).length;
+      onCompletedCountChange(completedCount); // 부모 컴포넌트로 완료된 개수를 전달
+
+      // 체크된 할 일 목록을 콘솔로 출력
+      const checkedTodos = updatedTodos.todos.filter(todo => todo.isCompleted && !todo.isDeleted && activeCategory === todo.categoryId);
+      console.log('Checked todos : ', checkedTodos, activeCategory);
     } catch (error) {
+      // 에러 로그 출력
       console.error('Error updating todo:', error);
     }
   };
 
+  // 할 일을 삭제하는 함수
   const handleDeleteTodo = async (todoId: string) => {
     try {
+      // 할 일 삭제 API 호출
       await deleteTodo(todoId);
 
+      // 할 일 삭제 후, 새로 fetchTodoData로 데이터 받아오기
       const updatedTodos = await fetchTodoData();
-      setTodos(updatedTodos.todos);
       
+      // 삭제된 항목을 제외한 새 투두 목록으로 상태 업데이트
+      setTodos(updatedTodos.todos.filter(todo => !todo.isDeleted));
+
+      // 완료된 할 일 수를 다시 계산
+      const completedCount = updatedTodos.todos.filter(
+        (todo) =>
+          todo.isCompleted &&
+          dayjs(todo.createdAt).format('YYYY-MM-DD') === selectedDate
+      ).length;
+
+      onCompletedCountChange(completedCount);  // 부모 컴포넌트로 완료된 개수 전달
+
     } catch (error) {
       console.error('Error deleting todo:', error);
     }
   };
 
+  // 드롭다운 메뉴를 열고 닫는 함수
   const toggleDropdown = (todoId: string) => {
+    // 토글 동작
     setIsMenuOpen((prev) => (prev === todoId ? null : todoId));
   };
 
+  // 드롭다운 메뉴 외부를 클릭했을 때 닫는 함수
   const handleClickOutside = (e: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+      // 드롭다운 닫기
       setIsMenuOpen(null);
     }
 
@@ -151,6 +496,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
       !inputRef.current.contains(e.target as Node) &&
       !(e.target && (e.target as Element).closest('button') === e.target)
     ) {
+      // 활성화된 카테고리 초기화
       setActiveCategory(null);
     }
   };
@@ -165,9 +511,8 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
       ) : (
         <S.CategoryListContainer>
           {categories.map((category) => (
-            <div>
+            <div key={category.id}>
               <S.CategoryItem
-                key={category.id}
                 textColor={category.textColor}
                 onClick={() => handleCategoryClick(category.id)}
               >
@@ -178,8 +523,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
               {Array.isArray(todos) &&
                 todos.map((todo) => {
                   if (
-                    selectedDate ===
-                      dayjs(todo.createdAt).format('YYYY-MM-DD') &&
+                    selectedDate === dayjs(todo.createdAt).format('YYYY-MM-DD') &&
                     todo.categoryId === category.id
                   ) {
                     return (

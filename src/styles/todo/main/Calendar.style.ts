@@ -69,7 +69,7 @@ export const StyledCalendar = styled(Calendar)`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-	width: 600px;
+	  width: 600px; height: 340px;
   }
 
   .react-calendar__month-view__days :disabled{
@@ -103,7 +103,7 @@ export const StyledCalendar = styled(Calendar)`
 
   .react-calendar__tile {
     text-align: center;
-    font-size: 1em;
+    font-size: 1.1em;
     border: 1px solid transparent;
     padding-top: 30px;
     background: none;
@@ -123,8 +123,8 @@ export const StyledCalendar = styled(Calendar)`
       top: 7px;
       left: 50%;
       transform: translateX(-50%);
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       background-color: lightgray;
       border-radius: 5px;
     }
@@ -136,8 +136,8 @@ export const StyledCalendar = styled(Calendar)`
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 25px;
-      height: 25px;
+      width: 22px;
+      height: 22px;
       border: none;
       margin: auto;
       pointer-events: none;
