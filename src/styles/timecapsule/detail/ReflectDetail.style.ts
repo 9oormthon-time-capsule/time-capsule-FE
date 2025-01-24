@@ -5,9 +5,12 @@ export const ReflectDetailContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 80px auto;
-	width: 90%;
+	overflow: hidden;
 `;
+
+export const StartsBackground = styled.div`
+ 	
+`
 
 export const BackButton = styled.button`
 	align-self: flex-start;
@@ -18,25 +21,23 @@ export const BackButton = styled.button`
 `;
 
 export const Title = styled.h1`
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: bold;
 	text-align: center;
-	margin-bottom: 30px;
-	margin-top: 80px;
+	margin-bottom: 40px;
+	margin-top: 50px;
+	color: black;
+	text-shadow: 
+		-1px -1px 0 white, 
+		1px -1px 0 white, 
+		-1px  1px 0 white, 
+		1px  1px 0 white; 
 `;
 
 export const ReflectContent = styled.div`
-	background-image: url('capsule_letterbackimg.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	border-radius: 10px;
-	padding: 180px;
-	margin-top: -100px;
-	width: 800px;
-	height: 1000px;
-	position: relative;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background-color: white;
+	width: 1200px; height: 540px;
+	border-radius: 20px;
 `;
 
 export const ToText = styled.p`
@@ -48,7 +49,7 @@ export const ToText = styled.p`
 `;
 
 export const BodyText = styled.p`
-	margin: 60px 0;
+	margin: 36px 26px;
 	line-height: 1.6;
 `;
 
@@ -61,16 +62,16 @@ export const FromText = styled.p`
 `;
 
 export const DownloadButton = styled.button`
-	padding: 20px 60px;
+	padding: 15px 45px;
 	background: linear-gradient(135deg, #4caf50, #2e7d32);
 	color: white;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	border: none;
 	border-radius: 10px;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	margin-top: 60px;
+	margin-top: 40px;
 
 	&:hover {
 		background: linear-gradient(135deg, #2e7d32, #1b5e20);
