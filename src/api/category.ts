@@ -55,6 +55,18 @@ export const fetchCategories = async () => {
   }
 };
 
+export const modifiedCategory = async (categoryData: CategoryData, categoryId: string) => {
+  try {
+    const response = await API.patch(`/todo/category/${categoryId}`, categoryData, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error modify category:', error);
+    throw error;
+  }
+};
+
 export const deleteCategory = async (categoryId: string) => {
   try {
     const response = await API.delete(`/todo/category/${categoryId}`, {
