@@ -1,7 +1,9 @@
 import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-import { useState } from 'react';
+// import { useState } from 'react';
+
+import { useEmotion } from '../../../../src/context/EmotionContext';
 
 export default function ReflectWritePage() {
   const emotions = [
@@ -12,11 +14,15 @@ export default function ReflectWritePage() {
     { id: 'excited', emoji: '😆' },
   ];
 
-  const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(undefined);
+  // const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(undefined);
+  const { selectedEmotion, setSelectedEmotion } = useEmotion();
 
+  // const handleEmotionChange = (emotion: string) => {
+  //   setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
+  // };
   const handleEmotionChange = (emotion: string) => {
-    setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
-  };
+    setSelectedEmotion((prev: string | undefined) => (prev === emotion ? undefined : emotion));
+  };  
 
   return (
     <S.WriteContainer>

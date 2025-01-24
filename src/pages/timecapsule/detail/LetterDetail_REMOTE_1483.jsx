@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import * as S from '../../../styles/timecapsule/detail/ReflectDetail.style';
+import * as S from '../../../styles/timecapsule/detail/LetterDetail.style';
 import { fetchLetterData } from '../../../api/directoryLetter';
-import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
 
-import { useEmotion } from '../../../context/EmotionContext';
-
-const ReflectDetail = () => {
-  const location = useLocation();
+const LetterDetail = () => {
   const { letterId } = useParams();
+  const location = useLocation();
   const [letterData, setLetterData] = useState([]);
-  const [currentYear, setCurrentYear] = useState('');
-
-  const { selectedEmotion } = useEmotion();
 
   useEffect(() => {
-    // 현재 연도를 가져옴
-    const year = new Date().getFullYear();
-    setCurrentYear(year);
-
     const loadData = async () => {
-      const data = await fetchLetterData('일일회고');
+      const data = await fetchLetterData('타임캡슐');
 
       const selectedLetter = data.find((letter) => letter.id === letterId);
       setLetterData(selectedLetter || null);
@@ -31,6 +20,8 @@ const ReflectDetail = () => {
 
     loadData();
   }, [letterId]);
+
+  console.log(letterData);
 
   const handleDownload = () => {
     const input = document.getElementById('letter');
@@ -43,27 +34,19 @@ const ReflectDetail = () => {
   };
 
   return (
-    <S.ReflectDetailContainer>
-      <StarsBackground />
-
-      <S.BackButton onClick={() => window.history.back()}>
-        &larr;
-      </S.BackButton>
-
+    <S.LetterDetailContainer>
+      <S.BackButton onClick={() => window.history.back()}>&larr;</S.BackButton>
       <S.Title>
-        🍀 {currentYear}년 {letterData.createdAt} 일일 회고 🍀
+        💌 2025년 {letterData.createdAt}의 내가 미래의 나에게 보낸 편지 💌
       </S.Title>
-      
-      <S.ReflectContent id="letter">
-        <S.BodyText>오늘의 감정: {selectedEmotion || '선택되지 않음'}</S.BodyText>
+      <S.LetterContent id="letter">
         <S.BodyText>{letterData.content}</S.BodyText>
-      </S.ReflectContent>
-      
+      </S.LetterContent>
       <S.DownloadButton onClick={handleDownload}>
         📥 PDF로 다운로드
       </S.DownloadButton>
-    </S.ReflectDetailContainer>
+    </S.LetterDetailContainer>
   );
 };
 
-export default ReflectDetail;
+export default LetterDetail;
