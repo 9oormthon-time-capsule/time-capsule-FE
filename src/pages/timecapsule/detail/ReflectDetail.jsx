@@ -7,17 +7,18 @@ import * as S from '../../../styles/timecapsule/detail/ReflectDetail.style';
 import { fetchLetterData } from '../../../api/directoryLetter';
 
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-import { useEmotion } from '../../../context/EmotionContext';
+import { useEmotion } from '../../../context/EmotionProvider';
 
 const ReflectDetail = () => {
   const location = useLocation();
   const { letterId } = useParams();
-  const [letterData, setLetterData] = useState([]);
+  const [letterData, setLetterData] = useState(null);
 
   const [currentYear, setCurrentYear] = useState('');
   const { selectedEmotion } = useEmotion();
 
   useEffect(() => {
+    console.log("Selected Emotion in ReflectDetail:", selectedEmotion);
     // 현재 연도를 가져옴
     const year = new Date().getFullYear();
     setCurrentYear(year);
@@ -30,7 +31,7 @@ const ReflectDetail = () => {
     };
 
     loadData();
-  }, [letterId]);
+  }, [letterId, selectedEmotion]);
 
   const handleDownload = () => {
     const input = document.getElementById('letter');
@@ -44,21 +45,24 @@ const ReflectDetail = () => {
 
   return (
     <S.ReflectDetailContainer>
-      <S.BackButton onClick={() => window.history.back()}>
-        &larr;
-      </S.BackButton>
+      <StarsBackground />
 
-      <S.Title>
-        🍀 {currentYear}년 {letterData.createdAt} 일일 회고 🍀
-      </S.Title>
+        <S.BackButton onClick={() => window.history.back()}>
+          &larr;
+        </S.BackButton>
 
-      <S.ReflectContent id="letter">
-        <S.BodyText>{letterData.content}</S.BodyText>
-      </S.ReflectContent>
-      
-      <S.DownloadButton onClick={handleDownload}>
-        📥 PDF로 다운로드
-      </S.DownloadButton>
+        <S.Title>
+          🍀 {currentYear}년 {letterData?.createdAt} 일일 회고 🍀
+        </S.Title>
+
+        <S.ReflectContent id="letter">
+          <S.BodyText>오늘의 감정: {selectedEmotion || '이모티콘이 선택되지 않았습니다.'}</S.BodyText>
+          <S.BodyText>{letterData ? letterData.content : '내용이 없습니다.'}</S.BodyText>
+        </S.ReflectContent>
+        
+        <S.DownloadButton onClick={handleDownload}>
+          📥 PDF로 다운로드
+        </S.DownloadButton>
     </S.ReflectDetailContainer>
   );
 };
