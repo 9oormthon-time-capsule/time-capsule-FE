@@ -5,9 +5,12 @@ export const ReflectDetailContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 80px auto;
-	width: 90%;
+	overflow: hidden;
 `;
+
+export const StartsBackground = styled.div`
+ 	
+`
 
 export const BackButton = styled.button`
 	align-self: flex-start;
@@ -28,7 +31,7 @@ export const BackButton = styled.button`
 `;
 
 export const Title = styled.h1`
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: bold;
 	text-align: left;
 	margin-bottom: 50px;
@@ -69,7 +72,7 @@ export const FromText = styled.p`
 `;
 
 export const DownloadButton = styled.button`
-	padding: 16px 40px;
+	padding: 15px 45px;
 	background: linear-gradient(135deg, #4caf50, #2e7d32);
 	color: white;
 	font-size: 18px;

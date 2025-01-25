@@ -19,6 +19,7 @@ const ReflectDetail = () => {
 
   useEffect(() => {
     console.log("Selected Emotion in ReflectDetail:", selectedEmotion);
+
     // 현재 연도를 가져옴
     const year = new Date().getFullYear();
     setCurrentYear(year);

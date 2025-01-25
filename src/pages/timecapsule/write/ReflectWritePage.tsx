@@ -3,7 +3,7 @@ import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
 // import { useState } from 'react';
 
-import { useEmotion } from '../../../../src/context/EmotionProvider';
+import { useEmotion } from '../../../../src/contexts/EmotionProvider';
 // import { addReflect } from '../../../api/';
 
 export default function ReflectWritePage() {
