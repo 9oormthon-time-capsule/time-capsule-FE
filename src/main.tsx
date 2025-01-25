@@ -5,7 +5,7 @@ import router from './router';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { EmotionProvider } from './context/EmotionContext';
+import { EmotionProvider } from './contexts/EmotionProvider';
 
 const queryClient = new QueryClient();
 
