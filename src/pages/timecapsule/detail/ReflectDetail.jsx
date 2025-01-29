@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
@@ -17,6 +17,8 @@ const ReflectDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [selectedEmotion, setSelectedEmotion] = useState(null);
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
     // 현재 연도 가져오기
@@ -49,7 +51,8 @@ const ReflectDetail = () => {
   }, [letterId]); 
 
   const handleDownload = () => {
-    const input = document.getElementById('letter');
+    const input = inputRef.current;
+    console.log(input);
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
@@ -70,7 +73,7 @@ const ReflectDetail = () => {
         🍀 {currentYear}년 {reflectData?.createdAt || "날짜 없음"} 일일 회고 🍀
       </S.Title>
 
-      <S.ReflectContent id="letter">
+      <S.ReflectContent ref={inputRef} id="letter">
         <S.BodyText>
           오늘의 감정: {selectedEmotion ? selectedEmotion : '이모티콘이 없습니다.'}
         </S.BodyText>
