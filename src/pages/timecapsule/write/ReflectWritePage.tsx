@@ -1,12 +1,14 @@
 import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-// import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { useEmotion } from '../../../../src/contexts/EmotionProvider';
-// import { addReflect } from '../../../api/';
+import { useParams } from 'react-router-dom';
 
 export default function ReflectWritePage() {
+  // letterId 가져오기
+  const { letterId } = useParams();
+
   const emotions = [
     { id: 'angry', emoji: '😠' },
     { id: 'sad', emoji: '😢' },
@@ -15,15 +17,34 @@ export default function ReflectWritePage() {
     { id: 'excited', emoji: '😆' },
   ];
 
-  // const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(undefined);
-  const { selectedEmotion, setSelectedEmotion } = useEmotion();
+  // 선택된 이모지를 저장할 상태
+  const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(
+    localStorage.getItem(`selectedEmotion_${letterId}`) || undefined
+  );
+
+  console.log('Emotion in WritePage:', selectedEmotion);
 
   // const handleEmotionChange = (emotion: string) => {
   //   setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
   // };
   const handleEmotionChange = (emotion: string) => {
-    setSelectedEmotion(emotion);
+    setSelectedEmotion((prev) => {
+      const newEmotion = prev === emotion ? undefined : emotion;
+      if (letterId) {
+        // letterId에 맞게 localStorage에 저장
+        localStorage.setItem(`selectedEmotion_${letterId}`, newEmotion || '');
+      }
+      return newEmotion;
+    });
   };
+
+  // `selectedEmotion` 변경될 때마다 `localStorage`에 저장
+  useEffect(() => {
+    if (letterId && selectedEmotion) {
+      localStorage.setItem(`selectedEmotion_${letterId}`, selectedEmotion);
+      console.log('Saved to localStorage:', `selectedEmotion_${letterId}`, selectedEmotion);
+    }
+  }, [selectedEmotion, letterId]);
 
   return (
     <S.WriteContainer>

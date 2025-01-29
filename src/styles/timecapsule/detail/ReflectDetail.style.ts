@@ -8,10 +8,6 @@ export const ReflectDetailContainer = styled.div`
 	overflow: hidden;
 `;
 
-export const StartsBackground = styled.div`
- 	
-`
-
 export const BackButton = styled.button`
 	align-self: flex-start;
 	font-size: 20px;
@@ -23,6 +19,7 @@ export const BackButton = styled.button`
 	color: white;
 	background: linear-gradient(135deg, #4caf50, #2e7d32);
 	padding: 6px 10px;
+	margin-top: 30px; margin-left: 30px;
 
 	&:hover {
 		background: linear-gradient(135deg, #2e7d32, #1b5e20);
@@ -35,7 +32,7 @@ export const Title = styled.h1`
 	font-weight: bold;
 	text-align: left;
 	margin-bottom: 50px;
-	margin-top: 0px;
+	margin-top: 20px;
 
 	text-shadow: 
     1px 1px 0 white, 

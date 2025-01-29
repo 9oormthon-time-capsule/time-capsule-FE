@@ -7,32 +7,46 @@ import * as S from '../../../styles/timecapsule/detail/ReflectDetail.style';
 import { fetchLetterData } from '../../../api/directoryLetter';
 
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-import { useEmotion } from '../../../context/EmotionProvider';
 
 const ReflectDetail = () => {
   const location = useLocation();
   const { letterId } = useParams();
-  const [letterData, setLetterData] = useState(null);
 
+  const [reflectData, setReflectData] = useState(null);
   const [currentYear, setCurrentYear] = useState('');
-  const { selectedEmotion } = useEmotion();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
 
   useEffect(() => {
-    console.log("Selected Emotion in ReflectDetail:", selectedEmotion);
-
-    // 현재 연도를 가져옴
+    // 현재 연도 가져오기
     const year = new Date().getFullYear();
     setCurrentYear(year);
 
     const loadData = async () => {
-      const data = await fetchLetterData('일일회고');
+      try {
+        const data = await fetchLetterData('일일회고');
+        console.log("Fetched Reflect Data:", data);
 
-      const selectedLetter = data.find((letter) => letter.id === letterId);
-      setLetterData(selectedLetter || null);
+        const selectedLetter = data.find((letter) => letter.id === letterId);
+        console.log("🔍 Selected Letter Data:", selectedLetter);
+
+        if (selectedLetter) {
+          setReflectData(selectedLetter);
+          setSelectedEmotion(selectedLetter.emoji ?? '이모티콘이 없습니다.');
+          console.log("✅ Selected Emotion:", selectedLetter.emoji);
+        } else {
+          setSelectedEmotion('이모티콘이 없습니다.');
+        }
+      } catch (error) {
+        console.error("Error fetching letter data:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     loadData();
-  }, [letterId, selectedEmotion]);
+  }, [letterId]); 
 
   const handleDownload = () => {
     const input = document.getElementById('letter');
@@ -48,22 +62,27 @@ const ReflectDetail = () => {
     <S.ReflectDetailContainer>
       <StarsBackground />
 
-        <S.BackButton onClick={() => window.history.back()}>
-          &larr;
-        </S.BackButton>
+      <S.BackButton onClick={() => window.history.back()}>
+        &larr;
+      </S.BackButton>
 
-        <S.Title>
-          🍀 {currentYear}년 {letterData?.createdAt} 일일 회고 🍀
-        </S.Title>
+      <S.Title>
+        🍀 {currentYear}년 {reflectData?.createdAt || "날짜 없음"} 일일 회고 🍀
+      </S.Title>
 
-        <S.ReflectContent id="letter">
-          <S.BodyText>오늘의 감정: {selectedEmotion || '이모티콘이 선택되지 않았습니다.'}</S.BodyText>
-          <S.BodyText>{letterData ? letterData.content : '내용이 없습니다.'}</S.BodyText>
-        </S.ReflectContent>
-        
-        <S.DownloadButton onClick={handleDownload}>
-          📥 PDF로 다운로드
-        </S.DownloadButton>
+      <S.ReflectContent id="letter">
+        <S.BodyText>
+          오늘의 감정: {selectedEmotion ? selectedEmotion : '이모티콘이 없습니다.'}
+        </S.BodyText>
+
+        <S.BodyText>
+          {reflectData?.content || '회고 내용이 없습니다.'}
+        </S.BodyText>
+      </S.ReflectContent>
+
+      <S.DownloadButton onClick={handleDownload}>
+        📥 PDF로 다운로드
+      </S.DownloadButton>
     </S.ReflectDetailContainer>
   );
 };
