@@ -56,7 +56,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
             </S.ColorForm>
           </>
         ) : (
-          <p>해당 카테고리를 삭제하시겠습니까?</p>
+          <p>해당 카테고리를 수정 / 삭제하시겠습니까?</p>
         )}
         <S.ButtonGroup>
           {isEdit ? (
