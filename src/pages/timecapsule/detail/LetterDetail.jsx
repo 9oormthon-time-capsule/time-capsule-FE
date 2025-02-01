@@ -4,6 +4,8 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as S from '../../../styles/timecapsule/detail/LetterDetail.style';
 
+import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
+
 const LetterDetail = () => {
 	const location = useLocation();
 	const { letterContent } = location.state || {
@@ -26,6 +28,8 @@ const LetterDetail = () => {
 
 	return (
 		<S.LetterDetailContainer>
+			<StarsBackground />
+
 			<S.BackButton onClick={() => window.history.back()}>&larr;</S.BackButton>
 			<S.Title>💌작년 1월의 내가 미래의 나에게 보내온 편지💌</S.Title>
 			<S.LetterContent id="letter">
