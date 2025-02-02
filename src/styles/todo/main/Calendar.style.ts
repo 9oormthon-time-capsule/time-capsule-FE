@@ -9,13 +9,13 @@ export const CalendarContainer = styled.div`
 `;
 
 export const TileContent = styled.div`
-  position: "absolute";
-  top: "9px";
-  left: "50%";
-  transform: "translateX(-50%)";
-  fontSize: "12px";
-  fontWeight: "bold";
-  color: "black;
+  position: 'absolute';
+  top: '9px';
+  left: '50%';
+  transform: 'translateX(-50%)';
+  font-size: '12px';
+  font-weight: 'bold';
+  color: 'black';
 `;
 
 export const ProfileHeader = styled.div`
@@ -53,6 +53,7 @@ export const StyledCalendar = styled(Calendar)`
   max-width: 660px;
   border: none;
   font-size: 15px;
+  font-weight: bold;
 
   .react-calendar__month-view__weekdays {
     display: grid;
@@ -79,10 +80,11 @@ export const StyledCalendar = styled(Calendar)`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-	  width: 600px; height: 340px;
+    width: 600px;
+    height: 340px;
   }
 
-  .react-calendar__month-view__days :disabled{
+  .react-calendar__month-view__days :disabled {
     color: transparent;
     background: none !important;
     pointer-events: none;
@@ -92,6 +94,14 @@ export const StyledCalendar = styled(Calendar)`
     &::before {
       display: none;
     }
+  }
+
+  .saturday {
+    color: #6fa8ff !important;
+  }
+
+  .sunday {
+    color: #ff6f6f !important;
   }
 
   .calendar-tile::before {
@@ -121,11 +131,7 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-    }
+    /* height: 55px; */
 
     &::before {
       content: '';
@@ -135,7 +141,7 @@ export const StyledCalendar = styled(Calendar)`
       transform: translateX(-50%);
       width: 22px;
       height: 22px;
-      background-color: lightgray;
+      background-color: #d3d8db;
       border-radius: 5px;
     }
 
@@ -151,6 +157,13 @@ export const StyledCalendar = styled(Calendar)`
       border: none;
       margin: auto;
       pointer-events: none;
+    }
+    &.react-calendar__tile--active.saturday abbr {
+      color: #6fa8ff;
+    }
+
+    &.react-calendar__tile--active.sunday abbr {
+      color: #ff6f6f;
     }
   }
 
