@@ -157,6 +157,21 @@ export const StyledCalendar = styled(Calendar)`
       margin: auto;
       pointer-events: none;
     }
+
+    &.react-calendar__tile.today abbr {
+      background-color: #dadde2;
+      color: black;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border: none;
+      margin: auto;
+      pointer-events: none;
+    }
+
     &.react-calendar__tile--active.saturday abbr {
       color: #6fa8ff;
     }

@@ -11,6 +11,7 @@ const CustomCalendar = ({ onDateChange }) => {
   const nickname = useUserStore((state) => state.nickname);
   const profileImage = useUserStore((state) => state.profileImage);
   const [completedCount, setCompletedCount] = useState(0);
+  const today = new Date();
 
   const { todoQuery } = useTodo();
   const todos = todoQuery.data?.todos ?? [];
@@ -81,6 +82,11 @@ const CustomCalendar = ({ onDateChange }) => {
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
       const day = date.getDay();
+      const isToday = date.toDateString() === today.toDateString();
+      const isSelected = date.toDateString() === currentDate.toDateString();
+
+      if (isSelected) return '';
+      if (isToday) return 'today';
 
       if (day === 0) return 'sunday';
       if (day === 6) return 'saturday';
