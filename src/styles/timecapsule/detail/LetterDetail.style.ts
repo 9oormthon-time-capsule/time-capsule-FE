@@ -48,24 +48,8 @@ export const LetterContent = styled.div`
 	border-radius: 20px;
 `;
 
-export const ToText = styled.p`
-	font-weight: bold;
-	position: absolute;
-	top: 190px;
-	left: 230px;
-`;
-
 export const BodyText = styled.p`
-	margin-left: 30px; margin-top: 80px;
-	line-height: 1.4;
-`;
-
-export const FromText = styled.p`
-	margin-top: 400px;
-	margin-right: 30px;
-	font-weight: bold;
-	text-align: right;
-	font-style: italic;
+	margin-left: 30px; margin-top: 30px;
 `;
 
 export const DownloadButton = styled.button`
