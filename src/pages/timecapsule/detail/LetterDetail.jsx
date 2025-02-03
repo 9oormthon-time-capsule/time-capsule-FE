@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -13,6 +13,8 @@ const LetterDetail = () => {
 	
 	const { letterId } = useParams();
 	const [letterContent, setLetterContent] = useState(null);
+
+	const inputRef = useRef(null);
 
 	useEffect(() => {
 		const getLetterContent = async () => {
@@ -37,7 +39,9 @@ const LetterDetail = () => {
 	}, [letterId]); // letterId가 변경될 때마다 실행
 
 	const handleDownload = () => {
-		const input = document.getElementById('letter');
+		// const input = document.getElementById('letter');
+		const input = inputRef.current;
+
 		html2canvas(input).then((canvas) => {
 			const imgData = canvas.toDataURL('image/png');
 			const pdf = new jsPDF();
@@ -58,7 +62,7 @@ const LetterDetail = () => {
 				💌 {letterContent ? new Date(letterContent.createdAt.seconds * 1000).toISOString().split("T")[0] : "로딩 중..."}의 내가 미래의 나에게 보내온 편지 💌
 			</S.Title>
 
-			<S.LetterContent id="letter">
+			<S.LetterContent ref={inputRef} id="letter">
 				<S.BodyText>{letterContent?.content || "로딩 중..."}</S.BodyText>
 			</S.LetterContent>
 
