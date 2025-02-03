@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import * as S from '../../../styles/todo/main/Calendar.style';
 import { useUserStore } from '../../../store/userStore';
 import dayjs from 'dayjs';
@@ -97,8 +97,13 @@ const CustomCalendar = ({ onDateChange }) => {
 
   const handleDateChange = (date) => {
     setCurrentDate(date);
-    onDateChange(date);
   };
+
+  useEffect(() => {
+    if (currentDate) {
+      onDateChange(currentDate);
+    }
+  }, [currentDate]);
 
   return (
     <S.CalendarContainer>
