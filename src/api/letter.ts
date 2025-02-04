@@ -94,9 +94,8 @@ export const canReadLetter = async () => {
       canReadDate: new Date(item.canReadDate.seconds * 1000),
     }));
 
-    // const now = new Date().getTime();
-    // const now = new Date('2026-01-01').getTime();
-    const now = new Date('2026-02-01').getTime();
+    const now = new Date().getTime();
+    // const now = new Date('2026-02-01').getTime();
 
     for (const item of letterData) {
       if (now >= item.canReadDate.getTime()) {

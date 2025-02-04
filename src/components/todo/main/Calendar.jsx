@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from '../../../styles/todo/main/Calendar.style';
 import { useUserStore } from '../../../store/userStore';
 import dayjs from 'dayjs';
