@@ -8,35 +8,42 @@ export const ReflectDetailContainer = styled.div`
 	overflow: hidden;
 `;
 
-export const StartsBackground = styled.div`
- 	
-`
-
 export const BackButton = styled.button`
 	align-self: flex-start;
-	font-size: 24px;
-	border: none;
+	font-size: 20px;
 	background: transparent;
 	cursor: pointer;
+	border: 1px solid;
+	border: none;
+	border-radius: 50%;
+	color: white;
+	background: linear-gradient(135deg, #4caf50, #2e7d32);
+	padding: 6px 10px;
+	margin-top: 30px; margin-left: 30px;
+
+	&:hover {
+		background: linear-gradient(135deg, #2e7d32, #1b5e20);
+		transform: translateX(-3px);
+	}
 `;
 
 export const Title = styled.h1`
 	font-size: 26px;
 	font-weight: bold;
-	text-align: center;
-	margin-bottom: 40px;
-	margin-top: 50px;
-	color: black;
+	text-align: left;
+	margin-bottom: 50px;
+	margin-top: 20px;
+
 	text-shadow: 
-		-1px -1px 0 white, 
-		1px -1px 0 white, 
-		-1px  1px 0 white, 
-		1px  1px 0 white; 
+    1px 1px 0 white, 
+   -1px 1px 0 white, 
+    1px -1px 0 white, 
+   -1px -1px 0 white;
 `;
 
 export const ReflectContent = styled.div`
 	background-color: white;
-	width: 1200px; height: 540px;
+	width: 1200px; height: 500px;
 	border-radius: 20px;
 `;
 
@@ -49,8 +56,8 @@ export const ToText = styled.p`
 `;
 
 export const BodyText = styled.p`
-	margin: 36px 26px;
-	line-height: 1.6;
+	margin: 30px 20px;
+	line-height: 1.0;
 `;
 
 export const FromText = styled.p`
@@ -68,10 +75,10 @@ export const DownloadButton = styled.button`
 	font-size: 18px;
 	font-weight: bold;
 	border: none;
-	border-radius: 10px;
+	border-radius: 20px;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	margin-top: 40px;
+	margin-top: 50px;
 
 	&:hover {
 		background: linear-gradient(135deg, #2e7d32, #1b5e20);

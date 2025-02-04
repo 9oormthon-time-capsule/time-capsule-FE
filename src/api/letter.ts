@@ -36,6 +36,7 @@ export const fetchLetterCount = async () => {
   }
 };
 
+// 편지 제출 함수
 export const submitLetter = async (letter: string) => {
   try {
     const response = await API.post(
@@ -94,7 +95,8 @@ export const canReadLetter = async () => {
     }));
 
     // const now = new Date().getTime();
-    const now = new Date('2026-01-01').getTime();
+    // const now = new Date('2026-01-01').getTime();
+    const now = new Date('2026-02-01').getTime();
 
     for (const item of letterData) {
       if (now >= item.canReadDate.getTime()) {
