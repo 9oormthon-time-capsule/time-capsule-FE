@@ -140,7 +140,12 @@ const CustomCalendar = ({ onDateChange }) => {
         onActiveStartDateChange={handleActiveStartDateChange}
         showNeighboringMonth={false}
         navigationLabel={() => (
-          <S.TodoStatusBar>
+          <S.TodoStatusBar
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
             {dayjs(activeStartDate).format('YYYY년 M월')}
             <span>
               ☑️ {completedTodosForMonth(dayjs(activeStartDate).month())}
