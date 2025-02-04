@@ -131,6 +131,7 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    height: 68px;
 
     &::before {
       content: '';
