@@ -4,6 +4,7 @@ interface ILetterData {
   id: number;
   content: string;
   createdAt: { seconds: number };
+  emoji?: string; // ✅ emoji 필드 추가
 }
 
 export const fetchLetterData = async (pageType: string) => {
@@ -35,6 +36,7 @@ export const fetchLetterData = async (pageType: string) => {
         id: item.id,
         content: item.content,
         createdAt: formattedDate,
+        emoji: item.emoji || '', // ✅ emoji 데이터 추가 (없으면 빈 문자열)
       };
     });
 
