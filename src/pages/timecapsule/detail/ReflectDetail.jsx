@@ -19,24 +19,24 @@ const ReflectDetail = () => {
   const [selectedEmotion, setSelectedEmotion] = useState(null);
 
   useEffect(() => {
-    // 현재 연도 가져오기
     const year = new Date().getFullYear();
     setCurrentYear(year);
 
     const loadData = async () => {
       try {
         const data = await fetchLetterData('일일회고');
-        console.log("Fetched Reflect Data:", data);
+        console.log("📌 Fetched Reflect Data:", data);
 
         const selectedLetter = data.find((letter) => letter.id === letterId);
         console.log("🔍 Selected Letter Data:", selectedLetter);
 
         if (selectedLetter) {
           setReflectData(selectedLetter);
-          setSelectedEmotion(selectedLetter.emoji ?? '이모티콘이 없습니다.');
+          
+          setSelectedEmotion(selectedLetter.emoji || null);
           console.log("✅ Selected Emotion:", selectedLetter.emoji);
         } else {
-          setSelectedEmotion('이모티콘이 없습니다.');
+          console.error("❌ 해당 letterId의 데이터를 찾을 수 없음:", letterId);
         }
       } catch (error) {
         console.error("Error fetching letter data:", error);
@@ -72,7 +72,7 @@ const ReflectDetail = () => {
 
       <S.ReflectContent id="letter">
         <S.BodyText>
-          오늘의 감정: {selectedEmotion ? selectedEmotion : '이모티콘이 없습니다.'}
+          {selectedEmotion ? `오늘의 감정 : ${selectedEmotion}` : ''}
         </S.BodyText>
 
         <S.BodyText>

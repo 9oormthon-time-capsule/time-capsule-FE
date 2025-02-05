@@ -43,7 +43,7 @@ export const Title = styled.h1`
 
 export const ReflectContent = styled.div`
 	background-color: white;
-	width: 1200px; height: 500px;
+	width: 60%; height: 60vh;
 	border-radius: 20px;
 `;
 

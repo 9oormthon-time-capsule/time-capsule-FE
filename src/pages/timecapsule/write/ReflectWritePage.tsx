@@ -22,30 +22,20 @@ export default function ReflectWritePage() {
     localStorage.getItem(`selectedEmotion_${letterId}`) || undefined
   );
 
-  console.log('Emotion in WritePage:', selectedEmotion);
-
-  // const handleEmotionChange = (emotion: string) => {
-  //   setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
-  // };
-  const handleEmotionChange = (emotion: string) => {
-    setSelectedEmotion((prev) => {
-      const newEmotion = prev === emotion ? undefined : emotion;
-      if (letterId) {
-        // letterId에 맞게 localStorage에 저장
-        localStorage.setItem(`selectedEmotion_${letterId}`, newEmotion || '');
-      }
-      return newEmotion;
-    });
-  };
-
-  // `selectedEmotion` 변경될 때마다 `localStorage`에 저장
   useEffect(() => {
-    if (letterId && selectedEmotion) {
-      localStorage.setItem(`selectedEmotion_${letterId}`, selectedEmotion);
-      console.log('Saved to localStorage:', `selectedEmotion_${letterId}`, selectedEmotion);
-    }
-  }, [selectedEmotion, letterId]);
+    if (!letterId) return;
 
+    // ✅ LocalStorage에서 저장된 이모지가 있으면 불러오기
+    const savedEmotion = localStorage.getItem(`selectedEmotion_${letterId}`);
+    if (savedEmotion) {
+      setSelectedEmotion(savedEmotion);
+    }
+  }, [letterId]);
+
+  const handleEmotionChange = (emotion: string) => {
+    setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
+  };
+  
   return (
     <S.WriteContainer>
       <StarsBackground />
