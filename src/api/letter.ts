@@ -1,27 +1,9 @@
-import axios from 'axios';
 import API from '.';
 
 interface ILetter {
   createdAt: { seconds: number };
   canReadDate: { seconds: number };
 }
-
-// Reflect 데이터 받아오기
-export const fetchReflectData = async () => {
-  try {
-    const response = await axios.get(
-      'http://localhost:4000/api/timecapsule/reflect',
-      {
-        withCredentials: true, // 쿠키와 세션을 함께 보냄
-      },
-    );
-    console.log('Reflect Data:', response.data); // 데이터 확인용
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching reflect data:', error);
-    throw error;
-  }
-};
 
 export const fetchLetterCount = async () => {
   try {
