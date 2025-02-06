@@ -139,13 +139,9 @@ const CustomCalendar = ({ onDateChange }) => {
         tileClassName={tileClassName}
         onActiveStartDateChange={handleActiveStartDateChange}
         showNeighboringMonth={false}
+        minDetail="month"
         navigationLabel={() => (
-          <S.TodoStatusBar
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-          >
+          <S.TodoStatusBar>
             {dayjs(activeStartDate).format('YYYY년 M월')}
             <span>
               ☑️ {completedTodosForMonth(dayjs(activeStartDate).month())}

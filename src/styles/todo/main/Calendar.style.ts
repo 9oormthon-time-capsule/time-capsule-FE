@@ -131,7 +131,7 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-    height: 68px;
+    height: 4.25rem;
 
     &::before {
       content: '';
@@ -225,6 +225,7 @@ export const TodoStatusBar = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 600px;
+  color: black;
 
   span {
     margin-left: 15px;
