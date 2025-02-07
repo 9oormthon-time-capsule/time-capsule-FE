@@ -52,7 +52,6 @@ const ReflectDetail = () => {
 
   const handleDownload = () => {
     const textContainer = inputRef.current.querySelector('.text-container');
-    console.log(textContainer);
   
     html2canvas(textContainer).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
