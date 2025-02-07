@@ -50,8 +50,8 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   }, []);
 
   const handleCategoryClick = (id: string) => {
-    console.log(id);
     setActiveCategory((prev) => (prev === id ? null : id));
+    setTask('');
   };
 
   const handleWriteTodo = (e: ChangeEvent<HTMLInputElement>) => {
