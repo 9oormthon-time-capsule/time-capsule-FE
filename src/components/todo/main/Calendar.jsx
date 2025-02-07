@@ -3,6 +3,7 @@ import * as S from '../../../styles/todo/main/Calendar.style';
 import { useUserStore } from '../../../store/userStore';
 import dayjs from 'dayjs';
 import { fetchTodoData } from '../../../api/todo';
+import useTodo from '../../../hooks/useTodo';
 
 const CustomCalendar = ({ onDateChange }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -10,27 +11,33 @@ const CustomCalendar = ({ onDateChange }) => {
   const nickname = useUserStore((state) => state.nickname);
   const profileImage = useUserStore((state) => state.profileImage);
   const [completedCount, setCompletedCount] = useState(0);
-  const [todos, setTodos] = useState([]);
+  const today = new Date();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { todos, completedCount } = await fetchTodoData();
-      setCompletedCount(completedCount);
-      setTodos(todos);
-    };
+  const { todoQuery } = useTodo();
+  const todos = todoQuery.data?.todos ?? [];
 
-    fetchData();
+  const completedTodosForMonth = (month) => {
+    return todos.filter((todo) => {
+      const todoDate = new Date(todo.createdAt);
+      return todoDate.getMonth() === month && todo.isCompleted;
+    }).length;
+  };
 
-    const handleTodoUpdated = (event) => {
-      fetchData();
-    };
+  const todosCountForDate = (date) => {
+    return todos.filter(
+      (todo) =>
+        new Date(todo.createdAt).toDateString() ===
+        new Date(date).toDateString(),
+    ).length;
+  };
 
-    window.addEventListener('todoUpdated', handleTodoUpdated);
-
-    return () => {
-      window.removeEventListener('todoUpdated', handleTodoUpdated);
-    };
-  }, []);
+  const todosCompletedCountForDate = (date) => {
+    return todos.filter(
+      (todo) =>
+        new Date(todo.createdAt).toDateString() ===
+          new Date(date).toDateString() && todo.isCompleted,
+    ).length;
+  };
 
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {
@@ -43,11 +50,8 @@ const CustomCalendar = ({ onDateChange }) => {
 
   const tileContent = ({ date, view }) => {
     if (view === 'month') {
-      const todosForDate = todos.filter(
-        (todo) =>
-          dayjs(todo.createdAt).format('YYYY-MM-DD') ===
-          dayjs(date).format('YYYY-MM-DD'),
-      ).length;
+      const todosForDate = todosCountForDate(date);
+      const completedTodosForDate = todosCompletedCountForDate(date);
 
       if (todosForDate > 0) {
         return (
@@ -65,7 +69,9 @@ const CustomCalendar = ({ onDateChange }) => {
               color: 'black',
             }}
           >
-            {todosForDate}
+            {todosForDate - completedTodosForDate === 0
+              ? '✔️'
+              : todosForDate - completedTodosForDate}
           </div>
         );
       }
@@ -73,16 +79,36 @@ const CustomCalendar = ({ onDateChange }) => {
     return null;
   };
 
+  const tileClassName = ({ date, view }) => {
+    if (view === 'month') {
+      const day = date.getDay();
+      const isToday = date.toDateString() === today.toDateString();
+      const isSelected = date.toDateString() === currentDate.toDateString();
+
+      if (day === 0) return 'sunday';
+      if (day === 6) return 'saturday';
+      if (isSelected) return '';
+      if (isToday) return 'today';
+    }
+    return '';
+  };
+
   const handleActiveStartDateChange = ({ activeStartDate }) => {
     setActiveStartDate(activeStartDate);
+    setCurrentDate(
+      new Date(activeStartDate.getFullYear(), activeStartDate.getMonth(), 1),
+    );
   };
 
   const handleDateChange = (date) => {
     setCurrentDate(date);
-    onDateChange(date);
   };
 
-  console.log(completedCount);
+  useEffect(() => {
+    if (currentDate) {
+      onDateChange(currentDate);
+    }
+  }, [currentDate]);
 
   return (
     <S.CalendarContainer>
@@ -110,11 +136,16 @@ const CustomCalendar = ({ onDateChange }) => {
         nextLabel=">"
         tileDisabled={tileDisabled}
         tileContent={tileContent}
+        tileClassName={tileClassName}
         onActiveStartDateChange={handleActiveStartDateChange}
+        showNeighboringMonth={false}
+        minDetail="month"
         navigationLabel={() => (
           <S.TodoStatusBar>
             {dayjs(activeStartDate).format('YYYY년 M월')}
-            <span>☑️ {completedCount}</span>
+            <span>
+              ☑️ {completedTodosForMonth(dayjs(activeStartDate).month())}
+            </span>
           </S.TodoStatusBar>
         )}
       />
