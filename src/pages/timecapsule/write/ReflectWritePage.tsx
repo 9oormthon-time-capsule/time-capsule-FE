@@ -1,13 +1,9 @@
 import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-import { useState, useEffect } from 'react';
-
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function ReflectWritePage() {
-  // letterId 가져오기
-  const { letterId } = useParams();
 
   const emotions = [
     { id: 'angry', emoji: '😠' },
@@ -17,20 +13,7 @@ export default function ReflectWritePage() {
     { id: 'excited', emoji: '😆' },
   ];
 
-  // 선택된 이모지를 저장할 상태
-  const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(
-    localStorage.getItem(`selectedEmotion_${letterId}`) || undefined
-  );
-
-  useEffect(() => {
-    if (!letterId) return;
-
-    // ✅ LocalStorage에서 저장된 이모지가 있으면 불러오기
-    const savedEmotion = localStorage.getItem(`selectedEmotion_${letterId}`);
-    if (savedEmotion) {
-      setSelectedEmotion(savedEmotion);
-    }
-  }, [letterId]);
+  const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(undefined);
 
   const handleEmotionChange = (emotion: string) => {
     setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
