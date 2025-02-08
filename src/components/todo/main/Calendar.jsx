@@ -55,24 +55,11 @@ const CustomCalendar = ({ onDateChange }) => {
 
       if (todosForDate > 0) {
         return (
-          <div
-            style={{
-              position: 'absolute',
-              top: '9px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              color: 'black',
-            }}
-          >
+          <S.TodoCntForDate>
             {todosForDate - completedTodosForDate === 0
               ? '✔️'
               : todosForDate - completedTodosForDate}
-          </div>
+          </S.TodoCntForDate>
         );
       }
     }
