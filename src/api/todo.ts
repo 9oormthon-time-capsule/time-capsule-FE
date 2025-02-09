@@ -5,7 +5,7 @@ interface ITodo {
   task: string;
   isCompleted: boolean;
   categoryId: string;
-  createdAt: { seconds: number };
+  createdAt: { seconds: number; nanoseconds: number };
 }
 
 export const addTodo = async (
@@ -40,14 +40,15 @@ export const fetchTodoData = async () => {
     });
 
     const todos = response.data.map((item: ITodo) => {
-      const date = new Date(item.createdAt.seconds * 1000);
+      const timestamp =
+        item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1000000;
 
       return {
         id: item.id,
         task: item.task,
         isCompleted: item.isCompleted,
         categoryId: item.categoryId,
-        createdAt: date.getTime(),
+        createdAt: timestamp,
       };
     });
 

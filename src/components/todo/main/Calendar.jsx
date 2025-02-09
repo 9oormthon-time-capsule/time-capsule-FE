@@ -55,24 +55,11 @@ const CustomCalendar = ({ onDateChange }) => {
 
       if (todosForDate > 0) {
         return (
-          <div
-            style={{
-              position: 'absolute',
-              top: '9px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              color: 'black',
-            }}
-          >
+          <S.TodoCntForDate>
             {todosForDate - completedTodosForDate === 0
               ? '✔️'
               : todosForDate - completedTodosForDate}
-          </div>
+          </S.TodoCntForDate>
         );
       }
     }
@@ -85,10 +72,20 @@ const CustomCalendar = ({ onDateChange }) => {
       const isToday = date.toDateString() === today.toDateString();
       const isSelected = date.toDateString() === currentDate.toDateString();
 
+      if (isSelected) {
+        if (day === 0) return 'sunday';
+        if (day === 6) return 'saturday';
+        return '';
+      }
+
+      if (isToday) {
+        if (day === 0) return 'today sunday';
+        if (day === 6) return 'today saturday';
+        return 'today';
+      }
+
       if (day === 0) return 'sunday';
       if (day === 6) return 'saturday';
-      if (isSelected) return '';
-      if (isToday) return 'today';
     }
     return '';
   };
