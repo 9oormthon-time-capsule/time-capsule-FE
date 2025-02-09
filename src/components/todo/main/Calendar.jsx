@@ -72,10 +72,20 @@ const CustomCalendar = ({ onDateChange }) => {
       const isToday = date.toDateString() === today.toDateString();
       const isSelected = date.toDateString() === currentDate.toDateString();
 
+      if (isSelected) {
+        if (day === 0) return 'sunday';
+        if (day === 6) return 'saturday';
+        return '';
+      }
+
+      if (isToday) {
+        if (day === 0) return 'today sunday';
+        if (day === 6) return 'today saturday';
+        return 'today';
+      }
+
       if (day === 0) return 'sunday';
       if (day === 6) return 'saturday';
-      if (isSelected) return '';
-      if (isToday) return 'today';
     }
     return '';
   };

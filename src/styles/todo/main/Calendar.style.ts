@@ -8,16 +8,6 @@ export const CalendarContainer = styled.div`
   justify-content: center;
 `;
 
-export const TileContent = styled.div`
-  position: 'absolute';
-  top: '9px';
-  left: '50%';
-  transform: 'translateX(-50%)';
-  font-size: '12px';
-  font-weight: 'bold';
-  color: 'black';
-`;
-
 export const ProfileHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -97,11 +87,11 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .saturday {
-    color: #6fa8ff !important;
+    color: #6fa8ff;
   }
 
   .sunday {
-    color: #ff6f6f !important;
+    color: #ff6f6f;
   }
 
   .react-calendar__tile {
@@ -110,7 +100,6 @@ export const StyledCalendar = styled(Calendar)`
     border: 1px solid transparent;
     padding-top: 30px;
     background: none;
-    color: black;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -144,7 +133,6 @@ export const StyledCalendar = styled(Calendar)`
 
     &.react-calendar__tile.today abbr {
       background-color: #dadde2;
-      color: black;
       border-radius: 50%;
       display: flex;
       align-items: center;
