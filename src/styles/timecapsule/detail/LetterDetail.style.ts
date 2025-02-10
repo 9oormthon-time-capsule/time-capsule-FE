@@ -44,7 +44,8 @@ export const Title = styled.h1`
 
 export const LetterContent = styled.div`
 	background-color: white;
-	width: 1300px; height: 540px;
+	width: 1100px; height: 540px;
+	padding-top: 10px;
 	border-radius: 20px;
 `;
 

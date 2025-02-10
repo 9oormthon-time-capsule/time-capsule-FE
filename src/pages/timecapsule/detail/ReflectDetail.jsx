@@ -51,9 +51,9 @@ const ReflectDetail = () => {
   }, [letterId]); 
 
   const handleDownload = () => {
-    const input = inputRef.current;
-    console.log(input);
-    html2canvas(input).then((canvas) => {
+    const textContainer = inputRef.current.querySelector('.text-container');
+  
+    html2canvas(textContainer).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
@@ -62,26 +62,28 @@ const ReflectDetail = () => {
   };
 
   return (
-    <S.ReflectDetailContainer>
+    <S.ReflectDetailContainer ref={inputRef}>
       <StarsBackground />
 
       <S.BackButton onClick={() => window.history.back()}>
         &larr;
       </S.BackButton>
 
-      <S.Title>
-        🍀 {currentYear}년 {reflectData?.createdAt || "날짜 없음"} 일일 회고 🍀
-      </S.Title>
+      <div className="text-container">
+        <S.Title>
+          🍀 {currentYear}년 {reflectData?.createdAt || "날짜 없음"} 일일 회고 🍀
+        </S.Title>
 
-      <S.ReflectContent ref={inputRef} id="letter">
-        <S.BodyText>
-          {selectedEmotion ? `오늘의 감정 : ${selectedEmotion}` : ''}
-        </S.BodyText>
+        <S.ReflectContent id="letter">
+          <S.BodyText>
+            {selectedEmotion ? `오늘의 감정 : ${selectedEmotion}` : ''}
+          </S.BodyText>
 
-        <S.BodyText>
-          {reflectData?.content || '회고 내용이 없습니다.'}
-        </S.BodyText>
-      </S.ReflectContent>
+          <S.BodyText>
+            {reflectData?.content || '회고 내용이 없습니다.'}
+          </S.BodyText>
+        </S.ReflectContent>
+      </div>
 
       <S.DownloadButton onClick={handleDownload}>
         📥 PDF로 다운로드

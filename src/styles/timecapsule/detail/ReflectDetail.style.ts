@@ -5,7 +5,6 @@ export const ReflectDetailContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	overflow: hidden;
 `;
 
 export const BackButton = styled.button`
@@ -30,7 +29,7 @@ export const BackButton = styled.button`
 export const Title = styled.h1`
 	font-size: 26px;
 	font-weight: bold;
-	text-align: left;
+	text-align: center;
 	margin-bottom: 50px;
 	margin-top: 20px;
 
@@ -43,29 +42,12 @@ export const Title = styled.h1`
 
 export const ReflectContent = styled.div`
 	background-color: white;
-	width: 60%; height: 60vh;
+	width: 1000px; height: 60vh;
 	border-radius: 20px;
 `;
 
-export const ToText = styled.p`
-	font-weight: bold;
-	margin-bottom: 10px;
-	position: absolute;
-	top: 180px;
-	left: 130px;
-`;
-
 export const BodyText = styled.p`
-	margin: 30px 20px;
-	line-height: 1.0;
-`;
-
-export const FromText = styled.p`
-	margin-top: 20px;
-	margin-right: -50px;
-	font-weight: bold;
-	text-align: right;
-	font-style: italic;
+	padding-top: 30px; padding-left: 30px;
 `;
 
 export const DownloadButton = styled.button`

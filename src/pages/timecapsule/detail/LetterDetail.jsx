@@ -39,32 +39,33 @@ const LetterDetail = () => {
 	}, [letterId]); // letterId가 변경될 때마다 실행
 
 	const handleDownload = () => {
-		// const input = document.getElementById('letter');
-		const input = inputRef.current;
-
-		html2canvas(input).then((canvas) => {
+		const textContainer = inputRef.current.querySelector('.text-container');
+		
+		html2canvas(textContainer).then((canvas) => {
 			const imgData = canvas.toDataURL('image/png');
 			const pdf = new jsPDF();
 			pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
 			pdf.save('letter-detail.pdf');
 		});
-	};
+	};	
 
 	return (
-		<S.LetterDetailContainer>
+		<S.LetterDetailContainer ref={inputRef}>
 			<StarsBackground />
 
 			<S.BackButton onClick={() => window.history.back()}>
 				&larr;
 			</S.BackButton>
 
-			<S.Title>
-				💌 {letterContent ? new Date(letterContent.createdAt.seconds * 1000).toISOString().split("T")[0] : "로딩 중..."}의 내가 미래의 나에게 보내온 편지 💌
-			</S.Title>
+			<div className="text-container">
+				<S.Title>
+					💌 {letterContent ? new Date(letterContent.createdAt.seconds * 1000).toISOString().split("T")[0] : "로딩 중..."}의 내가 미래의 나에게 보내온 편지 💌
+				</S.Title>
 
-			<S.LetterContent ref={inputRef} id="letter">
-				<S.BodyText>{letterContent?.content || "로딩 중..."}</S.BodyText>
-			</S.LetterContent>
+				<S.LetterContent ref={inputRef} id="letter">
+					<S.BodyText>{letterContent?.content || "로딩 중..."}</S.BodyText>
+				</S.LetterContent>
+			</div>
 
 			<S.DownloadButton onClick={handleDownload}>
 				📥 PDF로 다운로드
