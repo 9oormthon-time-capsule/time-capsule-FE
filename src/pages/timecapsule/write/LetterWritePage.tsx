@@ -1,8 +1,22 @@
 import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
+import { useEffect } from 'react';
 
 export default function LetterWritePage() {
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <S.WriteContainer>
       <StarsBackground />

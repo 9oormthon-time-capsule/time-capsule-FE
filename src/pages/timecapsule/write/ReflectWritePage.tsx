@@ -1,10 +1,9 @@
 import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ReflectWritePage() {
-
   const emotions = [
     { id: 'angry', emoji: '😠' },
     { id: 'sad', emoji: '😢' },
@@ -13,17 +12,32 @@ export default function ReflectWritePage() {
     { id: 'excited', emoji: '😆' },
   ];
 
-  const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(undefined);
+  const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(
+    undefined,
+  );
 
   const handleEmotionChange = (emotion: string) => {
     setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
   };
-  
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <S.WriteContainer>
       <StarsBackground />
       <S.TitleContainer>
-        <S.Title>오늘의 회고</S.Title>
+        <S.Title>오늘의 일기</S.Title>
         <S.SubTitle>오늘은 어떤 하루였나요?</S.SubTitle>
       </S.TitleContainer>
       <S.EmotionBox>
