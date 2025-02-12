@@ -1,21 +1,14 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import * as S from '../../../styles/todo/main/AddTodo.style';
-import { fetchCategories } from '../../../api/category';
 import dayjs from 'dayjs';
 import useTodo from '../../../hooks/useTodo';
-
-type category = {
-  id: string;
-  categoryName: string;
-  textColor: string;
-};
+import useCategory from '../../../hooks/useCategory';
 
 type AddTodoProps = {
   selectedDate: string;
 };
 
 export default function AddTodo({ selectedDate }: AddTodoProps) {
-  const [categories, setCategories] = useState<category[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
@@ -30,20 +23,11 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   } = useTodo();
   const todos = todoQuery.data?.todos ?? [];
 
+  const { categoryQuery } = useCategory();
+  const categories = categoryQuery.data ?? [];
+
   useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
-    getCategories();
-
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -118,83 +102,89 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
         </S.MsgContainer>
       ) : (
         <S.CategoryListContainer>
-          {categories.map((category) => (
-            <div>
-              <S.CategoryItem
-                key={category.id}
-                textColor={category.textColor}
-                onClick={() => handleCategoryClick(category.id)}
-              >
-                {category.categoryName}
-                <S.PlusButton>＋</S.PlusButton>
-              </S.CategoryItem>
+          {categories.map(
+            (category: {
+              id: string;
+              textColor: string;
+              categoryName: string;
+            }) => (
+              <div>
+                <S.CategoryItem
+                  key={category.id}
+                  textColor={category.textColor}
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  {category.categoryName}
+                  <S.PlusButton>＋</S.PlusButton>
+                </S.CategoryItem>
 
-              {Array.isArray(todos) &&
-                todos.map((todo) => {
-                  if (
-                    selectedDate ===
-                      dayjs(todo.createdAt).format('YYYY-MM-DD') &&
-                    todo.categoryId === category.id
-                  ) {
-                    return (
-                      <S.TodoItem key={todo.id}>
-                        <S.CheckBox
-                          type="checkbox"
-                          textColor={category.textColor}
-                          checked={todo.isCompleted}
-                          onChange={() =>
-                            handleCheckBoxChange(todo.id, todo.isCompleted)
-                          }
-                        />
-                        <S.TodoText>{todo.task}</S.TodoText>
+                {Array.isArray(todos) &&
+                  todos.map((todo) => {
+                    if (
+                      selectedDate ===
+                        dayjs(todo.createdAt).format('YYYY-MM-DD') &&
+                      todo.categoryId === category.id
+                    ) {
+                      return (
+                        <S.TodoItem key={todo.id}>
+                          <S.CheckBox
+                            type="checkbox"
+                            textColor={category.textColor}
+                            checked={todo.isCompleted}
+                            onChange={() =>
+                              handleCheckBoxChange(todo.id, todo.isCompleted)
+                            }
+                          />
+                          <S.TodoText>{todo.task}</S.TodoText>
 
-                        <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
-                          •••
-                        </S.TodoMenu>
+                          <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
+                            •••
+                          </S.TodoMenu>
 
-                        {isMenuOpen === todo.id && (
-                          <S.DropdownMenu ref={menuRef}>
-                            <S.DropdownItem>수정</S.DropdownItem>
-                            <S.DropdownItem
-                              onClick={() => handleDeleteTodo(todo.id)}
-                            >
-                              삭제
-                            </S.DropdownItem>
-                          </S.DropdownMenu>
-                        )}
-                      </S.TodoItem>
-                    );
-                  }
-                  return null;
-                })}
+                          {isMenuOpen === todo.id && (
+                            <S.DropdownMenu ref={menuRef}>
+                              <S.DropdownItem>수정</S.DropdownItem>
+                              <S.DropdownItem
+                                onClick={() => handleDeleteTodo(todo.id)}
+                              >
+                                삭제
+                              </S.DropdownItem>
+                            </S.DropdownMenu>
+                          )}
+                        </S.TodoItem>
+                      );
+                    }
+                    return null;
+                  })}
 
-              {activeCategory === category.id && (
-                <S.InputGroup>
-                  <S.CheckBox
-                    type="checkbox"
-                    textColor={category.textColor}
-                    checked={false}
-                  />
-                  <S.TodoInput
-                    type="text"
-                    placeholder="할 일 입력"
-                    textColor={category.textColor}
-                    value={task}
-                    onChange={handleWriteTodo}
-                    onKeyDown={(e) => handleKeyDown(e, category.id)}
-                    ref={inputRef}
-                    autoFocus
-                  />
-                  <S.AddButton
-                    textColor={category.textColor}
-                    onClick={() => handleAddTodo(category.id)}
-                  >
-                    추가
-                  </S.AddButton>
-                </S.InputGroup>
-              )}
-            </div>
-          ))}
+                {activeCategory === category.id && (
+                  <S.InputGroup>
+                    <S.CheckBox
+                      type="checkbox"
+                      textColor={category.textColor}
+                      checked={false}
+                    />
+                    <S.TodoInput
+                      type="text"
+                      placeholder="할 일 입력"
+                      textColor={category.textColor}
+                      value={task}
+                      onChange={handleWriteTodo}
+                      onKeyDown={(e) => handleKeyDown(e, category.id)}
+                      ref={inputRef}
+                      autoFocus
+                    />
+                    <S.AddButton
+                      textColor={category.textColor}
+                      onClick={() => handleAddTodo(category.id)}
+                    >
+                      추가
+                    </S.AddButton>
+                  </S.InputGroup>
+                )}
+              </div>
+            ),
+          )}
         </S.CategoryListContainer>
       )}
     </S.TodoContainer>
