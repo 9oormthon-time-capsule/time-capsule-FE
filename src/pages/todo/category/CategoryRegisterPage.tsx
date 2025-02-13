@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import { registerCategory } from '../../../api/category';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
 import MainLayout from '../../../layout/MainLayout';
 import * as S from '../../../styles/todo/category/CategoryRegister.style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useCategory from '../../../hooks/useCategory';
+import Loading from '../../../components/common/Loading';
 
 const CategoryRegister = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
   const [selectColor, setSelectColor] = useState('');
   const nav = useNavigate();
+  const { addCategoryMutation } = useCategory();
+  const [showLoading, setShowLoading] = useState(false);
 
   const colors = [
     '#FF6F6F',
@@ -21,7 +24,7 @@ const CategoryRegister = () => {
     '#A786E9',
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
@@ -29,12 +32,12 @@ const CategoryRegister = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleColorClick = (color) => {
+  const handleColorClick = (color: string) => {
     setSelectColor(color);
     setIsOpen(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!value || !selectColor) {
       alert('카테고리 이름과 색상을 선택해주세요!');
       return;
@@ -45,17 +48,33 @@ const CategoryRegister = () => {
       textColor: selectColor,
     };
 
-    try {
-        await registerCategory(categoryData);
-        nav("/todo");
-    } catch (error) {
-      console.error('Error registering category:', error);
-      alert('카테고리 등록 중 문제가 발생했습니다.');
-    }
+    addCategoryMutation.mutate(categoryData, {
+      onSuccess: () => {
+        try {
+          nav('/todo');
+        } catch (error) {
+          console.error('카테고리 추가 후 데이터 갱신 중 오류 발생:', error);
+          alert('카테고리 추가 후 데이터를 갱신하는데 문제가 발생했습니다.');
+        }
+      },
+      onError: (error) => {
+        console.error('카테고리 등록 중 오류 발생:', error);
+        alert('카테고리 등록 중 문제가 발생했습니다.');
+      },
+    });
   };
+
+  useEffect(() => {
+    if (addCategoryMutation.isPending) {
+      const timer = setTimeout(() => setShowLoading(true), 200);
+      return () => clearTimeout(timer);
+    }
+    setShowLoading(false);
+  }, [addCategoryMutation.isPending]);
 
   return (
     <MainLayout>
+      {showLoading && <Loading />}
       <CategoryHeader
         title="카테고리 등록"
         button="완료"

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
 import MainLayout from '../../../layout/MainLayout';
 import * as S from '../../../styles/todo/category/Category.style';
 import CategoryModal from '../../../components/todo/category/CategoryModal';
 import useCategory from '../../../hooks/useCategory';
 import useTodo from '../../../hooks/useTodo';
+import Loading from '../../../components/common/Loading';
 
 const CategoryPage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
@@ -14,6 +15,7 @@ const CategoryPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [categoryName, setCategoryName] = useState('');
   const [textColor, setTextColor] = useState('');
+  const [showLoading, setShowLoading] = useState(false);
   const { categoryQuery, modifiedCategoryMutation, deletedCategoryMutation } =
     useCategory();
 
@@ -57,17 +59,20 @@ const CategoryPage = () => {
   const handleModifyComplete = () => {
     if (!selectedCategoryId) return;
 
-    try {
-      modifiedCategoryMutation.mutate({
+    modifiedCategoryMutation.mutate(
+      {
         categoryData: { categoryName, textColor },
         categoryId: selectedCategoryId,
-      });
-    } catch (error) {
-      console.error('수정 중 오류 발생:', error);
-      alert('수정 중 문제가 발생했습니다.');
-    } finally {
-      handleModalClose();
-    }
+      },
+      {
+        onSuccess: () => {
+          handleModalClose();
+        },
+        onError: (error) => {
+          console.error('Error: 작업 실패', error);
+        },
+      },
+    );
   };
 
   const handleConfirmDelete = () => {
@@ -79,23 +84,39 @@ const CategoryPage = () => {
 
     if (!result) return;
 
-    try {
-      if (todosInCategory.length > 0) {
-        todosInCategory.forEach((todo: { id: string }) =>
-          deletedTodoMutation.mutate({ todoId: todo.id }),
-        );
-      }
-      deletedCategoryMutation.mutate({ categoryId: selectedCategoryId });
-    } catch (error) {
-      console.error('삭제 중 오류 발생:', error);
-      alert('삭제 중 문제가 발생했습니다.');
-    } finally {
-      handleModalClose();
+    if (todosInCategory.length > 0) {
+      todosInCategory.forEach((todo: { id: string }) =>
+        deletedTodoMutation.mutate({ todoId: todo.id }),
+      );
     }
+    deletedCategoryMutation.mutate(
+      { categoryId: selectedCategoryId },
+      {
+        onSuccess: () => {
+          handleModalClose();
+        },
+        onError: (error) => {
+          console.error('삭제 중 오류 발생:', error);
+          alert('삭제 중 문제가 발생했습니다.');
+        },
+      },
+    );
   };
+
+  useEffect(() => {
+    if (
+      deletedCategoryMutation.isPending ||
+      modifiedCategoryMutation.isPending
+    ) {
+      const timer = setTimeout(() => setShowLoading(true), 200);
+      return () => clearTimeout(timer);
+    }
+    setShowLoading(false);
+  }, [deletedCategoryMutation.isPending, modifiedCategoryMutation.isPending]);
 
   return (
     <MainLayout>
+      {showLoading && <Loading />}
       <CategoryHeader title="카테고리" button="+" />
       <S.CategoryList>
         {Array.isArray(categories) && categories.length > 0 ? (
