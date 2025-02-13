@@ -5,6 +5,7 @@ import * as S from '../../../styles/todo/category/Category.style';
 import CategoryModal from '../../../components/todo/category/CategoryModal';
 import useCategory from '../../../hooks/useCategory';
 import useTodo from '../../../hooks/useTodo';
+import Loading from '../../../components/common/Loading';
 
 const CategoryPage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
@@ -96,6 +97,7 @@ const CategoryPage = () => {
 
   return (
     <MainLayout>
+      {deletedCategoryMutation.isPending && <Loading />}
       <CategoryHeader title="카테고리" button="+" />
       <S.CategoryList>
         {Array.isArray(categories) && categories.length > 0 ? (
