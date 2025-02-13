@@ -27,11 +27,12 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   const categories = categoryQuery.data ?? [];
 
   useEffect(() => {
+    setActiveCategory(null);
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [selectedDate]);
 
   const handleCategoryClick = (id: string) => {
     setActiveCategory((prev) => (prev === id ? null : id));
