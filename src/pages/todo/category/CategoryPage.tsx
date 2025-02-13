@@ -4,6 +4,7 @@ import MainLayout from '../../../layout/MainLayout';
 import * as S from '../../../styles/todo/category/Category.style';
 import CategoryModal from '../../../components/todo/category/CategoryModal';
 import useCategory from '../../../hooks/useCategory';
+import useTodo from '../../../hooks/useTodo';
 
 const CategoryPage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
@@ -17,6 +18,11 @@ const CategoryPage = () => {
     useCategory();
 
   const categories = categoryQuery.data ?? [];
+  const { todoQuery, deletedTodoMutation } = useTodo();
+
+  const todosInCategory = todoQuery.data?.todos.filter(
+    (todo: { categoryId: string }) => todo.categoryId === selectedCategoryId,
+  );
 
   const handleModalClose = () => {
     setIsEdit(false);
@@ -49,8 +55,9 @@ const CategoryPage = () => {
   };
 
   const handleModifyComplete = () => {
+    if (!selectedCategoryId) return;
+
     try {
-      if (!selectedCategoryId) return;
       modifiedCategoryMutation.mutate({
         categoryData: { categoryName, textColor },
         categoryId: selectedCategoryId,
@@ -65,11 +72,20 @@ const CategoryPage = () => {
 
   const handleConfirmDelete = () => {
     if (!selectedCategoryId) return;
+
+    const result = confirm(
+      '카테고리를 삭제하시겠습니까?\n포함되어 있던 할 일들은 모두 삭제됩니다.',
+    );
+
+    if (!result) return;
+
     try {
-      if (!selectedCategoryId) return;
-      deletedCategoryMutation.mutate({
-        categoryId: selectedCategoryId,
-      });
+      if (todosInCategory.length > 0) {
+        todosInCategory.forEach((todo: { id: string }) =>
+          deletedTodoMutation.mutate({ todoId: todo.id }),
+        );
+      }
+      deletedCategoryMutation.mutate({ categoryId: selectedCategoryId });
     } catch (error) {
       console.error('삭제 중 오류 발생:', error);
       alert('삭제 중 문제가 발생했습니다.');
