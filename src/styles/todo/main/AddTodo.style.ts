@@ -42,7 +42,6 @@ export const InputGroup = styled.div`
   margin-top: 1rem;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
 `;
 
 export const CheckBox = styled.input<{ textColor: string }>`
@@ -51,6 +50,7 @@ export const CheckBox = styled.input<{ textColor: string }>`
   height: 1.2rem;
   border: 1.5px solid gainsboro;
   border-radius: 0.35rem;
+  flex-shrink: 0;
 
   &:checked {
     border-color: transparent;
@@ -75,6 +75,7 @@ export const AddButton = styled.button<{ textColor: string }>`
   color: black;
   border: none;
   border-radius: 5px;
+  flex-shrink: 0;
 `;
 
 export const TodoItem = styled.div`
