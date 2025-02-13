@@ -19,7 +19,7 @@ export const CategoryItem = styled.button<{ textColor: string }>`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  background-color:rgb(243,243,243);
+  background-color: rgb(243, 243, 243);
   border-radius: 5rem;
   width: fit-content;
   font-weight: 800;
@@ -107,6 +107,7 @@ export const DropdownMenu = styled.div`
 export const DropdownItem = styled.div`
   padding: 8px 12px;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: #f0f0f0;
