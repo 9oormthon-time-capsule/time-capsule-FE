@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryHeader from '../../../components/todo/category/CategoryHeader';
 import MainLayout from '../../../layout/MainLayout';
 import * as S from '../../../styles/todo/category/Category.style';
@@ -15,6 +15,7 @@ const CategoryPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [categoryName, setCategoryName] = useState('');
   const [textColor, setTextColor] = useState('');
+  const [showLoading, setShowLoading] = useState(false);
   const { categoryQuery, modifiedCategoryMutation, deletedCategoryMutation } =
     useCategory();
 
@@ -94,10 +95,20 @@ const CategoryPage = () => {
       handleModalClose();
     }
   };
+  useEffect(() => {
+    if (
+      deletedCategoryMutation.isPending ||
+      modifiedCategoryMutation.isPending
+    ) {
+      const timer = setTimeout(() => setShowLoading(true), 200);
+      return () => clearTimeout(timer);
+    }
+    setShowLoading(false);
+  }, [deletedCategoryMutation.isPending, modifiedCategoryMutation.isPending]);
 
   return (
     <MainLayout>
-      {deletedCategoryMutation.isPending && <Loading />}
+      {showLoading && <Loading />}
       <CategoryHeader title="카테고리" button="+" />
       <S.CategoryList>
         {Array.isArray(categories) && categories.length > 0 ? (
