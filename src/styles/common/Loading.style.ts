@@ -10,6 +10,7 @@ export const LoadingOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.8);
 `;
 
 export const LoadingImage = styled.img`
