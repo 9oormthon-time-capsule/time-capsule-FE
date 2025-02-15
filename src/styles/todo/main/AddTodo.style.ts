@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 export const TodoContainer = styled.div`
-  flex-shrink: 0;
+  flex-shrink: 1;
   flex-grow: 1;
   background-color: white;
   padding: 1rem;
   align-items: center;
+  width: 600px;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 250px);
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -98,6 +99,7 @@ export const TodoItem = styled.div`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+  margin-right: 0.5rem;
 `;
 
 export const TodoText = styled.p`
