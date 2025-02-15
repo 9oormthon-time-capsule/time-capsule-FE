@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
 export const MainLayoutContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-	max-width: 1200px;
-	min-width: 700px;
+  max-width: 1200px;
 
-	height: 100vh;
+  height: 100vh;
 
-	margin: 0 auto;
-	padding: 20px;
+  margin: 0 auto;
+  padding: 30px;
 
-	position: relative;
+  position: relative;
 `;

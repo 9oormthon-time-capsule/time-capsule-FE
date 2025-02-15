@@ -1,19 +1,13 @@
 import styled from 'styled-components';
 
-interface MenuContainerProps {
-  type: 'directory' | 'default';
-}
 
-export const MenuContainer = styled.div<MenuContainerProps>`
+export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: ${(props) => {
-    return props.type === 'directory' ? '120px' : '450px';
-  }};
-  right: ${(props) => {
-    return props.type === 'directory' ? '40px' : '0px';
-  }};
+  top: 100%;
+  margin-top: 2rem;
+  right: 0;
   gap: 30px;
   z-index: 100;
 `;

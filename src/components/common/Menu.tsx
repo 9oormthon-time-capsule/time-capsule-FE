@@ -1,9 +1,8 @@
 import * as S from '../../styles/common/Menu.style';
-import * as Layout from '../../styles/layout/MainLayout.style';
 import { useLocation, useNavigate } from 'react-router-dom';
 import API from '../../api';
 
-const Menu: React.FC<{ type: string }> = ({ type }) => {
+const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -57,20 +56,8 @@ const Menu: React.FC<{ type: string }> = ({ type }) => {
     }
   };
 
-  return type !== 'directory' ? (
-    <Layout.MainLayoutContainer>
-      <S.MenuContainer type={type}>
-        {menuItems.map((item) => (
-          <S.MenuItem key={item.path} onClick={() => handleNavigate(item.path)}>
-            {item.label}
-          </S.MenuItem>
-        ))}
-        <S.MenuItem onClick={handleLogout}>로그아웃</S.MenuItem>
-        <S.MenuItem onClick={handleWithdraw}>회원 탈퇴</S.MenuItem>
-      </S.MenuContainer>
-    </Layout.MainLayoutContainer>
-  ) : (
-    <S.MenuContainer type={type}>
+  return (
+    <S.MenuContainer>
       {menuItems.map((item) => (
         <S.MenuItem key={item.path} onClick={() => handleNavigate(item.path)}>
           {item.label}

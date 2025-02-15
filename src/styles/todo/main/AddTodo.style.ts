@@ -1,11 +1,26 @@
 import styled from 'styled-components';
 
 export const TodoContainer = styled.div`
-  flex: 1;
+  flex-shrink: 0;
+  flex-grow: 1;
   background-color: white;
   padding: 1rem;
-  border-radius: 10px;
-  margin: 1rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 40px);
+  }
 `;
 
 export const CategoryListContainer = styled.div`
