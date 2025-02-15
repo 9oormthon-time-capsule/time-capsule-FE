@@ -17,6 +17,11 @@ const Menu = () => {
         { path: '/todo/category/new', label: '카테고리 등록' },
         { path: '/todo/category', label: '카테고리 관리' },
       ];
+    } else if (location.pathname.startsWith('/directory')) {
+      return [
+        { path: `/main`, label: '나의 타임캡슐' },
+        { path: `/todo`, label: '나의 Todo' },
+      ];
     } else {
       return [
         { path: `/todo`, label: '나의 Todo' },
