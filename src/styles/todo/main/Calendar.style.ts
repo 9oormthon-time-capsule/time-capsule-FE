@@ -6,15 +6,18 @@ export const CalendarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 40px);
+  }
 `;
 
 export const ProfileHeader = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 600px;
   margin-bottom: 40px;
-  padding-left: 20px;
+  padding-left: 1rem;
 
   .profile {
     display: flex;
@@ -39,11 +42,10 @@ export const StyledCalendar = styled(Calendar)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  max-width: 660px;
   border: none;
   font-size: 15px;
   font-weight: bold;
+  max-width: 600px;
 
   .react-calendar__month-view__weekdays {
     display: grid;
@@ -70,8 +72,7 @@ export const StyledCalendar = styled(Calendar)`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    width: 600px;
-    height: 340px;
+    height: auto;
   }
 
   .react-calendar__month-view__days :disabled {
@@ -115,6 +116,11 @@ export const StyledCalendar = styled(Calendar)`
       height: 22px;
       background-color: #d3d8db;
       border-radius: 5px;
+    }
+
+    & abbr {
+      display: inline-block;
+      width: 22px;
     }
 
     &.react-calendar__tile--active abbr {
@@ -195,7 +201,6 @@ export const TodoStatusBar = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 600px;
   color: black;
 
   span {

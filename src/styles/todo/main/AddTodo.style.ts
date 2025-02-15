@@ -1,11 +1,27 @@
 import styled from 'styled-components';
 
 export const TodoContainer = styled.div`
-  flex: 1;
+  flex-shrink: 1;
+  flex-grow: 1;
   background-color: white;
   padding: 1rem;
-  border-radius: 10px;
-  margin: 1rem;
+  align-items: center;
+  width: 600px;
+
+  @media (min-width: 768px) {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 40px);
+  }
 `;
 
 export const CategoryListContainer = styled.div`
@@ -19,7 +35,7 @@ export const CategoryItem = styled.button<{ textColor: string }>`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  background-color:rgb(243,243,243);
+  background-color: rgb(243, 243, 243);
   border-radius: 5rem;
   width: fit-content;
   font-weight: 800;
@@ -42,7 +58,6 @@ export const InputGroup = styled.div`
   margin-top: 1rem;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
 `;
 
 export const CheckBox = styled.input<{ textColor: string }>`
@@ -51,6 +66,7 @@ export const CheckBox = styled.input<{ textColor: string }>`
   height: 1.2rem;
   border: 1.5px solid gainsboro;
   border-radius: 0.35rem;
+  flex-shrink: 0;
 
   &:checked {
     border-color: transparent;
@@ -75,6 +91,7 @@ export const AddButton = styled.button<{ textColor: string }>`
   color: black;
   border: none;
   border-radius: 5px;
+  flex-shrink: 0;
 `;
 
 export const TodoItem = styled.div`
@@ -82,6 +99,7 @@ export const TodoItem = styled.div`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+  margin-right: 0.5rem;
 `;
 
 export const TodoText = styled.p`
@@ -107,6 +125,7 @@ export const DropdownMenu = styled.div`
 export const DropdownItem = styled.div`
   padding: 8px 12px;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: #f0f0f0;
