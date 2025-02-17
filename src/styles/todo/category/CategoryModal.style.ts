@@ -24,30 +24,29 @@ export const ModalContent = styled.div`
   padding: 30px;
   border-radius: 20px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
 `;
 
 export const ButtonGroup = styled.div`
-  margin-top: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
 
   button {
-    padding: 10px 20px;
+    padding: 10px 25px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
 
     &:first-child {
-      background: #ccc;
+      background: rgb(243, 243, 243);
     }
 
     &:nth-child(2) {
-      background: #ff6b6b;
-      color: white;
+      background: rgb(243, 243, 243);
+      color: #ff6b6b;
     }
   }
 `;
@@ -81,6 +80,13 @@ export const CloseButtonBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
-  padding-bottom: 20px;
+  font-size: 18px;
   cursor: pointer;
+`;
+
+export const MainMessage = styled.div`
+  text-align: center;
+  font-size: 18px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 `;
