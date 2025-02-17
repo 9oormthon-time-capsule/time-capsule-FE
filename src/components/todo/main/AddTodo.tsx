@@ -13,6 +13,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [editedTodoId, setEditedTodoId] = useState<string | null>(null);
 
   const {
     todoQuery,
@@ -45,9 +46,15 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   const handleKeyDown = (
     e: KeyboardEvent<HTMLInputElement>,
     categoryId: string,
+    todoId?: string,
+    isCompleted?: boolean,
   ) => {
     if (e.key === 'Enter') {
-      handleAddTodo(categoryId);
+      if (!editedTodoId) {
+        handleAddTodo(categoryId);
+      } else if (todoId !== undefined && isCompleted !== undefined) {
+        handleUpdateTodo(todoId, isCompleted);
+      }
     }
   };
 
@@ -68,7 +75,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   };
 
   const handleCheckBoxChange = (todoId: string, currentChecked: boolean) => {
-    updateTodoMutation.mutate({ todoId, isCompleted: !currentChecked });
+    updateTodoMutation.mutate({ todoId, task, isCompleted: !currentChecked });
   };
 
   const handleDeleteTodo = (todoId: string) => {
@@ -90,6 +97,26 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
       !(e.target && (e.target as Element).closest('button') === e.target)
     ) {
       setActiveCategory(null);
+      setEditedTodoId(null);
+    }
+  };
+
+  const handleEditTodo = (todoId: string, currentTask: string) => {
+    setEditedTodoId(todoId);
+    setTask(currentTask);
+    setIsMenuOpen(null);
+  };
+
+  const handleUpdateTodo = (todoId: string, isCompleted: boolean) => {
+    if (!task.trim()) {
+      alert('할 일을 입력해주세요.');
+      return;
+    }
+
+    if (editedTodoId) {
+      updateTodoMutation.mutate({ todoId, task, isCompleted });
+      setTask('');
+      setEditedTodoId(null);
     }
   };
 
@@ -119,42 +146,75 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
                 </S.CategoryItem>
 
                 {Array.isArray(todos) &&
-                  todos.map((todo) => {
-                    if (
-                      selectedDate === todo.selectedDate &&
-                      todo.categoryId === category.id
-                    ) {
-                      return (
-                        <S.TodoItem key={todo.id}>
-                          <S.CheckBox
-                            type="checkbox"
-                            textColor={category.textColor}
-                            checked={todo.isCompleted}
-                            onChange={() =>
-                              handleCheckBoxChange(todo.id, todo.isCompleted)
-                            }
-                          />
-                          <S.TodoText>{todo.task}</S.TodoText>
+                  todos
+                    .filter(
+                      (todo) =>
+                        selectedDate === todo.selectedDate &&
+                        category.id === todo.categoryId,
+                    )
+                    .map((todo) => (
+                      <S.TodoItem key={todo.id}>
+                        <S.CheckBox
+                          type="checkbox"
+                          textColor={category.textColor}
+                          checked={todo.isCompleted}
+                          onChange={() =>
+                            handleCheckBoxChange(todo.id, todo.isCompleted)
+                          }
+                        />
+                        {editedTodoId === todo.id ? (
+                          <>
+                            <S.TodoInput
+                              type="text"
+                              placeholder="할 일 입력"
+                              textColor={category.textColor}
+                              value={task}
+                              onChange={handleWriteTodo}
+                              onKeyDown={(e) =>
+                                handleKeyDown(
+                                  e,
+                                  category.id,
+                                  todo.id,
+                                  todo.isCompleted,
+                                )
+                              }
+                              ref={inputRef}
+                              autoFocus
+                            />
+                            <S.AddButton
+                              textColor={category.textColor}
+                              onClick={() =>
+                                handleUpdateTodo(todo.id, todo.isCompleted)
+                              }
+                            >
+                              수정
+                            </S.AddButton>
+                          </>
+                        ) : (
+                          <>
+                            <S.TodoText>{todo.task}</S.TodoText>
+                            <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
+                              •••
+                            </S.TodoMenu>
+                          </>
+                        )}
 
-                          <S.TodoMenu onClick={() => toggleDropdown(todo.id)}>
-                            •••
-                          </S.TodoMenu>
-
-                          {isMenuOpen === todo.id && (
-                            <S.DropdownMenu ref={menuRef}>
-                              <S.DropdownItem>수정</S.DropdownItem>
-                              <S.DropdownItem
-                                onClick={() => handleDeleteTodo(todo.id)}
-                              >
-                                삭제
-                              </S.DropdownItem>
-                            </S.DropdownMenu>
-                          )}
-                        </S.TodoItem>
-                      );
-                    }
-                    return null;
-                  })}
+                        {isMenuOpen === todo.id && (
+                          <S.DropdownMenu ref={menuRef}>
+                            <S.DropdownItem
+                              onClick={() => handleEditTodo(todo.id, todo.task)}
+                            >
+                              수정
+                            </S.DropdownItem>
+                            <S.DropdownItem
+                              onClick={() => handleDeleteTodo(todo.id)}
+                            >
+                              삭제
+                            </S.DropdownItem>
+                          </S.DropdownMenu>
+                        )}
+                      </S.TodoItem>
+                    ))}
 
                 {activeCategory === category.id && (
                   <S.InputGroup>

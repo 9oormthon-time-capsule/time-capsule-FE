@@ -27,11 +27,13 @@ export default function useTodo() {
   const updateTodoMutation = useMutation({
     mutationFn: ({
       todoId,
+      task,
       isCompleted,
     }: {
       todoId: string;
+      task: string;
       isCompleted: boolean;
-    }) => updateTodo(todoId, isCompleted),
+    }) => updateTodo(todoId, task, isCompleted),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todos'] });
     },
