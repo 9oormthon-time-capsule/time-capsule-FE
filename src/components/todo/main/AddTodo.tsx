@@ -1,6 +1,5 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import * as S from '../../../styles/todo/main/AddTodo.style';
-import dayjs from 'dayjs';
 import useTodo from '../../../hooks/useTodo';
 import useCategory from '../../../hooks/useCategory';
 
@@ -122,8 +121,7 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
                 {Array.isArray(todos) &&
                   todos.map((todo) => {
                     if (
-                      selectedDate ===
-                        dayjs(todo.createdAt).format('YYYY-MM-DD') &&
+                      selectedDate === todo.selectedDate &&
                       todo.categoryId === category.id
                     ) {
                       return (
