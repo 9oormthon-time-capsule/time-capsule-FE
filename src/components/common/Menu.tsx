@@ -39,7 +39,11 @@ const Menu = () => {
           withCredentials: true,
         },
       );
-      if (response.status === 200) navigate('/');
+
+      if (response.status === 200) {
+        navigate('/');
+        localStorage.removeItem('user-info');
+      }
     } catch (error) {
       console.error('로그아웃 실패:', error);
     }

@@ -10,19 +10,44 @@ import ReflectDetail from './pages/timecapsule/detail/ReflectDetail';
 import TodoMainPage from './pages/todo/TodoMainPage';
 import CategoryRegisterPage from './pages/todo/category/CategoryRegisterPage';
 import CategoryPage from './pages/todo/category/CategoryPage';
+import PrivateRoute from './components/common/PrivateRoute';
 
 const router = createBrowserRouter([
   { path: '/', element: <Login /> },
   { path: '/main', element: <MainPage /> },
-  { path: '/directory/letter', element: <Directory pageType="타임캡슐" /> },
-  { path: '/directory/reflect', element: <Directory pageType="일일회고" /> },
-  { path: '/write/letter', element: <LetterWritePage /> },
-  { path: '/write/reflect', element: <ReflectWritePage /> },
-  { path: '/detail/letter/:letterId', element: <LetterDetail /> },
-  { path: '/detail/reflect/:letterId', element: <ReflectDetail /> },
-  { path: '/todo', element: <TodoMainPage /> },
-  { path: '/todo/category', element: <CategoryPage /> },
-  { path: '/todo/category/new', element: <CategoryRegisterPage /> },
+  {
+    path: '/directory/letter',
+    element: <PrivateRoute element={<Directory pageType="타임캡슐" />} />,
+  },
+  {
+    path: '/directory/reflect',
+    element: <PrivateRoute element={<Directory pageType="일일회고" />} />,
+  },
+  {
+    path: '/write/letter',
+    element: <PrivateRoute element={<LetterWritePage />} />,
+  },
+  {
+    path: '/write/reflect',
+    element: <PrivateRoute element={<ReflectWritePage />} />,
+  },
+  {
+    path: '/detail/letter/:letterId',
+    element: <PrivateRoute element={<LetterDetail />} />,
+  },
+  {
+    path: '/detail/reflect/:letterId',
+    element: <PrivateRoute element={<ReflectDetail />} />,
+  },
+  { path: '/todo', element: <PrivateRoute element={<TodoMainPage />} /> },
+  {
+    path: '/todo/category',
+    element: <PrivateRoute element={<CategoryPage />} />,
+  },
+  {
+    path: '/todo/category/new',
+    element: <PrivateRoute element={<CategoryRegisterPage />} />,
+  },
 ]);
 
 export default router;
