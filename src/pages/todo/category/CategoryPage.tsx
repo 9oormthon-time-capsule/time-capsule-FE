@@ -12,7 +12,7 @@ const CategoryPage = () => {
     null,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [categoryName, setCategoryName] = useState('');
   const [textColor, setTextColor] = useState('');
   const [showLoading, setShowLoading] = useState(false);
@@ -27,7 +27,7 @@ const CategoryPage = () => {
   );
 
   const handleModalClose = () => {
-    setIsEdit(false);
+    setIsDelete(false);
     setIsModalOpen(false);
     setSelectedCategoryId(null);
     setCategoryName('');
@@ -52,10 +52,6 @@ const CategoryPage = () => {
     }
   };
 
-  const handleModifyOpen = async () => {
-    setIsEdit(true);
-  };
-
   const handleModifyComplete = () => {
     if (!selectedCategoryId) return;
 
@@ -75,14 +71,12 @@ const CategoryPage = () => {
     );
   };
 
+  const handleDeleteOpen = () => {
+    setIsDelete(true);
+  };
+
   const handleConfirmDelete = () => {
     if (!selectedCategoryId) return;
-
-    const result = confirm(
-      '카테고리를 삭제하시겠습니까?\n포함되어 있던 할 일들은 모두 삭제됩니다.',
-    );
-
-    if (!result) return;
 
     if (todosInCategory.length > 0) {
       todosInCategory.forEach((todo: { id: string }) =>
@@ -144,9 +138,9 @@ const CategoryPage = () => {
       {isModalOpen && (
         <CategoryModal
           onClose={handleModalClose}
-          onModify={handleModifyOpen}
           onModifyComplete={handleModifyComplete}
-          isEdit={isEdit}
+          isDelete={isDelete}
+          onDelete={handleDeleteOpen}
           onConfirm={handleConfirmDelete}
           categoryName={categoryName}
           onCategoryChange={handleCategoryChange}

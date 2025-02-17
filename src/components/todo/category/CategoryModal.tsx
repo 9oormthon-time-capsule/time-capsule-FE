@@ -2,10 +2,10 @@ import * as S from '../../../styles/todo/category/CategoryModal.style';
 
 interface CategoryModalProps {
   onClose: () => void;
-  onModify: () => void;
   onModifyComplete: () => void;
   onConfirm: () => void;
-  isEdit: boolean;
+  onDelete: () => void;
+  isDelete: boolean;
   categoryName: string;
   onCategoryChange: (
     field: 'categoryName' | 'textColor',
@@ -25,45 +25,56 @@ const colors = [
 
 const CategoryModal: React.FC<CategoryModalProps> = ({
   onClose,
-  onModify,
   onModifyComplete,
+  onDelete,
   onConfirm,
-  isEdit,
+  isDelete,
   categoryName,
   onCategoryChange,
 }) => {
   return (
     <S.ModalContainer>
       <S.ModalContent>
-        <S.CloseButtonBox>
-          <img src='/main/Close.svg' onClick={onClose} width={22} height={22} />
-        </S.CloseButtonBox>
-        {isEdit ? (
+        {!isDelete ? (
           <>
-            <S.EditForm
-              type="text"
-              value={categoryName}
-              onChange={(e) => onCategoryChange('categoryName', e.target.value)}
-            />
-            <S.ColorForm>
-              {colors.map((color) => (
-                <S.ColorItem
-                  key={color}
-                  color={color}
-                  onClick={() => onCategoryChange('textColor', color)}
-                />
-              ))}
-            </S.ColorForm>
+            <S.CloseButtonBox>
+              <button onClick={onModifyComplete}>확인</button>
+            </S.CloseButtonBox>
+            <S.MainMessage>
+              <S.EditForm
+                type="text"
+                value={categoryName}
+                onChange={(e) =>
+                  onCategoryChange('categoryName', e.target.value)
+                }
+              />
+              <S.ColorForm>
+                {colors.map((color) => (
+                  <S.ColorItem
+                    key={color}
+                    color={color}
+                    onClick={() => onCategoryChange('textColor', color)}
+                  />
+                ))}
+              </S.ColorForm>
+            </S.MainMessage>
           </>
         ) : (
-          <p>해당 카테고리를 수정 / 삭제하시겠습니까?</p>
+          <S.MainMessage>
+            해당 카테고리를 삭제하시겠습니까?
+            <br />
+            "포함되어 있던 할 일들은 모두 삭제됩니다."
+          </S.MainMessage>
         )}
         <S.ButtonGroup>
-          {isEdit ? (
-            <button onClick={onModifyComplete}>완료</button>
+          {!isDelete ? (
+            <>
+              <button onClick={onClose}>취소</button>
+              <button onClick={onDelete}>삭제</button>
+            </>
           ) : (
             <>
-              <button onClick={onModify}>수정</button>
+              <button onClick={onClose}>취소</button>
               <button onClick={onConfirm}>삭제</button>
             </>
           )}
