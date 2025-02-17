@@ -18,7 +18,7 @@ const CustomCalendar = ({ onDateChange }) => {
 
   const completedTodosForMonth = (month) => {
     return todos.filter((todo) => {
-      const todoDate = new Date(todo.createdAt);
+      const todoDate = new Date(todo.selectedDate);
       return todoDate.getMonth() === month && todo.isCompleted;
     }).length;
   };
@@ -26,7 +26,7 @@ const CustomCalendar = ({ onDateChange }) => {
   const todosCountForDate = (date) => {
     return todos.filter(
       (todo) =>
-        new Date(todo.createdAt).toDateString() ===
+        new Date(todo.selectedDate).toDateString() ===
         new Date(date).toDateString(),
     ).length;
   };
@@ -34,7 +34,7 @@ const CustomCalendar = ({ onDateChange }) => {
   const todosCompletedCountForDate = (date) => {
     return todos.filter(
       (todo) =>
-        new Date(todo.createdAt).toDateString() ===
+        new Date(todo.selectedDate).toDateString() ===
           new Date(date).toDateString() && todo.isCompleted,
     ).length;
   };

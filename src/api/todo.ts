@@ -5,6 +5,7 @@ interface ITodo {
   task: string;
   isCompleted: boolean;
   categoryId: string;
+  selectedDate: string;
   createdAt: { seconds: number; nanoseconds: number };
 }
 
@@ -48,6 +49,7 @@ export const fetchTodoData = async () => {
         task: item.task,
         isCompleted: item.isCompleted,
         categoryId: item.categoryId,
+        selectedDate: item.selectedDate,
         createdAt: timestamp,
       };
     });
@@ -58,8 +60,8 @@ export const fetchTodoData = async () => {
     );
     const currentMonth = new Date().getMonth();
     const completedCount = sortedTodos.filter(
-      (todo: { createdAt: number; isCompleted: boolean }) => {
-        const todoDate = new Date(todo.createdAt);
+      (todo: { selectedDate: string; isCompleted: boolean }) => {
+        const todoDate = new Date(todo.selectedDate);
         return todo.isCompleted && todoDate.getMonth() === currentMonth;
       },
     ).length;
