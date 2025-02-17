@@ -10,10 +10,10 @@ import ReflectDetail from './pages/timecapsule/detail/ReflectDetail';
 import TodoMainPage from './pages/todo/TodoMainPage';
 import CategoryRegisterPage from './pages/todo/category/CategoryRegisterPage';
 import CategoryPage from './pages/todo/category/CategoryPage';
-import PrivateRoute from './components/common/PrivateRoute';
+import { PrivateRoute, PublicRoute } from './components/common/PrivateRoute';
 
 const router = createBrowserRouter([
-  { path: '/', element: <Login /> },
+  { path: '/', element: <PublicRoute element={<Login />} /> },
   { path: '/main', element: <MainPage /> },
   {
     path: '/directory/letter',
