@@ -76,11 +76,12 @@ export const fetchTodoData = async () => {
   }
 };
 
-export const updateTodo = async (todoId: string, isCompleted: boolean) => {
+export const updateTodo = async (todoId: string, task: string, isCompleted: boolean) => {
   try {
     const response = await API.patch(
       `/todo/task/${todoId}`,
       {
+        task,
         isCompleted,
       },
       {

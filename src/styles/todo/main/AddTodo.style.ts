@@ -7,9 +7,9 @@ export const TodoContainer = styled.div`
   padding: 1rem;
   align-items: center;
   width: 600px;
+  height: 650px;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 250px);
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
