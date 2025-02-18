@@ -70,6 +70,7 @@ interface EmotionLabelProps {
 export const EmotionLabel = styled.label<EmotionLabelProps>`
   font-size: 1.8rem;
   margin: 5px;
+  padding: 4px 6px 0 6px;
   cursor: pointer;
   background-color: ${({ isSelected }) => (isSelected ? '#5C271F' : '')};
   transition: background-color 0.3s;
