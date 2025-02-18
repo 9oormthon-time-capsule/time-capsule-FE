@@ -3,6 +3,7 @@ import * as S from '../../../styles/timecapsule/write/WriteForm.style';
 import WriteButton from './WriteButton';
 import { submitLetter } from '../../../api/letter';
 import { submitReflect } from '../../../api/reflect';
+import { useNavigate } from 'react-router-dom';
 
 interface WriteFormProps {
   placeholder: string;
@@ -16,6 +17,7 @@ export default function WriteForm({
   emoji,
 }: WriteFormProps) {
   const [content, setContent] = useState('');
+  const navigate = useNavigate();
 
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -41,13 +43,12 @@ export default function WriteForm({
     try {
       if (mode === 'letter') {
         await submitLetter(content);
-        alert('편지가 등록되었습니다.');
-        window.location.href = '/directory/letter';
       } else if (mode === 'reflect') {
         await submitReflect(content, emoji!);
-        alert('회고가 등록되었습니다.');
-        window.location.href = '/directory/reflect';
       }
+
+      alert(`${mode === 'letter' ? '편지' : '회고'}가 등록되었습니다.`);
+      navigate(`/directory/${mode}`);
     } catch {
       alert(
         `${mode === 'letter' ? '편지' : '회고'} 등록에 실패했습니다. 다시 시도해주세요.`,
