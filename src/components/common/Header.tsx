@@ -21,7 +21,7 @@ const Header = ({ pageType }: HeaderProps) => {
     if (location.pathname.startsWith('/todo'))
       return `${nickname}님의 할 일 목록`;
     if (location.pathname.startsWith('/directory'))
-      return `${nickname} 님의 ${pageType} 보관함`;
+      return `${nickname}님의 ${pageType} 보관함`;
   };
 
   const handleMainNav = () => {
