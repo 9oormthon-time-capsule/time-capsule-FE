@@ -7,7 +7,9 @@ export const Content = styled.div`
   flex-grow: 1;
   max-width: 1200px;
   box-sizing: border-box;
-  margin-top: 6rem;
+  margin-top: 4.75rem;
+  margin-left: 2rem;
+  gap: 20px;
 
   @media (max-width: 768px) {
     flex-direction: column;
