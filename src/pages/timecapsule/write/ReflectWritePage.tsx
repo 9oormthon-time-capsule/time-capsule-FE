@@ -16,12 +16,16 @@ export default function ReflectWritePage() {
   const [selectedEmotion, setSelectedEmotion] = useState<string | undefined>(
     undefined,
   );
+  const [isMac, setIsMac] = useState<boolean>(false);
 
   const handleEmotionChange = (emotion: string) => {
     setSelectedEmotion((prev) => (prev === emotion ? undefined : emotion));
   };
 
   useEffect(() => {
+    const isMacOS = /Mac/.test(navigator.userAgent);
+    setIsMac(isMacOS);
+    
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = '';
@@ -54,6 +58,7 @@ export default function ReflectWritePage() {
             key={emotion.id}
             onClick={() => handleEmotionChange(emotion.emoji)}
             isSelected={selectedEmotion === emotion.emoji}
+            isMac={isMac}
           >
             <span>{emotion.emoji}</span>
           </S.EmotionLabel>
