@@ -74,7 +74,11 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
     }
   };
 
-  const handleCheckBoxChange = (todoId: string, currentChecked: boolean) => {
+  const handleCheckBoxChange = (
+    todoId: string,
+    currentChecked: boolean,
+    task: string,
+  ) => {
     updateTodoMutation.mutate({ todoId, task, isCompleted: !currentChecked });
   };
 
@@ -159,7 +163,11 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
                           textColor={category.textColor}
                           checked={todo.isCompleted}
                           onChange={() =>
-                            handleCheckBoxChange(todo.id, todo.isCompleted)
+                            handleCheckBoxChange(
+                              todo.id,
+                              todo.isCompleted,
+                              todo.task,
+                            )
                           }
                         />
                         {editedTodoId === todo.id ? (
