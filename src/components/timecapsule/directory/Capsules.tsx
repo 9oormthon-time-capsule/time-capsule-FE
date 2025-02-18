@@ -2,13 +2,20 @@ import * as S from '../../../styles/timecapsule/directory/Directory.style';
 import { CAPSULE_IMAGE } from '../../../mock/capsule';
 import { canReadLetter } from '../../../api/letter';
 import EmptyDirectory from './EmptyDirectory';
+import { ILetterData } from '../../../pages/timecapsule/directory/Directory';
+import Loading from '../../common/Loading';
 
 interface ICapsuleContainer {
-  letterData: { id: number; createdAt: string }[];
+  letterData: ILetterData[];
   pageType: string;
+  isLoading: boolean;
 }
 
-const CapsuleContainer = ({ letterData, pageType }: ICapsuleContainer) => {
+const CapsuleContainer = ({
+  letterData,
+  pageType,
+  isLoading,
+}: ICapsuleContainer) => {
   const handleClick = async (dataId: number) => {
     if (pageType === '타임캡슐') {
       const canRead = await canReadLetter();
@@ -25,6 +32,7 @@ const CapsuleContainer = ({ letterData, pageType }: ICapsuleContainer) => {
 
   return (
     <>
+      {isLoading && <Loading />}
       {letterData.length ? (
         <S.CapsuleContainer>
           {letterData.map((data, index) => (

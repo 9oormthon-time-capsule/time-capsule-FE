@@ -1,10 +1,10 @@
 import API from '.';
 
-interface ILetterData {
+export interface ILetterData {
   id: number;
   content: string;
   createdAt: { seconds: number };
-  emoji?: string; // ✅ emoji 필드 추가
+  emoji?: string;
 }
 
 export const fetchLetterData = async (pageType: string) => {
