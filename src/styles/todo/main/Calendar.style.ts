@@ -16,8 +16,7 @@ export const ProfileHeader = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 2.5rem;
-  margin-left: 10px;
+  margin-bottom: 40px;
   padding-left: 1rem;
 
   .profile {
@@ -47,7 +46,6 @@ export const StyledCalendar = styled(Calendar)`
   font-size: 15px;
   font-weight: bold;
   max-width: 550px;
-  max-height: 400px;
 
   .react-calendar__month-view__weekdays {
     display: grid;
@@ -74,7 +72,7 @@ export const StyledCalendar = styled(Calendar)`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    height: 300px;
+    height: auto;
   }
 
   .react-calendar__month-view__days :disabled {
