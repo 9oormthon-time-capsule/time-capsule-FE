@@ -3,75 +3,56 @@ import { useLocation, useParams } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as S from '../../../styles/timecapsule/detail/LetterDetail.style';
-
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
-
-import API from '../../../api';
+import useLetterData from '../../../hooks/useLetterData';
+import Loading from '../../../components/common/Loading';
 
 const LetterDetail = () => {
-	const location = useLocation();
-	
-	const { letterId } = useParams();
-	const [letterContent, setLetterContent] = useState(null);
+  const { letterId } = useParams();
+  const inputRef = useRef(null);
+  const { letterQuery } = useLetterData('타임캡슐');
+  const { data: letterData, isLoading } = letterQuery;
+  const selectedLetter = letterData?.find((letter) => letter.id === letterId);
 
-	const inputRef = useRef(null);
+  if (isLoading || !selectedLetter) {
+    return <Loading />;
+  }
 
-	useEffect(() => {
-		const getLetterContent = async () => {
-			if (!letterId) return; // letterId가 없으면 요청 안 함
+  const handleDownload = () => {
+    const textContainer = inputRef.current.querySelector('.text-container');
 
-		try {
-			const response = await API.get(`/timecapsule/letter`, {
-				withCredentials: true,
-			});
-			console.log("Fetched Letter Content:", response.data);
+    html2canvas(textContainer).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+      pdf.save(`${letterId}.pdf`);
+    });
+  };
 
-			// 📌 여러 개의 편지 중에서 현재 URL의 letterId와 일치하는 편지 찾기
-			const selectedLetter = response.data.find(letter => letter.id === letterId);
-      
-			setLetterContent(selectedLetter || null); // 없으면 null 설정
-		  } catch (error) {
-			console.error(`Error fetching letter content (${letterId}):`, error);
-		  }
-		};
+  return (
+    <S.LetterDetailContainer ref={inputRef}>
+      <S.BackButton onClick={() => window.history.back()}>{'<'}</S.BackButton>
+      <div className="text-container">
+        <StarsBackground />
+        <S.Title>
+          💌{' '}
+          {
+            new Date(selectedLetter.realDate.seconds * 1000)
+              .toISOString()
+              .split('T')[0]
+          }{' '}
+          의 내가 미래의 나에게 보내온 편지 💌
+        </S.Title>
 
-		getLetterContent();
-	}, [letterId]); // letterId가 변경될 때마다 실행
-
-	const handleDownload = () => {
-		const textContainer = inputRef.current.querySelector('.text-container');
-		
-		html2canvas(textContainer).then((canvas) => {
-			const imgData = canvas.toDataURL('image/png');
-			const pdf = new jsPDF();
-			pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-			pdf.save('letter-detail.pdf');
-		});
-	};	
-
-	return (
-		<S.LetterDetailContainer ref={inputRef}>
-			<StarsBackground />
-
-			<S.BackButton onClick={() => window.history.back()}>
-				&larr;
-			</S.BackButton>
-
-			<div className="text-container">
-				<S.Title>
-					💌 {letterContent ? new Date(letterContent.createdAt.seconds * 1000).toISOString().split("T")[0] : "로딩 중..."}의 내가 미래의 나에게 보내온 편지 💌
-				</S.Title>
-
-				<S.LetterContent ref={inputRef} id="letter">
-					<S.BodyText>{letterContent?.content || "로딩 중..."}</S.BodyText>
-				</S.LetterContent>
-			</div>
-
-			<S.DownloadButton onClick={handleDownload}>
-				📥 PDF로 다운로드
-			</S.DownloadButton>
-		</S.LetterDetailContainer>
-	);
+        <S.LetterContent ref={inputRef}>
+          <S.BodyText>{selectedLetter.content}</S.BodyText>
+        </S.LetterContent>
+      </div>
+      <S.DownloadButton onClick={handleDownload}>
+        📥 PDF로 다운로드
+      </S.DownloadButton>
+    </S.LetterDetailContainer>
+  );
 };
 
 export default LetterDetail;

@@ -30,9 +30,10 @@ const CapsuleContainer = ({
     }
   };
 
+  if (isLoading || letterData.length === 0) return <Loading />;
+
   return (
     <>
-      {isLoading && <Loading />}
       {letterData.length ? (
         <S.CapsuleContainer>
           {letterData.map((data, index) => (
