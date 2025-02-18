@@ -1,79 +1,88 @@
 import styled from 'styled-components';
 
 export const ReflectDetailContainer = styled.div`
-	font-family: Arial, sans-serif;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 export const BackButton = styled.button`
-	align-self: flex-start;
-	font-size: 20px;
-	background: transparent;
-	cursor: pointer;
-	border: 1px solid;
-	border: none;
-	border-radius: 50%;
-	color: white;
-	background: linear-gradient(135deg, #4caf50, #2e7d32);
-	padding: 6px 10px;
-	margin-top: 30px; margin-left: 30px;
-
-	&:hover {
-		background: linear-gradient(135deg, #2e7d32, #1b5e20);
-		transform: translateX(-3px);
-	}
+  align-self: flex-start;
+  font-size: 2rem;
+  color: rgb(252, 229, 194);
+  cursor: pointer;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
 `;
 
 export const Title = styled.h1`
-	font-size: 26px;
-	font-weight: bold;
-	text-align: center;
-	margin-bottom: 50px;
-	margin-top: 20px;
+  font-size: 2.3rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 2rem;
+  text-shadow:
+    1px 1px 0 white,
+    -1px 1px 0 white,
+    1px -1px 0 white,
+    -1px -1px 0 white;
 
-	text-shadow: 
-    1px 1px 0 white, 
-   -1px 1px 0 white, 
-    1px -1px 0 white, 
-   -1px -1px 0 white;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 export const ReflectContent = styled.div`
-	background-color: white;
-	width: 1000px; height: 60vh;
-	border-radius: 20px;
+  background-color: white;
+  width: 90%;
+  max-width: 800px;
+  height: 60vh;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const BodyText = styled.p`
-	padding-top: 30px; padding-left: 30px;
+  font-size: 1rem;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.5;
+  max-width: 100%;
+  overflow-wrap: break-word;
 `;
 
 export const DownloadButton = styled.button`
-	padding: 15px 45px;
-	background: linear-gradient(135deg, #4caf50, #2e7d32);
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-	border: none;
-	border-radius: 20px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	margin-top: 50px;
+  padding: 15px 45px;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
 
-	&:hover {
-		background: linear-gradient(135deg, #2e7d32, #1b5e20);
-		transform: translateY(-2px);
-	}
+  &:hover {
+    transform: translateY(-2px);
+  }
 
-	&:active {
-		transform: translateY(0);
-		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-	}
-
-	&:focus {
-		outline: 2px solid #66bb6a;
-		outline-offset: 2px;
-	}
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
 `;

@@ -25,15 +25,15 @@ const LetterDetail = () => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-      pdf.save('letter-detail.pdf');
+      pdf.save(`${letterId}.pdf`);
     });
   };
 
   return (
     <S.LetterDetailContainer ref={inputRef}>
-      <StarsBackground />
-      <S.BackButton onClick={() => window.history.back()}>&larr;</S.BackButton>
+      <S.BackButton onClick={() => window.history.back()}>{'<'}</S.BackButton>
       <div className="text-container">
+        <StarsBackground />
         <S.Title>
           💌{' '}
           {
@@ -44,7 +44,7 @@ const LetterDetail = () => {
           의 내가 미래의 나에게 보내온 편지 💌
         </S.Title>
 
-        <S.LetterContent ref={inputRef} id="letter">
+        <S.LetterContent ref={inputRef}>
           <S.BodyText>{selectedLetter.content}</S.BodyText>
         </S.LetterContent>
       </div>

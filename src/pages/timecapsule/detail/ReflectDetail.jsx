@@ -13,7 +13,7 @@ const ReflectDetail = () => {
   const { letterId } = useParams();
   const inputRef = useRef(null);
   const year = new Date().getFullYear();
-  
+
   const { letterQuery } = useLetterData('일일회고');
   const { data: reflectData, isLoading } = letterQuery;
 
@@ -30,26 +30,26 @@ const ReflectDetail = () => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-      pdf.save('letter-detail.pdf');
+      pdf.save(`${letterId}.pdf`);
     });
   };
 
   return (
     <S.ReflectDetailContainer ref={inputRef}>
-      <StarsBackground />
-      <S.BackButton onClick={() => window.history.back()}>&larr;</S.BackButton>
+      <S.BackButton onClick={() => window.history.back()}>{'<'}</S.BackButton>
       <div className="text-container">
+        <StarsBackground />
         <S.Title>
           🍀 {year}년 {selectedLetter.createdAt} 일일 회고 🍀
         </S.Title>
 
-        <S.ReflectContent id="letter">
+        <S.ReflectContent>
           <S.BodyText>
             {selectedLetter.emoji
               ? `오늘의 감정 : ${selectedLetter.emoji}`
               : ''}
           </S.BodyText>
-
+          <br />
           <S.BodyText>{selectedLetter.content}</S.BodyText>
         </S.ReflectContent>
       </div>
