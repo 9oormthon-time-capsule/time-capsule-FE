@@ -2,6 +2,7 @@ import * as S from '../../../styles/timecapsule/write/WritePage.style';
 import WriteForm from '../../../components/timecapsule/write/WriteForm';
 import { StarsBackground } from '../../../components/timecapsule/write/StarsBackground';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ReflectWritePage() {
   const emotions = [
@@ -33,9 +34,16 @@ export default function ReflectWritePage() {
     };
   }, []);
 
+  const nav = useNavigate();
+
+  const handleBackNav = () => {
+    nav(-1);
+  };
+
   return (
     <S.WriteContainer>
       <StarsBackground />
+      <S.BackButton onClick={handleBackNav}>{'<'}</S.BackButton>
       <S.TitleContainer>
         <S.Title>오늘의 일기</S.Title>
         <S.SubTitle>오늘은 어떤 하루였나요?</S.SubTitle>

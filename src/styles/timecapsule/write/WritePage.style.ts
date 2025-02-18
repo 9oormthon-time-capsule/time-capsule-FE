@@ -12,8 +12,15 @@ export const TitleContainer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
+`;
+
+export const BackButton = styled.div`
+  font-size: 2.5rem;
+  color: rgb(252, 229, 194);
+  cursor: pointer;
+  margin-top: 0.2rem;
+  margin-left: 2rem;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
 `;
 
 export const Title = styled.div`
@@ -35,7 +42,7 @@ export const Title = styled.div`
 export const SubTitle = styled.div`
   font-weight: bold;
   font-size: 1.5rem;
-  margin: 1rem;
+  margin-bottom: 1rem;
   color: rgb(251, 233, 206);
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
 
