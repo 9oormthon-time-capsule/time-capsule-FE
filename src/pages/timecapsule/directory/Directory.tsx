@@ -1,8 +1,7 @@
 import MainLayout from '../../../layout/MainLayout';
 import CapsuleContainer from '../../../components/timecapsule/directory/Capsules';
-import { fetchLetterData } from '../../../api/directoryLetter';
 import Header from '../../../components/common/Header';
-import { useQuery } from '@tanstack/react-query';
+import useLetterData from '../../../hooks/useLetterData';
 
 interface IDirectory {
   pageType: string;
@@ -16,22 +15,14 @@ export interface ILetterData {
 }
 
 const Directory = ({ pageType }: IDirectory) => {
-  const { data: letterData, isLoading } = useQuery<
-    unknown,
-    Error,
-    ILetterData[]
-  >({
-    queryKey: ['letterData', pageType],
-    queryFn: async () => await fetchLetterData(pageType),
-    initialData: [],
-  });
+  const { letterQuery } = useLetterData(pageType);
 
   return (
     <MainLayout>
       <Header pageType={pageType} />
       <CapsuleContainer
-        isLoading={isLoading}
-        letterData={letterData}
+        isLoading={letterQuery.isLoading}
+        letterData={letterQuery.data}
         pageType={pageType}
       />
     </MainLayout>
