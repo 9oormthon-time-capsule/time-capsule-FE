@@ -1,13 +1,28 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import * as S from '../../../styles/todo/main/AddTodo.style';
 import useTodo from '../../../hooks/useTodo';
-import useCategory from '../../../hooks/useCategory';
 
-type AddTodoProps = {
+interface Todo {
+  id: string;
+  task: string;
+  isCompleted: boolean;
+  categoryId: string;
   selectedDate: string;
 };
 
-export default function AddTodo({ selectedDate }: AddTodoProps) {
+interface Category {
+  id: string;
+  categoryName: string;
+  textColor: string;
+};
+
+interface AddTodoProps {
+  selectedDate: string;
+  todos: Todo[];
+  categories: Category[];
+};
+
+export default function AddTodo({ selectedDate, todos, categories }: AddTodoProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [task, setTask] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
@@ -15,16 +30,8 @@ export default function AddTodo({ selectedDate }: AddTodoProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [editedTodoId, setEditedTodoId] = useState<string | null>(null);
 
-  const {
-    todoQuery,
-    addTodoMutation,
-    updateTodoMutation,
-    deletedTodoMutation,
-  } = useTodo();
-  const todos = todoQuery.data?.todos ?? [];
-
-  const { categoryQuery } = useCategory();
-  const categories = categoryQuery.data ?? [];
+  const { addTodoMutation, updateTodoMutation, deletedTodoMutation } =
+    useTodo();
 
   useEffect(() => {
     setActiveCategory(null);
