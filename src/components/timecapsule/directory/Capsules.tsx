@@ -9,12 +9,14 @@ interface ICapsuleContainer {
   letterData: ILetterData[];
   pageType: string;
   isLoading: boolean;
+  isFetching: boolean;
 }
 
 const CapsuleContainer = ({
   letterData,
   pageType,
   isLoading,
+  isFetching,
 }: ICapsuleContainer) => {
   const handleClick = async (dataId: number) => {
     if (pageType === '타임캡슐') {
@@ -30,7 +32,7 @@ const CapsuleContainer = ({
     }
   };
 
-  if (isLoading || letterData.length === 0) return <Loading />;
+  if (isLoading || isFetching) return <Loading />;
 
   return (
     <>
