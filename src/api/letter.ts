@@ -5,19 +5,6 @@ interface ILetter {
   canReadDate: { seconds: number };
 }
 
-export const fetchLetterCount = async () => {
-  try {
-    const response = await API.get('/timecapsule/letter', {
-      withCredentials: true,
-    });
-
-    return response.data.length;
-  } catch (error) {
-    console.error('Error fetching letter data:', error);
-    throw error;
-  }
-};
-
 // 편지 제출 함수
 export const submitLetter = async (letter: string) => {
   try {
