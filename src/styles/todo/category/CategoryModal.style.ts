@@ -20,7 +20,8 @@ export const ModalContent = styled.div`
   justify-content: center;
   align-items: center;
   background: white;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 30px;
   border-radius: 20px;
   font-size: 20px;
@@ -61,6 +62,7 @@ export const EditForm = styled.input`
 export const ColorForm = styled.div`
   display: flex;
   gap: 10px;
+  justify-content: center;
 `;
 
 export const ColorItem = styled.button<{ color: string }>`
