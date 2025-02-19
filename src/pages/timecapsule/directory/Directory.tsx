@@ -22,6 +22,7 @@ const Directory = ({ pageType }: IDirectory) => {
       <Header pageType={pageType} />
       <CapsuleContainer
         isLoading={letterQuery.isLoading}
+        isFetching={letterQuery.isFetching}
         letterData={letterQuery.data}
         pageType={pageType}
       />

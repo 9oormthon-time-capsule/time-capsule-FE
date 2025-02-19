@@ -4,36 +4,32 @@ import LetterCreateButton from '../../components/timecapsule/main/LetterCreateBu
 import MainLayout from '../../layout/MainLayout';
 import * as S from '../../styles/timecapsule/MainPage.style';
 import { useUserStore } from '../../store/userStore';
-import { useEffect, useState } from 'react';
-import { fetchUserData } from '../../api/user';
-import { fetchLetterCount } from '../../api/letter';
+import { useEffect } from 'react';
+import useLetterData from '../../hooks/useLetterData';
+import Loading from '../../components/common/Loading';
+import useUser from '../../hooks/useUser';
 
 const MainPage = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
-  const [letterCount, setLetterCount] = useState(null);
+
+  const { letterQuery } = useLetterData('타임캡슐');
+  const letterCount = letterQuery.data.length;
+
+  const { userDataQuery } = useUser();
+  const userData = userDataQuery.data;
 
   useEffect(() => {
-    const loadUserData = async () => {
-      try {
-        const userData = await fetchUserData();
-        setUserInfo(userData.name, userData.profileImage);
-      } catch (error) {
-        console.error('Failed to load user data:', error);
-      }
-    };
+    if (userData) {
+      setUserInfo(userData.name, userData.profileImage);
+    }
+  }, [userData, setUserInfo]);
 
-    const loadLetterCount = async () => {
-      try {
-        const count = await fetchLetterCount();
-        setLetterCount(count);
-      } catch (error) {
-        console.error('Failed to fetch letter count:', error);
-      }
-    };
-
-    loadUserData();
-    loadLetterCount();
-  }, [setUserInfo]);
+  if (
+    letterQuery.isLoading ||
+    letterQuery.isFetching ||
+    userDataQuery.isLoading
+  )
+    return <Loading />;
 
   return (
     <S.MainContainer>
