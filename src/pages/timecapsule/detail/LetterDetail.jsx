@@ -11,10 +11,10 @@ const LetterDetail = () => {
   const { letterId } = useParams();
   const inputRef = useRef(null);
   const { letterQuery } = useLetterData('타임캡슐');
-  const { data: letterData, isLoading } = letterQuery;
+  const { data: letterData, isLoading, isFetching } = letterQuery;
   const selectedLetter = letterData?.find((letter) => letter.id === letterId);
 
-  if (isLoading || !selectedLetter) {
+  if (isLoading || isFetching) {
     return <Loading />;
   }
 

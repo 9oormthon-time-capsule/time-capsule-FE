@@ -15,11 +15,11 @@ const ReflectDetail = () => {
   const year = new Date().getFullYear();
 
   const { letterQuery } = useLetterData('일일회고');
-  const { data: reflectData, isLoading } = letterQuery;
+  const { data: reflectData, isLoading, isFetching } = letterQuery;
 
   const selectedLetter = reflectData?.find((letter) => letter.id === letterId);
 
-  if (isLoading || !selectedLetter) {
+  if (isLoading || isFetching) {
     return <Loading />;
   }
 
