@@ -2,7 +2,11 @@ import * as S from '../../styles/common/Menu.style';
 import { useLocation, useNavigate } from 'react-router-dom';
 import API from '../../api';
 
-const Menu = () => {
+interface IMenu {
+  onWithdraw: () => void;
+}
+
+const Menu = ({ onWithdraw }: IMenu) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -49,21 +53,7 @@ const Menu = () => {
     }
   };
 
-  const handleWithdraw = async () => {
-    try {
-      const response = await API.delete('/withdraw', {
-        withCredentials: true,
-      });
 
-      if (response.status === 200) {
-        alert(response.data.message);
-        navigate('/');
-      }
-    } catch (error) {
-      console.error('회원 탈퇴 실패:', error);
-      alert('회원 탈퇴에 실패했습니다.');
-    }
-  };
 
   return (
     <S.MenuContainer>
@@ -73,7 +63,7 @@ const Menu = () => {
         </S.MenuItem>
       ))}
       <S.MenuItem onClick={handleLogout}>로그아웃</S.MenuItem>
-      <S.MenuItem onClick={handleWithdraw}>회원 탈퇴</S.MenuItem>
+      <S.MenuItem onClick={onWithdraw}>회원 탈퇴</S.MenuItem>
     </S.MenuContainer>
   );
 };

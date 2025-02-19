@@ -3,6 +3,8 @@ import { useState } from 'react';
 import * as S from '../../styles/common/Header.style';
 import Menu from './Menu';
 import { useUserStore } from '../../store/userStore';
+import Modal from './Modal';
+import API from '../../api';
 
 interface HeaderProps {
   pageType?: string;
@@ -12,8 +14,17 @@ const Header = ({ pageType }: HeaderProps) => {
   const location = useLocation();
   const nav = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const nickname = useUserStore((state) => state.nickname);
   const isTodo = location.pathname.startsWith('/main');
+
+  const handleWithdraw = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const getTitle = () => {
     if (location.pathname.startsWith('/main'))
@@ -34,6 +45,22 @@ const Header = ({ pageType }: HeaderProps) => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleWithdrawButton = async () => {
+    try {
+      const response = await API.delete('/withdraw', {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        alert(response.data.message);
+        nav('/');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 실패:', error);
+      alert('회원 탈퇴에 실패했습니다.');
+    }
   };
 
   const handleButtonClick = () => {
@@ -61,8 +88,17 @@ const Header = ({ pageType }: HeaderProps) => {
       {isMenuOpen && (
         <>
           <S.Overlay onClick={closeMenu} />
-          <Menu />
+          <Menu onWithdraw={handleWithdraw} />
         </>
+      )}
+      {isModalOpen && (
+        <Modal
+          handleWithdrawButton={handleWithdrawButton}
+          onClose={handleCloseModal}
+          titleText="회원 탈퇴 안내"
+          bodyText="회원 탈퇴 시 30일 간만 데이터가 유효해요. 정말 탈퇴하시겠어요?"
+          buttonText="탈퇴"
+        />
       )}
     </S.HeaderContainer>
   );
