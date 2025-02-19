@@ -32,7 +32,7 @@ const TodoMainPage = () => {
     <MainLayout>
       <Header />
       <S.Content>
-        <CustomCalendar onDateChange={handleDateChange} />
+        <CustomCalendar onDateChange={handleDateChange} todos={todos} />
         <AddTodo
           selectedDate={formattedDate}
           todos={todos}
