@@ -6,7 +6,7 @@ const IMAGE_MAP = [
   { range: [9, 12], src: '/main/Box-4.png' },
 ];
 
-const CapsuleBox = ({ letterCount }) => {
+const CapsuleBox = ({ letterCount }: { letterCount: number }) => {
   const handleCapsuleBox = () => {
     window.location.href = `/directory/letter`;
   };
