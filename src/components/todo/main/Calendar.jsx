@@ -2,19 +2,14 @@ import { useState, useEffect } from 'react';
 import * as S from '../../../styles/todo/main/Calendar.style';
 import { useUserStore } from '../../../store/userStore';
 import dayjs from 'dayjs';
-import { fetchTodoData } from '../../../api/todo';
-import useTodo from '../../../hooks/useTodo';
 
-const CustomCalendar = ({ onDateChange }) => {
+const CustomCalendar = ({ onDateChange, todos }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(new Date());
   const nickname = useUserStore((state) => state.nickname);
   const profileImage = useUserStore((state) => state.profileImage);
   const [completedCount, setCompletedCount] = useState(0);
   const today = new Date();
-
-  const { todoQuery } = useTodo();
-  const todos = todoQuery.data?.todos ?? [];
 
   const completedTodosForMonth = (month) => {
     return todos.filter((todo) => {

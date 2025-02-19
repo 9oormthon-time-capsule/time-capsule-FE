@@ -180,7 +180,8 @@ export const StyledCalendar = styled(Calendar)`
       font-size: 1.5em;
       cursor: pointer;
       color: black;
-      padding-left: 20px;
+      padding: 0 3px;
+      margin-left: 15px;
 
       &:hover {
         color: gray;
